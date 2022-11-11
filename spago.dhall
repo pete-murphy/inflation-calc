@@ -12,18 +12,23 @@ to generate this file without the comments in this block.
 -}
 { name = "react-starter"
 , dependencies =
-  [ "console"
+  [ "checked-exceptions"
+  , "console"
   , "effect"
   , "exceptions"
+  , "fetch-core"
   , "foldable-traversable"
   , "js-timers"
   , "maybe"
+  , "ordered-collections"
   , "prelude"
   , "react-basic"
   , "react-basic-dom"
   , "react-basic-hooks"
   , "web-dom"
   , "web-html"
+  , "yoga-fetch"
+  , "yoga-json"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
