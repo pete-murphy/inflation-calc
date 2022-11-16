@@ -1,0 +1,16 @@
+{
+  "name": "temp-data",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Note: API is limited to ten years at a time (and probably also rate-limited)",
+  "main": "index.js",
+  "scripts": {
+    "collect": "ts-node-esm ./collect.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  }
+}

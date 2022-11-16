@@ -34,9 +34,11 @@ import Yoga.JSON.Error as JSON.Error
 
 type NonEmptyMap k v = Tuple { key :: k, value :: v } (Map k v)
 
-type InflationData = NonEmptyMap
-  Int -- Year
-  Number -- Inflation rate
+type InflationData =
+  { minKey :: Int
+  , maxKey :: Int
+  , allData :: Map Int Number
+  }
 
 fetch :: URL -> Aff Response
 fetch url = Fetch.fetch Fetch.Impl.Window.windowFetch url Fetch.defaultFetchOptions
@@ -46,15 +48,15 @@ data FetchInflationDataError
   | JSONError Error
   | ReadError MultipleErrors
   | InvariantError'NonIntString
-  | InvariantError'EmptyMap
+  | InvariantError'MapSize
 
 printFetchInflationDataError :: FetchInflationDataError -> String
 printFetchInflationDataError = case _ of
   FetchError error -> show error
   JSONError error -> show error
   ReadError errors -> String.joinWith "\n" (List.NonEmpty.toUnfoldable (JSON.Error.renderHumanError <$> errors))
-  InvariantError'EmptyMap -> "Invariant Error: Empty Map"
   InvariantError'NonIntString -> "Invariant Error: Non-Int String"
+  InvariantError'MapSize -> "Invariant Error: Map Size"
 
 fetchInflationData :: ExceptT FetchInflationDataError Aff InflationData
 fetchInflationData = do
@@ -70,8 +72,11 @@ fetchInflationData = do
       entries :: Maybe (Array (Tuple Int Number))
       entries = Traversable.for parsedData \datum -> (_ /\ datum.value) <$> Int.fromString datum.date
     inflationData' <- Map.fromFoldable <$> entries # Either.note InvariantError'NonIntString
-    datum <- Map.findMin inflationData' # Either.note InvariantError'EmptyMap
-    pure (datum /\ inflationData')
+    minKey <- Map.findMin inflationData' <#> _.key # Either.note InvariantError'MapSize
+    maxKey <- Map.findMax inflationData' <#> _.key # Either.note InvariantError'MapSize
+    if minKey < maxKey then pure { minKey, maxKey, allData: inflationData' }
+    else Except.throwError InvariantError'MapSize
+
   pure inflationData
 
 data AppData
@@ -97,23 +102,17 @@ mkApp = do
 mkAppContents :: Component InflationData
 mkAppContents = do
   rangeSlider <- mkRangeSlider
-  Hooks.component "AppContents" \(datum /\ inflationData) -> Hooks.do
-    let
-      minDatum = Map.findMin inflationData # Maybe.fromMaybe datum
-      maxDatum = Map.findMax inflationData # Maybe.fromMaybe datum
-    minThumb /\ setMinThumb <- Hooks.useState' minDatum.key
-    maxThumb /\ setMaxThumb <- Hooks.useState' maxDatum.key
+  Hooks.component "AppContents" \props -> Hooks.do
+    thumbs /\ setThumbs <- Hooks.useState' { minThumb: props.minKey, maxThumb: props.maxKey }
 
     pure do
       DOM.div_
         [ DOM.h1_ [ DOM.text "Inflation data" ]
         , rangeSlider
-            { minValue: maxDatum.key
-            , maxValue: maxDatum.key
-            , value: minThumb /\ maxThumb
-            , onChange: \(min' /\ max') -> do
-                setMinThumb min'
-                setMaxThumb max'
+            { minValue: props.minKey
+            , maxValue: props.maxKey
+            , value: thumbs
+            , onChange: setThumbs
             }
         -- , DOM.ul_
         --     ( inflationData # FoldableWithIndex.foldMapWithIndex \year value ->
