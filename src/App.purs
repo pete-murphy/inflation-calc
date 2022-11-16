@@ -21,18 +21,21 @@ import Effect.Aff (Aff, Error)
 import Effect.Aff as Aff
 import Effect.Class as Effect
 import Foreign (Foreign, MultipleErrors)
+import Foreign.Object (Object)
+import Prim.Row (class Union)
 import React.Basic.DOM as DOM
 import React.Basic.Hooks (Component, (/\))
 import React.Basic.Hooks as Hooks
 import React.Basic.Hooks.Aff as Hooks.Aff
+import Safe.Coerce as Coerce
 import Slider (mkRangeSlider)
-import Yoga.Fetch (Response, URL(..))
+import Yoga.Fetch (Credentials, Method, Redirect, Response, URL(..))
 import Yoga.Fetch as Fetch
 import Yoga.Fetch.Impl.Window as Fetch.Impl.Window
 import Yoga.JSON as JSON
 import Yoga.JSON.Error as JSON.Error
 
-type NonEmptyMap k v = Tuple { key :: k, value :: v } (Map k v)
+foreign import apiKey :: String
 
 type InflationData =
   { minKey :: Int
@@ -40,8 +43,13 @@ type InflationData =
   , allData :: Map Int Number
   }
 
-fetch :: URL -> Aff Response
-fetch url = Fetch.fetch Fetch.Impl.Window.windowFetch url Fetch.defaultFetchOptions
+fetch
+  :: forall (options :: Row Type) (trash :: Row Type)
+   . Union options trash (body :: String, credentials :: Credentials, follow :: Int, headers :: Object String, method :: Method, redirect :: Redirect)
+  => URL
+  -> { method :: Method | options }
+  -> Aff Response
+fetch = Fetch.fetch Fetch.Impl.Window.windowFetch
 
 data FetchInflationDataError
   = FetchError Error
@@ -61,7 +69,15 @@ printFetchInflationDataError = case _ of
 fetchInflationData :: ExceptT FetchInflationDataError Aff InflationData
 fetchInflationData = do
   response <- (Except.withExceptT FetchError <<< ExceptT <<< Aff.attempt) do
-    fetch (URL "http://api.worldbank.org/v2/country/us/indicator/FP.CPI.TOTL.ZG?format=json&per_page=100")
+    let
+      body = JSON.writeJSON
+        { seriesid: [ "CUUR0000SA0" ]
+        , startyear: "1913"
+        , endyear: "2022"
+        , registrationkey: apiKey
+        }
+    fetch (URL "https://api.bls.gov/publicAPI/v2/timeseries/data/") { method: Fetch.postMethod, body }
+
   json <- (Except.withExceptT JSONError <<< ExceptT <<< Aff.attempt) do
     Fetch.json response
   (_ /\ parsedData :: Tuple Foreign (Array { date :: String, value :: Number })) <-

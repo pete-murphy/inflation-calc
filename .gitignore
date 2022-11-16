@@ -14,3 +14,5 @@
 /.parcel-cache/
 /bundle/
 /src/**/*.js
+/temp-data/**/*.js
+.env
