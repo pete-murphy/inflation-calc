@@ -34,7 +34,7 @@ import Effect.Aff as Aff
 import Effect.Class as Effect
 import Foreign (Foreign, MultipleErrors)
 import Foreign.Object (Object)
-import Number.Format as Format
+import Format.Int as Format
 import Prim.Row (class Union)
 import React.Basic.DOM as DOM
 import React.Basic.DOM.Events as DOM.Events
@@ -224,9 +224,9 @@ mkAppContents = do
                         Traversable.traverse_ \value ->
                           setInput (Format.formatString value)
                     , onBlur: Events.handler DOM.Events.targetValue do
-                        (_ >>= Format.unformatInt)
+                        (_ >>= Format.unformat)
                           >>> Traversable.traverse_ \value ->
-                            setInput (Format.formatInt value)
+                            setInput (Format.format value)
                     , type: "text"
                     , className: "dollar"
                     }
@@ -234,11 +234,11 @@ mkAppContents = do
             }
         , DOM.p_
             [ DOM.text do
-                case Format.unformatInt input of
+                case Format.unformat input of
                   Just n -> Maybe.fromMaybe "Oops!" do
                     x <- minV
                     y <- maxV
-                    pure ("$" <> Format.formatInt (Int.floor ((y / x) * Int.toNumber n)))
+                    pure ("$" <> Format.format (Int.floor ((y / x) * Int.toNumber n)))
                   Nothing -> "Failed to parse " <> input <> " as a number"
             ]
         ]
