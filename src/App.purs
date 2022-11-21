@@ -17,11 +17,13 @@ import Data.Maybe as Maybe
 import Data.Traversable as Traversable
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\))
+import Debug as Debug
+import Effect (Effect)
 import Format.Int as Format
 import React.Basic.DOM as DOM
 import React.Basic.DOM.Events as DOM.Events
 import React.Basic.Events as Events
-import React.Basic.Hooks (Component, (/\))
+import React.Basic.Hooks (Component, Reducer, (/\))
 import React.Basic.Hooks as Hooks
 import Slider (mkRangeSlider)
 import Temp.Data as Temp.Data
@@ -33,8 +35,7 @@ displayYearMonth :: YearMonth -> String
 displayYearMonth (year /\ month) = show month <> " " <> show (Enum.fromEnum year)
 
 type InflationData =
-  { minKey :: YearMonth
-  , maxKey :: YearMonth
+  { thumbs :: Thumbs
   , allData :: Map YearMonth Number
   }
 
@@ -71,11 +72,11 @@ appData = do
         _ -> Nothing
       pure (Tuple (year /\ month) datum.value)
   let dataMap = Map.fromFoldable dataArray
-  { minKey, maxKey } <- Either.note EmptyMap do
-    min <- Map.findMin dataMap
-    max <- Map.findMax dataMap
-    pure { minKey: min.key, maxKey: max.key }
-  pure { minKey, maxKey, allData: dataMap }
+  thumbs <- Either.note EmptyMap do
+    minThumb <- Map.findMin dataMap
+    maxThumb <- Map.findMax dataMap
+    pure { minThumb, maxThumb }
+  pure { thumbs, allData: dataMap }
 
 mkApp :: Component Unit
 mkApp = do
@@ -85,65 +86,134 @@ mkApp = do
       Left error -> DOM.pre_ [ DOM.text (printInvariantError error) ]
       Right inflationData -> appContents inflationData
 
+type Thumbs =
+  { minThumb :: { key :: YearMonth, value :: Number }
+  , maxThumb :: { key :: YearMonth, value :: Number }
+  }
+
+type State =
+  { earlier :: String
+  , later :: String
+  , thumbs :: Thumbs
+  -- TODO: Must be a better way
+  , earlierLastSet :: Boolean
+  }
+
+data Action
+  = Earlier String
+  | Later String
+  | SetThumbs Thumbs
+
+mkReducer :: Effect (Reducer State Action)
+mkReducer = Hooks.mkReducer \state -> case _ of
+  Earlier earlier -> do
+    let f n = Int.floor ((state.thumbs.maxThumb.value / state.thumbs.minThumb.value) * Int.toNumber n)
+    { earlier: Format.formatString earlier
+    , later: Maybe.fromMaybe state.later (earlier # Format.unformat >>> map (f >>> Format.format))
+    , earlierLastSet: true
+    , thumbs: state.thumbs
+    }
+  Later later -> do
+    let f n = Int.floor ((state.thumbs.minThumb.value / state.thumbs.maxThumb.value) * Int.toNumber n)
+    { earlier: Maybe.fromMaybe state.earlier (later # Format.unformat >>> map (f >>> Format.format))
+    , later: Format.formatString later
+    , earlierLastSet: false
+    , thumbs: state.thumbs
+    }
+  SetThumbs thumbs -> do
+    let
+      d =
+        if state.earlierLastSet then state.thumbs.maxThumb.value / state.thumbs.minThumb.value
+        else
+          state.thumbs.minThumb.value / state.thumbs.maxThumb.value
+      f n = Int.floor (d * Int.toNumber n)
+    { earlier:
+        if state.earlierLastSet then state.earlier
+        else
+          Maybe.fromMaybe state.earlier (state.later # Format.unformat >>> map (f >>> Format.format))
+    , later:
+        if not state.earlierLastSet then state.later
+        else
+          Maybe.fromMaybe state.later (state.earlier # Format.unformat >>> map (f >>> Format.format))
+    , earlierLastSet: state.earlierLastSet
+    , thumbs
+    }
+
 mkAppContents :: Component InflationData
 mkAppContents = do
   rangeSlider <- mkRangeSlider
+  reducer <- mkReducer
   Hooks.component "AppContents" \props -> Hooks.do
     let
       keys = Array.fromFoldable (Map.keys props.allData)
-      minValue = 0
-      maxValue = Array.length keys - 1
-    thumbs /\ setThumbs <- Hooks.useState' { minThumb: minValue, maxThumb: maxValue }
-    input /\ setInput <- Hooks.useState' ""
+      minKeyIndex = 0
+      maxKeyIndex = Array.length keys - 1
 
-    let
-      minKey = keys !! thumbs.minThumb
-      maxKey = keys !! thumbs.maxThumb
-      minV = minKey >>= \key -> Map.lookup key props.allData
-      maxV = maxKey >>= \key -> Map.lookup key props.allData
+      initialState :: State
+      initialState =
+        { earlier: "100"
+        , later: ""
+        , thumbs: props.thumbs
+        , earlierLastSet: true
+        }
+    state /\ dispatch <- Hooks.useReducer initialState reducer
 
     pure do
       DOM.div_
         [ DOM.h1_ [ DOM.text "Inflation data" ]
         , rangeSlider
-            { minValue
-            , maxValue
-            , value: thumbs
-            , onChange: setThumbs
+            { minValue: minKeyIndex
+            , maxValue: maxKeyIndex
+            , value: do
+                let
+                  minThumb = Array.findIndex (_ == state.thumbs.minThumb.key) keys # Maybe.fromMaybe minKeyIndex
+                  maxThumb = Array.findIndex (_ == state.thumbs.maxThumb.key) keys # Maybe.fromMaybe maxKeyIndex
+                { minThumb, maxThumb }
+            , onChange: \{ minThumb, maxThumb } -> do
+                let
+                  maybeThumbs = do
+                    min' <- do
+                      key <- keys !! minThumb
+                      value <- Map.lookup key props.allData
+                      pure { key, value }
+                    max' <- do
+                      key <- keys !! maxThumb
+                      value <- Map.lookup key props.allData
+                      pure { key, value }
+                    pure { minThumb: min', maxThumb: max' }
+                Foldable.for_ maybeThumbs (dispatch <<< SetThumbs)
             }
-        , minKey
-            # Foldable.foldMap \yearMonth -> DOM.p_ [ DOM.text (displayYearMonth yearMonth) ]
-        , minV
-            # Foldable.foldMap \value -> DOM.p_ [ DOM.text (show value) ]
-        , maxKey
-            # Foldable.foldMap \yearMonth -> DOM.p_ [ DOM.text (displayYearMonth yearMonth) ]
-        , maxV
-            # Foldable.foldMap \value -> DOM.p_ [ DOM.text (show value) ]
-        , DOM.span
-            { className: "dollar-input-group"
+        , DOM.section
+            { className: "inputs"
             , children:
-                [ DOM.text "$"
-                , DOM.input
-                    { value: input
-                    , onChange: Events.handler DOM.Events.targetValue do
-                        Traversable.traverse_ \value ->
-                          setInput (Format.formatString value)
-                    , onBlur: Events.handler DOM.Events.targetValue do
-                        (_ >>= Format.unformat)
-                          >>> Traversable.traverse_ \value ->
-                            setInput (Format.format value)
-                    , type: "text"
-                    , className: "dollar"
+                [ DOM.div
+                    { className: "dollar-input-group"
+                    , children:
+                        [ DOM.text "$"
+                        , DOM.input
+                            { value: state.earlier
+                            , onChange: Events.handler DOM.Events.targetValue do
+                                Traversable.traverse_ \value ->
+                                  dispatch (Earlier value)
+                            , type: "text"
+                            , className: "dollar"
+                            }
+                        ]
+                    }
+                , DOM.div
+                    { className: "dollar-input-group"
+                    , children:
+                        [ DOM.text "$"
+                        , DOM.input
+                            { value: state.later
+                            , onChange: Events.handler DOM.Events.targetValue do
+                                Traversable.traverse_ \value ->
+                                  dispatch (Later value)
+                            , type: "text"
+                            , className: "dollar"
+                            }
+                        ]
                     }
                 ]
             }
-        , DOM.p_
-            [ DOM.text do
-                case Format.unformat input of
-                  Just n -> Maybe.fromMaybe "Oops!" do
-                    x <- minV
-                    y <- maxV
-                    pure ("$" <> Format.format (Int.floor ((y / x) * Int.toNumber n)))
-                  Nothing -> "Failed to parse " <> input <> " as a number"
-            ]
         ]

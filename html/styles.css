@@ -80,10 +80,18 @@
   opacity: 0.4;
 }
 
-.dollar-input-group {
-  padding-bottom: 4px;
-  border-bottom: 1px solid black;
+section.inputs {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem;
 }
+
+.dollar-input-group {
+  padding-bottom: 2px;
+  border-bottom: 1px solid black;
+  width: max-content;
+}
+
 .dollar-input-group input[type="text"] {
   border: none;
   outline: none;
@@ -91,5 +99,5 @@
   display: inline-block;
   background-color: transparent;
   width: 10ch;
-  padding: 0;
+  padding-left: 0.2rem;
 }
