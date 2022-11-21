@@ -20,8 +20,10 @@ import Data.Tuple.Nested (type (/\))
 import Debug as Debug
 import Effect (Effect)
 import Format.Int as Format
+import Partial.Unsafe as Unsafe
 import React.Basic.DOM as DOM
 import React.Basic.DOM.Events as DOM.Events
+import React.Basic.DOM.SVG as SVG
 import React.Basic.Events as Events
 import React.Basic.Hooks (Component, Reducer, (/\))
 import React.Basic.Hooks as Hooks
@@ -151,37 +153,125 @@ mkAppContents = do
 
       initialState :: State
       initialState =
-        { earlier: "100"
+        { earlier: ""
         , later: ""
         , thumbs: props.thumbs
         , earlierLastSet: true
         }
     state /\ dispatch <- Hooks.useReducer initialState reducer
 
+    arr <- Hooks.useMemo unit \_ -> Array.fromFoldable props.allData
+
+    -- TODO: Responsive
+    let w = 360
+    let h = 450
+    let
+      inflData' :: Array Number
+      inflData' = Array.zipWith sub arr (Array.drop 1 arr)
+    let
+      inflData = do
+        let x' = Array.head inflData' # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no head"
+        let y' = Array.last inflData' # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no last"
+        let xs = Array.cons x' inflData'
+        let ys = Array.snoc inflData' y'
+        let zs = Array.zipWith ($) (Array.zipWith (\a b c -> a + b + c / 3.0) xs ys) inflData'
+        zs
+    let l = Array.length inflData
+    let w' = Int.toNumber w / Int.toNumber l
+    let mn'' = Foldable.minimum inflData # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no min"
+    let
+      mx = Foldable.maximum inflData # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no max"
+      mn = negate mx
+    let h' = Int.toNumber h
+    let
+      sc :: Number -> Number
+      sc y = do
+        let x = (y - mn) / (mx - mn)
+        (1.0 - x) * h'
+    let
+      minThumbIndex = Array.findIndex (_ == state.thumbs.minThumb.key) keys # Maybe.fromMaybe minKeyIndex
+      maxThumbIndex = Array.findIndex (_ == state.thumbs.maxThumb.key) keys # Maybe.fromMaybe maxKeyIndex
+    let
+      ds = inflData # Array.mapWithIndex \i d -> do
+        let
+          isNegative = d < 0.0
+          y = if isNegative then sc 0.0 else sc d
+          height = if isNegative then sc d - sc 0.0 else sc 0.0 - sc d
+          fill = if isNegative then "tomato" else "black"
+        { x: show (w' * Int.toNumber i)
+        , width: show w'
+        , fill
+        , height: show (height)
+        , y: show y
+        , opacity:
+            if between minThumbIndex maxThumbIndex i then "1"
+            else "0.2"
+        }
+
+    Hooks.useEffectOnce do
+      let
+        -- Random thumbs to get things started
+        maybeThumbs = do
+          min' <- do
+            key <- keys !! 800
+            value <- Map.lookup key props.allData
+            pure { key, value }
+          max' <- do
+            key <- keys !! 1200
+            value <- Map.lookup key props.allData
+            pure { key, value }
+          pure { minThumb: min', maxThumb: max' }
+      Traversable.for_ maybeThumbs (dispatch <<< SetThumbs)
+
+      dispatch (Earlier "100")
+
+      pure mempty
+
     pure do
       DOM.div_
-        [ DOM.h1_ [ DOM.text "Inflation data" ]
-        , rangeSlider
-            { minValue: minKeyIndex
-            , maxValue: maxKeyIndex
-            , value: do
-                let
-                  minThumb = Array.findIndex (_ == state.thumbs.minThumb.key) keys # Maybe.fromMaybe minKeyIndex
-                  maxThumb = Array.findIndex (_ == state.thumbs.maxThumb.key) keys # Maybe.fromMaybe maxKeyIndex
-                { minThumb, maxThumb }
-            , onChange: \{ minThumb, maxThumb } -> do
-                let
-                  maybeThumbs = do
-                    min' <- do
-                      key <- keys !! minThumb
-                      value <- Map.lookup key props.allData
-                      pure { key, value }
-                    max' <- do
-                      key <- keys !! maxThumb
-                      value <- Map.lookup key props.allData
-                      pure { key, value }
-                    pure { minThumb: min', maxThumb: max' }
-                Foldable.for_ maybeThumbs (dispatch <<< SetThumbs)
+        [ DOM.section
+            { className: "slider-section"
+            , children:
+                [ rangeSlider
+                    { minValue: minKeyIndex
+                    , maxValue: maxKeyIndex
+                    , value: do
+                        let
+                          minThumb = Array.findIndex (_ == state.thumbs.minThumb.key) keys # Maybe.fromMaybe minKeyIndex
+                          maxThumb = Array.findIndex (_ == state.thumbs.maxThumb.key) keys # Maybe.fromMaybe maxKeyIndex
+                        { minThumb, maxThumb }
+                    , onChange: \{ minThumb, maxThumb } -> do
+                        let
+                          maybeThumbs = do
+                            min' <- do
+                              key <- keys !! minThumb
+                              value <- Map.lookup key props.allData
+                              pure { key, value }
+                            max' <- do
+                              key <- keys !! maxThumb
+                              value <- Map.lookup key props.allData
+                              pure { key, value }
+                            pure { minThumb: min', maxThumb: max' }
+                        Foldable.for_ maybeThumbs (dispatch <<< SetThumbs)
+                    }
+                , SVG.svg
+                    { height: show h
+                    , width: show w
+                    , children: ds <#> \d -> SVG.rect d
+                    }
+                ]
+            }
+
+        , DOM.section
+            { className: "outputs-keys"
+            , children:
+                [ DOM.output_
+                    [ DOM.text (displayYearMonth state.thumbs.minThumb.key)
+                    ]
+                , DOM.output_
+                    [ DOM.text (displayYearMonth state.thumbs.maxThumb.key)
+                    ]
+                ]
             }
         , DOM.section
             { className: "inputs"
@@ -197,6 +287,7 @@ mkAppContents = do
                                   dispatch (Earlier value)
                             , type: "text"
                             , className: "dollar"
+                            , inputMode: "numeric"
                             }
                         ]
                     }
@@ -211,9 +302,22 @@ mkAppContents = do
                                   dispatch (Later value)
                             , type: "text"
                             , className: "dollar"
+                            , inputMode: "numeric"
                             }
                         ]
                     }
                 ]
             }
         ]
+
+onNothingM :: forall m a. Monad m => m a -> m (Maybe a) -> m a
+onNothingM ma = (_ >>= Maybe.maybe ma pure)
+
+whenNothingM :: forall m a. Monad m => m (Maybe a) -> m a -> m a
+whenNothingM = flip onNothingM
+
+onNothing :: forall m a. Monad m => m a -> Maybe a -> m a
+onNothing ma = Maybe.maybe ma pure
+
+whenNothing :: forall m a. Monad m => Maybe a -> m a -> m a
+whenNothing = flip onNothing

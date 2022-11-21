@@ -3,26 +3,28 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+section.slider-section {
+  display: grid;
+  align-items: center;
+  /* TODO: Remove when responsive */
+  width: max-content;
+}
+
+section.slider-section > * {
+  grid-area: 1 / 1;
+}
+
 .slider {
   display: flex;
 }
 
 .slider.horizontal {
   flex-direction: column;
-  width: 300px;
-}
-
-.slider.vertical {
-  height: 150px;
-}
-
-.label-container {
-  display: flex;
-  justify-content: space-between;
+  height: 100%;
 }
 
 .slider.horizontal .track {
-  height: 30px;
+  height: 100%;
   width: 100%;
 }
 
@@ -31,33 +33,22 @@
   content: attr(x);
   display: block;
   position: absolute;
-  background: gray;
+  background: black;
 }
 
 .slider.horizontal .track:before {
-  height: 3px;
+  height: 1px;
   width: 100%;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.slider.vertical .track {
-  width: 30px;
-  height: 100%;
-}
-
-.slider.vertical .track:before {
-  width: 3px;
-  height: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 .thumb {
-  width: 20px;
-  height: 20px;
+  width: 1rem;
+  height: 1rem;
   border-radius: 50%;
-  background: gray;
+  background: black;
+  outline: 2px solid white;
 }
 
 .thumb.dragging {
@@ -78,6 +69,13 @@
 
 .track.disabled {
   opacity: 0.4;
+}
+
+section.outputs-keys {
+  font-size: 0.8rem;
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem;
 }
 
 section.inputs {
