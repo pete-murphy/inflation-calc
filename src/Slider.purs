@@ -16,8 +16,7 @@ type Thumbs =
   }
 
 type Props_ =
-  { label :: String
-  , minValue :: Int
+  { minValue :: Int
   , maxValue :: Int
   , step :: Int
   , value :: Thumbs
@@ -39,8 +38,7 @@ mkRangeSlider =
     pure
       ( Hooks.element
           rangeSlider_
-          { label: "Years"
-          , step: 1
+          { step: 1
           , minValue: props.minValue
           , maxValue: props.maxValue
           , value: props.value

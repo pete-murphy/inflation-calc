@@ -79,3 +79,17 @@
 .track.disabled {
   opacity: 0.4;
 }
+
+.dollar-input-group {
+  padding-bottom: 4px;
+  border-bottom: 1px solid black;
+}
+.dollar-input-group input[type="text"] {
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  display: inline-block;
+  background-color: transparent;
+  width: 10ch;
+  padding: 0;
+}

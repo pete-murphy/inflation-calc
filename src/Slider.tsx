@@ -41,12 +41,12 @@ type Thumbs = {
   maxThumb: number;
 };
 type Props = {
-  label: string;
   maxValue: number;
   minValue: number;
   step: number;
   value: Thumbs;
   onChange: (value: Thumbs) => void;
+  displayThumb;
 };
 
 export function rangeSlider_(props: Props) {
@@ -67,7 +67,8 @@ export function rangeSlider_(props: Props) {
     onChange,
     value,
     numberFormatter,
-    label: props.label,
+    // TODO: Provide visible label
+    label: "Years",
   });
   let { groupProps, trackProps, labelProps, outputProps } = useSlider(
     {
@@ -75,7 +76,8 @@ export function rangeSlider_(props: Props) {
       maxValue: props.maxValue,
       minValue: props.minValue,
       onChange,
-      label: props.label,
+      // TODO: Provide visible label
+      label: "Years",
     },
     state,
     trackRef
@@ -83,14 +85,6 @@ export function rangeSlider_(props: Props) {
 
   return (
     <div {...groupProps} className={`slider ${state.orientation}`}>
-      {props.label && (
-        <div className="label-container">
-          <label {...labelProps}>{props.label}</label>
-          <output {...outputProps}>
-            {`${state.getThumbValueLabel(0)} - ${state.getThumbValueLabel(1)}`}
-          </output>
-        </div>
-      )}
       <div
         {...trackProps}
         ref={trackRef}

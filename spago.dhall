@@ -13,7 +13,9 @@ to generate this file without the comments in this block.
 { name = "react-starter"
 , dependencies =
   [ "checked-exceptions"
+  , "codec-argonaut"
   , "console"
+  , "debug"
   , "effect"
   , "exceptions"
   , "fetch-core"
@@ -25,6 +27,7 @@ to generate this file without the comments in this block.
   , "react-basic"
   , "react-basic-dom"
   , "react-basic-hooks"
+  , "validation"
   , "web-dom"
   , "web-html"
   , "yoga-fetch"
