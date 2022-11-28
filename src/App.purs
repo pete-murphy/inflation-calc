@@ -14,6 +14,8 @@ import Data.Map (Map)
 import Data.Map as Map
 import Data.Maybe (Maybe(..))
 import Data.Maybe as Maybe
+import Data.Monoid as Monoid
+import Data.Nullable as Nullable
 import Data.Traversable as Traversable
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\))
@@ -29,6 +31,7 @@ import React.Basic.Hooks (Component, Reducer, (/\))
 import React.Basic.Hooks as Hooks
 import Slider (mkRangeSlider)
 import Temp.Data as Temp.Data
+import Web.DOM.Element as Element
 
 -- Note: needs to be a Tuple so that it's ordered by year _then_ month
 type YearMonth = Year /\ Month
@@ -143,6 +146,7 @@ mkReducer = Hooks.mkReducer \state -> case _ of
 
 mkAppContents :: Component InflationData
 mkAppContents = do
+  chart <- mkChart
   rangeSlider <- mkRangeSlider
   reducer <- mkReducer
   Hooks.component "AppContents" \props -> Hooks.do
@@ -160,53 +164,15 @@ mkAppContents = do
         }
     state /\ dispatch <- Hooks.useReducer initialState reducer
 
-    arr <- Hooks.useMemo unit \_ -> Array.fromFoldable props.allData
-
-    -- TODO: Responsive
-    let w = 360
-    let h = 450
-    let
-      inflData' :: Array Number
-      inflData' = Array.zipWith sub arr (Array.drop 1 arr)
-    let
-      inflData = do
-        let x' = Array.head inflData' # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no head"
-        let y' = Array.last inflData' # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no last"
-        let xs = Array.cons x' inflData'
-        let ys = Array.snoc inflData' y'
-        let zs = Array.zipWith ($) (Array.zipWith (\a b c -> a + b + c / 3.0) xs ys) inflData'
-        zs
-    let l = Array.length inflData
-    let w' = Int.toNumber w / Int.toNumber l
-    let mn'' = Foldable.minimum inflData # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no min"
-    let
-      mx = Foldable.maximum inflData # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no max"
-      mn = negate mx
-    let h' = Int.toNumber h
-    let
-      sc :: Number -> Number
-      sc y = do
-        let x = (y - mn) / (mx - mn)
-        (1.0 - x) * h'
-    let
-      minThumbIndex = Array.findIndex (_ == state.thumbs.minThumb.key) keys # Maybe.fromMaybe minKeyIndex
-      maxThumbIndex = Array.findIndex (_ == state.thumbs.maxThumb.key) keys # Maybe.fromMaybe maxKeyIndex
-    let
-      ds = inflData # Array.mapWithIndex \i d -> do
-        let
-          isNegative = d < 0.0
-          y = if isNegative then sc 0.0 else sc d
-          height = if isNegative then sc d - sc 0.0 else sc 0.0 - sc d
-          fill = if isNegative then "tomato" else "black"
-        { x: show (w' * Int.toNumber i)
-        , width: show w'
-        , fill
-        , height: show (height)
-        , y: show y
-        , opacity:
-            if between minThumbIndex maxThumbIndex i then "1"
-            else "0.2"
-        }
+    maybeWidth /\ setMaybeWidth <- Hooks.useState' Nothing
+    ref <- Hooks.useRef Nullable.null
+    Hooks.useLayoutEffectOnce do
+      maybeElement <- Hooks.readRefMaybe ref
+      Foldable.for_ (maybeElement >>= Element.fromNode) \element -> do
+        rect <- Element.getBoundingClientRect element
+        Debug.traceM rect
+        setMaybeWidth (Just rect.width)
+      pure mempty
 
     Hooks.useEffectOnce do
       let
@@ -231,8 +197,10 @@ mkAppContents = do
       DOM.div_
         [ DOM.section
             { className: "slider-section"
+            , ref
             , children:
-                [ rangeSlider
+                [ maybeWidth # Foldable.foldMap \width -> chart { inflationData: props, width, thumbs: state.thumbs }
+                , rangeSlider
                     { minValue: minKeyIndex
                     , maxValue: maxKeyIndex
                     , value: do
@@ -254,11 +222,6 @@ mkAppContents = do
                             pure { minThumb: min', maxThumb: max' }
                         Foldable.for_ maybeThumbs (dispatch <<< SetThumbs)
                     }
-                , SVG.svg
-                    { height: show h
-                    , width: show w
-                    , children: ds <#> \d -> SVG.rect d
-                    }
                 ]
             }
 
@@ -277,7 +240,7 @@ mkAppContents = do
             { className: "inputs"
             , children:
                 [ DOM.div
-                    { className: "dollar-input-group"
+                    { className: "dollar-input-group" <> Monoid.guard state.earlierLastSet " selected"
                     , children:
                         [ DOM.text "$"
                         , DOM.input
@@ -292,7 +255,7 @@ mkAppContents = do
                         ]
                     }
                 , DOM.div
-                    { className: "dollar-input-group"
+                    { className: "dollar-input-group" <> Monoid.guard (not state.earlierLastSet) " selected"
                     , children:
                         [ DOM.text "$"
                         , DOM.input
@@ -310,14 +273,71 @@ mkAppContents = do
             }
         ]
 
-onNothingM :: forall m a. Monad m => m a -> m (Maybe a) -> m a
-onNothingM ma = (_ >>= Maybe.maybe ma pure)
+type ChartProps =
+  { inflationData :: InflationData
+  , width :: Number
+  , thumbs :: Thumbs
+  }
 
-whenNothingM :: forall m a. Monad m => m (Maybe a) -> m a -> m a
-whenNothingM = flip onNothingM
+mkChart :: Component ChartProps
+mkChart =
+  Hooks.component "Chart" \props -> Hooks.do
+    arr <- Hooks.useMemo unit \_ -> Array.fromFoldable props.inflationData.allData
 
-onNothing :: forall m a. Monad m => m a -> Maybe a -> m a
-onNothing ma = Maybe.maybe ma pure
+    let
+      keys = Array.fromFoldable (Map.keys props.inflationData.allData)
+      minKeyIndex = 0
+      maxKeyIndex = Array.length keys - 1
 
-whenNothing :: forall m a. Monad m => Maybe a -> m a -> m a
-whenNothing = flip onNothing
+    -- TODO: Responsive
+    let h = 150
+    let
+      inflData' :: Array Number
+      inflData' = Array.zipWith (\a b -> (b - a) / a) arr (Array.drop 1 arr)
+    let
+      inflData = do
+        let x' = Array.head inflData' # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no head"
+        let y' = Array.last inflData' # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no last"
+        let xs = Array.cons x' inflData'
+        let ys = Array.snoc inflData' y'
+        let zs = Array.zipWith ($) (Array.zipWith (\a b c -> a + b + c / 3.0) xs ys) inflData'
+        zs
+    -- inflData'
+    let l = Array.length inflData
+    let w' = props.width / Int.toNumber l
+    -- let mn'' = Foldable.minimum inflData # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no min"
+    let
+      mx = Foldable.maximum inflData # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no max"
+      mn = negate mx
+    let h' = Int.toNumber h
+    let
+      sc :: Number -> Number
+      sc y = do
+        let x = (y - mn) / (mx - mn)
+        (1.0 - x) * h'
+    let
+      minThumbIndex = Array.findIndex (_ == props.thumbs.minThumb.key) keys # Maybe.fromMaybe minKeyIndex
+      maxThumbIndex = Array.findIndex (_ == props.thumbs.maxThumb.key) keys # Maybe.fromMaybe maxKeyIndex
+    let
+      ds = inflData # Array.mapWithIndex \i d -> do
+        let
+          isNegative = d < 0.0
+          y = if isNegative then sc 0.0 else sc d
+          height = if isNegative then sc d - sc 0.0 else sc 0.0 - sc d
+          fill = if isNegative then "tomato" else "black"
+        { x: show (w' * Int.toNumber i)
+        , width: show w'
+        , fill
+        , height: show (height)
+        , y: show y
+        , opacity:
+            if between minThumbIndex maxThumbIndex i then "1"
+            else "0.2"
+        }
+
+    pure do
+      SVG.svg
+        { height: show h
+        , width: show props.width
+        , children: ds <#> \d -> SVG.rect d
+        }
