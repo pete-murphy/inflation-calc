@@ -39,6 +39,21 @@ export function _largeChart(props: Props) {
           {
             x: (d: Datum & { readonly x: Date }) => d.x,
             y: (d: Datum) => d.value,
+            fill: "tomato",
+            opacity: 0.2,
+          }
+        ),
+        Plot.lineY(
+          props.data
+            .map((d) => ({
+              ...d,
+              x: d3.timeParse("%B, %Y")(`${d.month}, ${d.year}`),
+            }))
+            .filter((d) => d.x >= props.min && d.x <= props.max),
+          {
+            x: (d: Datum & { readonly x: Date }) => d.x,
+            y: (d: Datum) => d.value,
+            strokeWidth: 1,
           }
         ),
       ],

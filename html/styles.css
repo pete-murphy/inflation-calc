@@ -78,14 +78,16 @@ section.outputs-keys {
 
 section.inputs {
   display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
   gap: 0.5rem;
   padding: 1rem;
 }
 
 .dollar-input-group {
-  padding-bottom: 2px;
   border-bottom: 1px solid black;
   width: max-content;
+  padding: 0.4rem;
 }
 
 .dollar-input-group input[type="text"] {
@@ -99,5 +101,6 @@ section.inputs {
 }
 
 .selected {
-  background: papayawhip;
+  background: #1e90ff22;
+  /* background */
 }

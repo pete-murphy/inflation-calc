@@ -2,7 +2,6 @@ module App (mkApp) where
 
 import Prelude
 
-import Chart as Chart
 import Data.Array ((!!))
 import Data.Array as Array
 import Data.Date (Month(..), Year)
@@ -22,22 +21,18 @@ import Data.Traversable as Traversable
 import Data.Tuple (Tuple(..))
 import Data.Tuple as Tuple
 import Data.Tuple.Nested (type (/\))
-import Debug as Debug
 import Effect (Effect)
 import Foreign.Hooks as Foreign.Hooks
 import Format.Int as Format
 import LargeChart as LargeChart
-import Partial.Unsafe as Unsafe
 import React.Basic.DOM as DOM
 import React.Basic.DOM.Events as DOM.Events
-import React.Basic.DOM.SVG as SVG
 import React.Basic.Events as Events
 import React.Basic.Hooks (Component, Reducer, (/\))
 import React.Basic.Hooks as Hooks
 import Slider as Slider
 import Temp.Data as Temp.Data
 import TimelineChart as TimelineChart
-import Web.DOM.Element as Element
 
 -- Note: needs to be a Tuple so that it's ordered by year _then_ month
 type YearMonth = Year /\ Month
@@ -118,15 +113,15 @@ data Action
 mkReducer :: Effect (Reducer State Action)
 mkReducer = Hooks.mkReducer \state -> case _ of
   Earlier earlier -> do
-    let f n = Int.floor ((state.thumbs.maxThumb.value / state.thumbs.minThumb.value) * Int.toNumber n)
+    let scalar n = Int.floor ((state.thumbs.maxThumb.value / state.thumbs.minThumb.value) * Int.toNumber n)
     { earlier: Format.formatString earlier
-    , later: Maybe.fromMaybe state.later (earlier # Format.unformat >>> map (f >>> Format.format))
+    , later: Maybe.fromMaybe state.later (earlier # Format.unformat >>> map (scalar >>> Format.format))
     , earlierLastSet: true
     , thumbs: state.thumbs
     }
   Later later -> do
-    let f n = Int.floor ((state.thumbs.minThumb.value / state.thumbs.maxThumb.value) * Int.toNumber n)
-    { earlier: Maybe.fromMaybe state.earlier (later # Format.unformat >>> map (f >>> Format.format))
+    let scalar n = Int.floor ((state.thumbs.minThumb.value / state.thumbs.maxThumb.value) * Int.toNumber n)
+    { earlier: Maybe.fromMaybe state.earlier (later # Format.unformat >>> map (scalar >>> Format.format))
     , later: Format.formatString later
     , earlierLastSet: false
     , thumbs: state.thumbs
@@ -137,20 +132,18 @@ mkReducer = Hooks.mkReducer \state -> case _ of
         if state.earlierLastSet then state.thumbs.maxThumb.value / state.thumbs.minThumb.value
         else
           state.thumbs.minThumb.value / state.thumbs.maxThumb.value
-      f n = Int.floor (d * Int.toNumber n)
+      scalar n = Int.floor (d * Int.toNumber n)
     { earlier:
         if state.earlierLastSet then state.earlier
         else
-          Maybe.fromMaybe state.earlier (state.later # Format.unformat >>> map (f >>> Format.format))
+          Maybe.fromMaybe state.earlier (state.later # Format.unformat >>> map (scalar >>> Format.format))
     , later:
         if not state.earlierLastSet then state.later
         else
-          Maybe.fromMaybe state.later (state.earlier # Format.unformat >>> map (f >>> Format.format))
+          Maybe.fromMaybe state.later (state.earlier # Format.unformat >>> map (scalar >>> Format.format))
     , earlierLastSet: state.earlierLastSet
     , thumbs
     }
-
-x = { width: _, height: _ } <$> pure 2 <*> pure 4
 
 mkAppContents :: Component InflationData
 mkAppContents = do
@@ -172,6 +165,12 @@ mkAppContents = do
         , earlierLastSet: true
         }
     state /\ dispatch <- Hooks.useReducer initialState reducer
+    let
+      scalar n =
+        if state.earlierLastSet then
+          (Int.toNumber (Format.unformat state.earlier # Maybe.fromMaybe 0) / state.thumbs.minThumb.value) * n
+        else
+          (Int.toNumber (Format.unformat state.later # Maybe.fromMaybe 0) / state.thumbs.maxThumb.value) * n
 
     ref <- Hooks.useRef Nullable.null
 
@@ -208,7 +207,13 @@ mkAppContents = do
                         <*> (Tuple.uncurry Date.canonicalDate state.thumbs.minThumb.key <$> Enum.toEnum 1)
                         <*> (Tuple.uncurry Date.canonicalDate state.thumbs.maxThumb.key <$> Enum.toEnum 1)
                         # Foldable.foldMap \{ width, min, max } -> do
-                            largeChart { data: Temp.Data.allData, width, min, max }
+                            largeChart
+                              { data:
+                                  Temp.Data.allData <#> \datum -> datum { value = scalar datum.value }
+                              , width
+                              , min
+                              , max
+                              }
                     ]
                 }
             , DOM.section
@@ -217,7 +222,6 @@ mkAppContents = do
                     [ maybeWidth # Foldable.foldMap \width -> do
                         let data' = Array.zipWith (\a b -> b { value = (b.value - a.value) / a.value }) Temp.Data.allData (Array.drop 1 Temp.Data.allData)
                         timelineChart { data: data', width }
-                    -- { inflationData: props, width, thumbs: state.thumbs }
                     , rangeSlider
                         { minValue: minKeyIndex
                         , maxValue: maxKeyIndex
@@ -242,18 +246,6 @@ mkAppContents = do
                         }
                     ]
                 }
-
-            -- , DOM.section
-            --     { className: "outputs-keys"
-            --     , children:
-            --         [ DOM.output_
-            --             [ DOM.text (displayYearMonth state.thumbs.minThumb.key)
-            --             ]
-            --         , DOM.output_
-            --             [ DOM.text (displayYearMonth state.thumbs.maxThumb.key)
-            --             ]
-            --         ]
-            --     }
             , DOM.section
                 { className: "inputs"
                 , children:
@@ -272,6 +264,9 @@ mkAppContents = do
                                 }
                             ]
                         }
+                    , DOM.output_
+                        [ DOM.text (displayYearMonth state.thumbs.minThumb.key)
+                        ]
                     , DOM.div
                         { className: "dollar-input-group" <> Monoid.guard (not state.earlierLastSet) " selected"
                         , children:
@@ -287,76 +282,10 @@ mkAppContents = do
                                 }
                             ]
                         }
+                    , DOM.output_
+                        [ DOM.text (displayYearMonth state.thumbs.maxThumb.key)
+                        ]
                     ]
                 }
             ]
         }
-
--- type ChartProps =
---   { inflationData :: InflationData
---   , width :: Number
---   , thumbs :: Thumbs
---   }
-
--- mkChart :: Component ChartProps
--- mkChart = do
---   largeChart <- LargeChart.make
---   timelineChart <- TimelineChart.make
---   Hooks.component "Chart" \props -> Hooks.do
-
---     let
---       keys = Array.fromFoldable (Map.keys props.inflationData.allData)
---       minKeyIndex = 0
---       maxKeyIndex = Array.length keys - 1
-
---     let
---       inflData' :: Array Number
---       inflData' = Array.zipWith (\a b -> (b - a) / a) props.inflationData.allData (Array.drop 1 props.inflationData.allData)
-
--- let
---   inflData = do
---     let x' = Array.head inflData' # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no head"
---     let y' = Array.last inflData' # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no last"
---     let xs = Array.cons x' inflData'
---     let ys = Array.snoc inflData' y'
---     let zs = Array.zipWith ($) (Array.zipWith (\a b c -> a + b + c / 3.0) xs ys) inflData'
---     zs
--- inflData'
--- let l = Array.length inflData
--- let w' = props.width / Int.toNumber l
--- -- let mn'' = Foldable.minimum inflData # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no min"
--- let
---   mx = Foldable.maximum inflData # Maybe.fromMaybe' \_ -> Unsafe.unsafeCrashWith "Oops, no max"
---   mn = negate mx
--- let h' = Int.toNumber h
--- let
---   sc :: Number -> Number
---   sc y = do
---     let x = (y - mn) / (mx - mn)
---     (1.0 - x) * h'
--- let
---   minThumbIndex = Array.findIndex (_ == props.thumbs.minThumb.key) keys # Maybe.fromMaybe minKeyIndex
---   maxThumbIndex = Array.findIndex (_ == props.thumbs.maxThumb.key) keys # Maybe.fromMaybe maxKeyIndex
--- let
---   ds = inflData # Array.mapWithIndex \i d -> do
---     let
---       isNegative = d < 0.0
---       y = if isNegative then sc 0.0 else sc d
---       height = if isNegative then sc d - sc 0.0 else sc 0.0 - sc d
---       fill = if isNegative then "tomato" else "black"
---     { x: show (w' * Int.toNumber i)
---     , width: show w'
---     , fill
---     , height: show (height)
---     , y: show y
---     , opacity:
---         if between minThumbIndex maxThumbIndex i then "1"
---         else "0.2"
---     }
-
--- pure do
---   SVG.svg
---     { height: show h
---     , width: show props.width
---     , children: ds <#> \d -> SVG.rect d
---     }
