@@ -2,6 +2,7 @@ module App (mkApp) where
 
 import Prelude
 
+import Chart as Chart
 import Data.Array ((!!))
 import Data.Array as Array
 import Data.Date (Month(..), Year)
@@ -21,6 +22,7 @@ import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\))
 import Debug as Debug
 import Effect (Effect)
+import Foreign.Hooks as Foreign.Hooks
 import Format.Int as Format
 import Partial.Unsafe as Unsafe
 import React.Basic.DOM as DOM
@@ -147,6 +149,7 @@ mkReducer = Hooks.mkReducer \state -> case _ of
 mkAppContents :: Component InflationData
 mkAppContents = do
   chart <- mkChart
+  chart' <- Chart.make
   rangeSlider <- mkRangeSlider
   reducer <- mkReducer
   Hooks.component "AppContents" \props -> Hooks.do
@@ -164,15 +167,9 @@ mkAppContents = do
         }
     state /\ dispatch <- Hooks.useReducer initialState reducer
 
-    maybeWidth /\ setMaybeWidth <- Hooks.useState' Nothing
     ref <- Hooks.useRef Nullable.null
-    Hooks.useLayoutEffectOnce do
-      maybeElement <- Hooks.readRefMaybe ref
-      Foldable.for_ (maybeElement >>= Element.fromNode) \element -> do
-        rect <- Element.getBoundingClientRect element
-        Debug.traceM rect
-        setMaybeWidth (Just rect.width)
-      pure mempty
+
+    maybeWidth <- Foreign.Hooks.useWidth ref
 
     Hooks.useEffectOnce do
       let
@@ -196,6 +193,10 @@ mkAppContents = do
     pure do
       DOM.div_
         [ DOM.section
+            { className: "chart"
+            , children: [ chart' Temp.Data.allData ]
+            }
+        , DOM.section
             { className: "slider-section"
             , ref
             , children:
@@ -225,17 +226,17 @@ mkAppContents = do
                 ]
             }
 
-        , DOM.section
-            { className: "outputs-keys"
-            , children:
-                [ DOM.output_
-                    [ DOM.text (displayYearMonth state.thumbs.minThumb.key)
-                    ]
-                , DOM.output_
-                    [ DOM.text (displayYearMonth state.thumbs.maxThumb.key)
-                    ]
-                ]
-            }
+        -- , DOM.section
+        --     { className: "outputs-keys"
+        --     , children:
+        --         [ DOM.output_
+        --             [ DOM.text (displayYearMonth state.thumbs.minThumb.key)
+        --             ]
+        --         , DOM.output_
+        --             [ DOM.text (displayYearMonth state.thumbs.maxThumb.key)
+        --             ]
+        --         ]
+        --     }
         , DOM.section
             { className: "inputs"
             , children:
