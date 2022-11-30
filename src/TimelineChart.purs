@@ -1,4 +1,4 @@
-module Chart where
+module TimelineChart where
 
 import Prelude
 
@@ -6,10 +6,10 @@ import React.Basic (ReactComponent)
 import React.Basic as React
 import React.Basic.Hooks (Component)
 
-make :: Component (Array { year :: Int, month :: String, value :: Number })
-make = pure (React.element _chart <<< \data' -> { data: data' })
+make :: Component { data :: Array { year :: Int, month :: String, value :: Number }, width :: Number }
+make = pure (React.element _timelineChart)
 
-foreign import _chart
+foreign import _timelineChart
   :: ReactComponent
        { data ::
            Array
@@ -17,4 +17,5 @@ foreign import _chart
              , month :: String
              , value :: Number
              }
+       , width :: Number
        }

@@ -7,15 +7,20 @@ type Datum = {
   readonly month: string;
   readonly value: number;
 };
+
 type Props = {
   readonly data: ReadonlyArray<Datum>;
+  readonly width: number;
+  readonly min: Date;
+  readonly max: Date;
 };
 
-export function _chart(props: Props) {
+export function _largeChart(props: Props) {
   const ref = React.useRef();
 
   React.useEffect(() => {
     const chart = Plot.plot({
+      width: props.width,
       style: {
         background: "transparent",
       },
@@ -23,15 +28,16 @@ export function _chart(props: Props) {
         label: "↑ ($)",
         grid: true,
       },
-      color: {
-        type: "diverging",
-        scheme: "burd",
-      },
       marks: [
         Plot.areaY(
-          props.data.filter((d) => d.year > 2008),
+          props.data
+            .map((d) => ({
+              ...d,
+              x: d3.timeParse("%B, %Y")(`${d.month}, ${d.year}`),
+            }))
+            .filter((d) => d.x >= props.min && d.x <= props.max),
           {
-            x: (d: Datum) => d3.timeParse("%B, %Y")(`${d.month}, ${d.year}`),
+            x: (d: Datum & { readonly x: Date }) => d.x,
             y: (d: Datum) => d.value,
           }
         ),
@@ -39,7 +45,7 @@ export function _chart(props: Props) {
     });
     ref.current.append(chart);
     return () => chart.remove();
-  }, [props.data]);
+  }, [props]);
 
   return <div ref={ref}></div>;
 }

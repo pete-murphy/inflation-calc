@@ -1,5 +1,5 @@
 module Slider
-  ( mkRangeSlider
+  ( make
   ) where
 
 import Prelude
@@ -32,8 +32,8 @@ type Props =
   , onChange :: Thumbs -> Effect Unit
   }
 
-mkRangeSlider :: Component Props
-mkRangeSlider =
+make :: Component Props
+make =
   Hooks.component "RangeSlider" \props -> Hooks.do
     pure
       ( Hooks.element
