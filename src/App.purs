@@ -183,7 +183,7 @@ mkAppContents = do
             value <- Map.lookup key props.allData
             pure { key, value }
           max' <- do
-            key <- keys !! 1200
+            key <- Array.last keys
             value <- Map.lookup key props.allData
             pure { key, value }
           pure { minThumb: min', maxThumb: max' }
