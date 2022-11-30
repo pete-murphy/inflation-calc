@@ -8,11 +8,11 @@
   var __commonJS = (cb, mod2) => function __require() {
     return mod2 || (0, cb[__getOwnPropNames(cb)[0]])((mod2 = { exports: {} }).exports, mod2), mod2.exports;
   };
-  var __copyProps = (to, from, except, desc) => {
-    if (from && typeof from === "object" || typeof from === "function") {
-      for (let key of __getOwnPropNames(from))
+  var __copyProps = (to, from2, except, desc) => {
+    if (from2 && typeof from2 === "object" || typeof from2 === "function") {
+      for (let key of __getOwnPropNames(from2))
         if (!__hasOwnProp.call(to, key) && key !== except)
-          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+          __defProp(to, key, { get: () => from2[key], enumerable: !(desc = __getOwnPropDesc(from2, key)) || desc.enumerable });
     }
     return to;
   };
@@ -23,7 +23,7 @@
 
   // node_modules/react/cjs/react.development.js
   var require_react_development = __commonJS({
-    "node_modules/react/cjs/react.development.js"(exports, module2) {
+    "node_modules/react/cjs/react.development.js"(exports, module) {
       "use strict";
       if (true) {
         (function() {
@@ -1012,7 +1012,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect2(create5, deps) {
+          function useEffect3(create5, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create5, deps);
           }
@@ -1028,7 +1028,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
-          function useMemo(create5, deps) {
+          function useMemo2(create5, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create5, deps);
           }
@@ -1597,8 +1597,8 @@
             if (enqueueTaskImpl === null) {
               try {
                 var requireString = ("require" + Math.random()).slice(0, 7);
-                var nodeRequire = module2 && module2[requireString];
-                enqueueTaskImpl = nodeRequire.call(module2, "timers").setImmediate;
+                var nodeRequire = module && module[requireString];
+                enqueueTaskImpl = nodeRequire.call(module, "timers").setImmediate;
               } catch (_err) {
                 enqueueTaskImpl = function(callback) {
                   {
@@ -1792,12 +1792,12 @@
           exports.useContext = useContext;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect2;
+          exports.useEffect = useEffect3;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
           exports.useLayoutEffect = useLayoutEffect;
-          exports.useMemo = useMemo;
+          exports.useMemo = useMemo2;
           exports.useReducer = useReducer2;
           exports.useRef = useRef3;
           exports.useState = useState2;
@@ -1814,12 +1814,12 @@
 
   // node_modules/react/index.js
   var require_react = __commonJS({
-    "node_modules/react/index.js"(exports, module2) {
+    "node_modules/react/index.js"(exports, module) {
       "use strict";
       if (false) {
-        module2.exports = null;
+        module.exports = null;
       } else {
-        module2.exports = require_react_development();
+        module.exports = require_react_development();
       }
     }
   });
@@ -2093,9 +2093,9 @@
             var currentTime2 = exports.unstable_now();
             var startTime2;
             if (typeof options2 === "object" && options2 !== null) {
-              var delay = options2.delay;
-              if (typeof delay === "number" && delay > 0) {
-                startTime2 = currentTime2 + delay;
+              var delay2 = options2.delay;
+              if (typeof delay2 === "number" && delay2 > 0) {
+                startTime2 = currentTime2 + delay2;
               } else {
                 startTime2 = currentTime2;
               }
@@ -2276,12 +2276,12 @@
 
   // node_modules/scheduler/index.js
   var require_scheduler = __commonJS({
-    "node_modules/scheduler/index.js"(exports, module2) {
+    "node_modules/scheduler/index.js"(exports, module) {
       "use strict";
       if (false) {
-        module2.exports = null;
+        module.exports = null;
       } else {
-        module2.exports = require_scheduler_development();
+        module.exports = require_scheduler_development();
       }
     }
   });
@@ -5730,7 +5730,7 @@
           var cancelCallback = Scheduler2.unstable_cancelCallback;
           var shouldYield = Scheduler2.unstable_shouldYield;
           var requestPaint = Scheduler2.unstable_requestPaint;
-          var now4 = Scheduler2.unstable_now;
+          var now3 = Scheduler2.unstable_now;
           var getCurrentPriorityLevel = Scheduler2.unstable_getCurrentPriorityLevel;
           var ImmediatePriority = Scheduler2.unstable_ImmediatePriority;
           var UserBlockingPriority = Scheduler2.unstable_UserBlockingPriority;
@@ -5882,14 +5882,14 @@
           }
           function getLaneLabelMap() {
             {
-              var map13 = /* @__PURE__ */ new Map();
+              var map14 = /* @__PURE__ */ new Map();
               var lane = 1;
               for (var index6 = 0; index6 < TotalLanes; index6++) {
                 var label5 = getLabelForLane(lane);
-                map13.set(lane, label5);
+                map14.set(lane, label5);
                 lane *= 2;
               }
-              return map13;
+              return map14;
             }
           }
           function markCommitStarted(lanes) {
@@ -6849,9 +6849,9 @@
             }
             return true;
           }
-          function attemptReplayContinuousQueuedEventInMap(queuedEvent, key, map13) {
+          function attemptReplayContinuousQueuedEventInMap(queuedEvent, key, map14) {
             if (attemptReplayContinuousQueuedEvent(queuedEvent)) {
-              map13.delete(key);
+              map14.delete(key);
             }
           }
           function replayUnblockedEvents() {
@@ -7909,11 +7909,11 @@
                 win = window;
               }
             }
-            var from;
+            var from2;
             var to;
             if (isOutEvent) {
               var _related = nativeEvent.relatedTarget || nativeEvent.toElement;
-              from = targetInst;
+              from2 = targetInst;
               to = _related ? getClosestInstanceFromNode(_related) : null;
               if (to !== null) {
                 var nearestMounted = getNearestMountedFiber(to);
@@ -7922,10 +7922,10 @@
                 }
               }
             } else {
-              from = null;
+              from2 = null;
               to = targetInst;
             }
-            if (from === to) {
+            if (from2 === to) {
               return;
             }
             var SyntheticEventCtor = SyntheticMouseEvent;
@@ -7938,9 +7938,9 @@
               enterEventType = "onPointerEnter";
               eventTypePrefix = "pointer";
             }
-            var fromNode2 = from == null ? win : getNodeFromInstance(from);
+            var fromNode2 = from2 == null ? win : getNodeFromInstance(from2);
             var toNode = to == null ? win : getNodeFromInstance(to);
-            var leave = new SyntheticEventCtor(leaveEventType, eventTypePrefix + "leave", from, nativeEvent, nativeEventTarget);
+            var leave = new SyntheticEventCtor(leaveEventType, eventTypePrefix + "leave", from2, nativeEvent, nativeEventTarget);
             leave.target = fromNode2;
             leave.relatedTarget = toNode;
             var enter = null;
@@ -7951,7 +7951,7 @@
               enterEvent.relatedTarget = fromNode2;
               enter = enterEvent;
             }
-            accumulateEnterLeaveTwoPhaseListeners(dispatchQueue, leave, enter, from, to);
+            accumulateEnterLeaveTwoPhaseListeners(dispatchQueue, leave, enter, from2, to);
           }
           function is(x2, y2) {
             return x2 === y2 && (x2 !== 0 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
@@ -8780,10 +8780,10 @@
               });
             }
           }
-          function accumulateEnterLeaveTwoPhaseListeners(dispatchQueue, leaveEvent, enterEvent, from, to) {
-            var common = from && to ? getLowestCommonAncestor(from, to) : null;
-            if (from !== null) {
-              accumulateEnterLeaveListenersForEvent(dispatchQueue, leaveEvent, from, common, false);
+          function accumulateEnterLeaveTwoPhaseListeners(dispatchQueue, leaveEvent, enterEvent, from2, to) {
+            var common = from2 && to ? getLowestCommonAncestor(from2, to) : null;
+            if (from2 !== null) {
+              accumulateEnterLeaveListenersForEvent(dispatchQueue, leaveEvent, from2, common, false);
             }
             if (to !== null && enterEvent !== null) {
               accumulateEnterLeaveListenersForEvent(dispatchQueue, enterEvent, to, common, true);
@@ -17781,7 +17781,7 @@
                         row = row.sibling;
                       }
                     }
-                    if (renderState.tail !== null && now4() > getRenderTargetTime()) {
+                    if (renderState.tail !== null && now3() > getRenderTargetTime()) {
                       workInProgress2.flags |= DidCapture;
                       didSuspendAlready = true;
                       cutOffTailIfNeeded(renderState, false);
@@ -17806,7 +17806,7 @@
                         bubbleProperties(workInProgress2);
                         return null;
                       }
-                    } else if (now4() * 2 - renderState.renderingStartTime > getRenderTargetTime() && renderLanes2 !== OffscreenLane) {
+                    } else if (now3() * 2 - renderState.renderingStartTime > getRenderTargetTime() && renderLanes2 !== OffscreenLane) {
                       workInProgress2.flags |= DidCapture;
                       didSuspendAlready = true;
                       cutOffTailIfNeeded(renderState, false);
@@ -17830,7 +17830,7 @@
                   var next = renderState.tail;
                   renderState.rendering = next;
                   renderState.tail = next.sibling;
-                  renderState.renderingStartTime = now4();
+                  renderState.renderingStartTime = now3();
                   next.sibling = null;
                   var suspenseContext = suspenseStackCursor.current;
                   if (didSuspendAlready) {
@@ -19781,7 +19781,7 @@
           var RENDER_TIMEOUT_MS = 500;
           var workInProgressTransitions = null;
           function resetRenderTimer() {
-            workInProgressRootRenderTargetTime = now4() + RENDER_TIMEOUT_MS;
+            workInProgressRootRenderTargetTime = now3() + RENDER_TIMEOUT_MS;
           }
           function getRenderTargetTime() {
             return workInProgressRootRenderTargetTime;
@@ -19810,12 +19810,12 @@
           }
           function requestEventTime() {
             if ((executionContext & (RenderContext | CommitContext)) !== NoContext) {
-              return now4();
+              return now3();
             }
             if (currentEventTime !== NoTimestamp) {
               return currentEventTime;
             }
-            currentEventTime = now4();
+            currentEventTime = now3();
             return currentEventTime;
           }
           function requestUpdateLane(fiber) {
@@ -20004,7 +20004,7 @@
                 var fatalError = workInProgressRootFatalError;
                 prepareFreshStack(root3, NoLanes);
                 markRootSuspended$1(root3, lanes);
-                ensureRootIsScheduled(root3, now4());
+                ensureRootIsScheduled(root3, now3());
                 throw fatalError;
               }
               if (exitStatus === RootDidNotComplete) {
@@ -20025,7 +20025,7 @@
                     var _fatalError = workInProgressRootFatalError;
                     prepareFreshStack(root3, NoLanes);
                     markRootSuspended$1(root3, lanes);
-                    ensureRootIsScheduled(root3, now4());
+                    ensureRootIsScheduled(root3, now3());
                     throw _fatalError;
                   }
                 }
@@ -20034,7 +20034,7 @@
                 finishConcurrentRender(root3, exitStatus, lanes);
               }
             }
-            ensureRootIsScheduled(root3, now4());
+            ensureRootIsScheduled(root3, now3());
             if (root3.callbackNode === originalCallbackNode) {
               return performConcurrentWorkOnRoot.bind(null, root3);
             }
@@ -20079,7 +20079,7 @@
               case RootSuspended: {
                 markRootSuspended$1(root3, lanes);
                 if (includesOnlyRetries(lanes) && !shouldForceFlushFallbacksInDEV()) {
-                  var msUntilTimeout = globalMostRecentFallbackTime + FALLBACK_THROTTLE_MS - now4();
+                  var msUntilTimeout = globalMostRecentFallbackTime + FALLBACK_THROTTLE_MS - now3();
                   if (msUntilTimeout > 10) {
                     var nextLanes = getNextLanes(root3, NoLanes);
                     if (nextLanes !== NoLanes) {
@@ -20106,7 +20106,7 @@
                 if (!shouldForceFlushFallbacksInDEV()) {
                   var mostRecentEventTime = getMostRecentEventTime(root3, lanes);
                   var eventTimeMs = mostRecentEventTime;
-                  var timeElapsedMs = now4() - eventTimeMs;
+                  var timeElapsedMs = now3() - eventTimeMs;
                   var _msUntilTimeout = jnd(timeElapsedMs) - timeElapsedMs;
                   if (_msUntilTimeout > 10) {
                     root3.timeoutHandle = scheduleTimeout(commitRoot.bind(null, root3, workInProgressRootRecoverableErrors, workInProgressTransitions), _msUntilTimeout);
@@ -20183,7 +20183,7 @@
             flushPassiveEffects();
             var lanes = getNextLanes(root3, NoLanes);
             if (!includesSomeLane(lanes, SyncLane)) {
-              ensureRootIsScheduled(root3, now4());
+              ensureRootIsScheduled(root3, now3());
               return null;
             }
             var exitStatus = renderRootSync(root3, lanes);
@@ -20198,7 +20198,7 @@
               var fatalError = workInProgressRootFatalError;
               prepareFreshStack(root3, NoLanes);
               markRootSuspended$1(root3, lanes);
-              ensureRootIsScheduled(root3, now4());
+              ensureRootIsScheduled(root3, now3());
               throw fatalError;
             }
             if (exitStatus === RootDidNotComplete) {
@@ -20208,13 +20208,13 @@
             root3.finishedWork = finishedWork;
             root3.finishedLanes = lanes;
             commitRoot(root3, workInProgressRootRecoverableErrors, workInProgressTransitions);
-            ensureRootIsScheduled(root3, now4());
+            ensureRootIsScheduled(root3, now3());
             return null;
           }
           function flushRoot(root3, lanes) {
             if (lanes !== NoLanes) {
               markRootEntangled(root3, mergeLanes(lanes, SyncLane));
-              ensureRootIsScheduled(root3, now4());
+              ensureRootIsScheduled(root3, now3());
               if ((executionContext & (RenderContext | CommitContext)) === NoContext) {
                 resetRenderTimer();
                 flushSyncCallbacks();
@@ -20373,7 +20373,7 @@
             ReactCurrentDispatcher$2.current = prevDispatcher;
           }
           function markCommitTimeOfFallback() {
-            globalMostRecentFallbackTime = now4();
+            globalMostRecentFallbackTime = now3();
           }
           function markSkippedUpdateLanes(lane) {
             workInProgressRootSkippedLanes = mergeLanes(lane, workInProgressRootSkippedLanes);
@@ -20707,7 +20707,7 @@
             {
               onCommitRoot$1();
             }
-            ensureRootIsScheduled(root3, now4());
+            ensureRootIsScheduled(root3, now3());
             if (recoverableErrors !== null) {
               var onRecoverableError = root3.onRecoverableError;
               for (var i2 = 0; i2 < recoverableErrors.length; i2++) {
@@ -20914,7 +20914,7 @@
             markRootPinged(root3, pingedLanes);
             warnIfSuspenseResolutionNotWrappedWithActDEV(root3);
             if (workInProgressRoot === root3 && isSubsetOfLanes(workInProgressRootRenderLanes, pingedLanes)) {
-              if (workInProgressRootExitStatus === RootSuspendedWithDelay || workInProgressRootExitStatus === RootSuspended && includesOnlyRetries(workInProgressRootRenderLanes) && now4() - globalMostRecentFallbackTime < FALLBACK_THROTTLE_MS) {
+              if (workInProgressRootExitStatus === RootSuspendedWithDelay || workInProgressRootExitStatus === RootSuspended && includesOnlyRetries(workInProgressRootRenderLanes) && now3() - globalMostRecentFallbackTime < FALLBACK_THROTTLE_MS) {
                 prepareFreshStack(root3, NoLanes);
               } else {
                 workInProgressRootPingedLanes = mergeLanes(workInProgressRootPingedLanes, pingedLanes);
@@ -22854,13 +22854,13 @@
 
   // node_modules/react-dom/index.js
   var require_react_dom = __commonJS({
-    "node_modules/react-dom/index.js"(exports, module2) {
+    "node_modules/react-dom/index.js"(exports, module) {
       "use strict";
       if (false) {
         checkDCE();
-        module2.exports = null;
+        module.exports = null;
       } else {
-        module2.exports = require_react_dom_development();
+        module.exports = require_react_dom_development();
       }
     }
   });
@@ -22952,6 +22952,15 @@
   // output/Data.Unit/foreign.js
   var unit = void 0;
 
+  // output/Type.Proxy/index.js
+  var $$Proxy = /* @__PURE__ */ function() {
+    function $$Proxy2() {
+    }
+    ;
+    $$Proxy2.value = new $$Proxy2();
+    return $$Proxy2;
+  }();
+
   // output/Data.Functor/index.js
   var map = function(dict) {
     return dict.map;
@@ -22978,20 +22987,20 @@
   };
   var applySecond = function(dictApply) {
     var apply1 = apply(dictApply);
-    var map13 = map(dictApply.Functor0());
+    var map14 = map(dictApply.Functor0());
     return function(a3) {
       return function(b2) {
-        return apply1(map13($$const(identity2))(a3))(b2);
+        return apply1(map14($$const(identity2))(a3))(b2);
       };
     };
   };
   var lift2 = function(dictApply) {
     var apply1 = apply(dictApply);
-    var map13 = map(dictApply.Functor0());
+    var map14 = map(dictApply.Functor0());
     return function(f) {
       return function(a3) {
         return function(b2) {
-          return apply1(map13(f)(a3))(b2);
+          return apply1(map14(f)(a3))(b2);
         };
       };
     };
@@ -23002,11 +23011,11 @@
     return dict.pure;
   };
   var liftA1 = function(dictApplicative) {
-    var apply4 = apply(dictApplicative.Apply0());
-    var pure12 = pure(dictApplicative);
+    var apply3 = apply(dictApplicative.Apply0());
+    var pure13 = pure(dictApplicative);
     return function(f) {
       return function(a3) {
-        return apply4(pure12(f))(a3);
+        return apply3(pure13(f))(a3);
       };
     };
   };
@@ -23098,7 +23107,7 @@
     };
   };
   var sortByImpl = function() {
-    function mergeFromTo(compare4, fromOrdering, xs1, xs2, from, to) {
+    function mergeFromTo(compare4, fromOrdering, xs1, xs2, from2, to) {
       var mid3;
       var i2;
       var j;
@@ -23106,14 +23115,14 @@
       var x2;
       var y2;
       var c4;
-      mid3 = from + (to - from >> 1);
-      if (mid3 - from > 1)
-        mergeFromTo(compare4, fromOrdering, xs2, xs1, from, mid3);
+      mid3 = from2 + (to - from2 >> 1);
+      if (mid3 - from2 > 1)
+        mergeFromTo(compare4, fromOrdering, xs2, xs1, from2, mid3);
       if (to - mid3 > 1)
         mergeFromTo(compare4, fromOrdering, xs2, xs1, mid3, to);
-      i2 = from;
+      i2 = from2;
       j = mid3;
-      k2 = from;
+      k2 = from2;
       while (i2 < mid3 && j < to) {
         x2 = xs2[i2];
         y2 = xs2[j];
@@ -23172,6 +23181,27 @@
       return s1 + s22;
     };
   };
+  var concatArray = function(xs) {
+    return function(ys) {
+      if (xs.length === 0)
+        return ys;
+      if (ys.length === 0)
+        return xs;
+      return xs.concat(ys);
+    };
+  };
+
+  // output/Data.Symbol/index.js
+  var reflectSymbol = function(dict) {
+    return dict.reflectSymbol;
+  };
+
+  // output/Record.Unsafe/foreign.js
+  var unsafeGet = function(label5) {
+    return function(rec) {
+      return rec[label5];
+    };
+  };
 
   // output/Data.Semigroup/index.js
   var semigroupUnit = {
@@ -23184,19 +23214,22 @@
   var semigroupString = {
     append: concatString
   };
+  var semigroupArray = {
+    append: concatArray
+  };
   var append = function(dict) {
     return dict.append;
   };
 
   // output/Control.Monad/index.js
   var ap = function(dictMonad) {
-    var bind5 = bind(dictMonad.Bind1());
-    var pure6 = pure(dictMonad.Applicative0());
+    var bind7 = bind(dictMonad.Bind1());
+    var pure8 = pure(dictMonad.Applicative0());
     return function(f) {
       return function(a3) {
-        return bind5(f)(function(f$prime) {
-          return bind5(a3)(function(a$prime2) {
-            return pure6(f$prime(a$prime2));
+        return bind7(f)(function(f$prime) {
+          return bind7(a3)(function(a$prime2) {
+            return pure8(f$prime(a$prime2));
           });
         });
       };
@@ -23232,13 +23265,59 @@
     };
   };
   var eqIntImpl = refEq;
+  var eqNumberImpl = refEq;
 
   // output/Data.Eq/index.js
+  var eqRowNil = {
+    eqRecord: function(v) {
+      return function(v1) {
+        return function(v2) {
+          return true;
+        };
+      };
+    }
+  };
+  var eqRecord = function(dict) {
+    return dict.eqRecord;
+  };
+  var eqRec = function() {
+    return function(dictEqRecord) {
+      return {
+        eq: eqRecord(dictEqRecord)($$Proxy.value)
+      };
+    };
+  };
+  var eqNumber = {
+    eq: eqNumberImpl
+  };
   var eqInt = {
     eq: eqIntImpl
   };
   var eq = function(dict) {
     return dict.eq;
+  };
+  var eqRowCons = function(dictEqRecord) {
+    var eqRecord1 = eqRecord(dictEqRecord);
+    return function() {
+      return function(dictIsSymbol) {
+        var reflectSymbol2 = reflectSymbol(dictIsSymbol);
+        return function(dictEq) {
+          var eq32 = eq(dictEq);
+          return {
+            eqRecord: function(v) {
+              return function(ra) {
+                return function(rb2) {
+                  var tail = eqRecord1($$Proxy.value)(ra)(rb2);
+                  var key = reflectSymbol2($$Proxy.value);
+                  var get4 = unsafeGet(key);
+                  return eq32(get4(ra))(get4(rb2)) && tail;
+                };
+              };
+            }
+          };
+        };
+      };
+    };
   };
 
   // output/Data.Ordering/index.js
@@ -23361,6 +23440,24 @@
       }
       ;
       throw new Error("Failed pattern match at Data.Maybe (line 288, column 1 - line 288, column 46): " + [v.constructor.name]);
+    };
+  };
+  var eqMaybe = function(dictEq) {
+    var eq5 = eq(dictEq);
+    return {
+      eq: function(x2) {
+        return function(y2) {
+          if (x2 instanceof Nothing && y2 instanceof Nothing) {
+            return true;
+          }
+          ;
+          if (x2 instanceof Just && y2 instanceof Just) {
+            return eq5(x2.value0)(y2.value0);
+          }
+          ;
+          return false;
+        };
+      }
     };
   };
   var applyMaybe = {
@@ -23517,6 +23614,12 @@
       return semigroupString;
     }
   };
+  var monoidArray = {
+    mempty: [],
+    Semigroup0: function() {
+      return semigroupArray;
+    }
+  };
   var mempty = function(dict) {
     return dict.mempty;
   };
@@ -23619,7 +23722,7 @@
 
   // output/Data.Array.ST/foreign.js
   var sortByImpl2 = function() {
-    function mergeFromTo(compare4, fromOrdering, xs1, xs2, from, to) {
+    function mergeFromTo(compare4, fromOrdering, xs1, xs2, from2, to) {
       var mid3;
       var i2;
       var j;
@@ -23627,14 +23730,14 @@
       var x2;
       var y2;
       var c4;
-      mid3 = from + (to - from >> 1);
-      if (mid3 - from > 1)
-        mergeFromTo(compare4, fromOrdering, xs2, xs1, from, mid3);
+      mid3 = from2 + (to - from2 >> 1);
+      if (mid3 - from2 > 1)
+        mergeFromTo(compare4, fromOrdering, xs2, xs1, from2, mid3);
       if (to - mid3 > 1)
         mergeFromTo(compare4, fromOrdering, xs2, xs1, mid3, to);
-      i2 = from;
+      i2 = from2;
       j = mid3;
-      k2 = from;
+      k2 = from2;
       while (i2 < mid3 && j < to) {
         x2 = xs2[i2];
         y2 = xs2[j];
@@ -23783,13 +23886,13 @@
   };
   var traverse_ = function(dictApplicative) {
     var applySecond2 = applySecond(dictApplicative.Apply0());
-    var pure6 = pure(dictApplicative);
+    var pure8 = pure(dictApplicative);
     return function(dictFoldable) {
       var foldr22 = foldr(dictFoldable);
       return function(f) {
         return foldr22(function($449) {
           return applySecond2(f($449));
-        })(pure6(unit));
+        })(pure8(unit));
       };
     };
   };
@@ -23897,24 +24000,24 @@
         return xs.concat(ys);
       };
     }
-    return function(apply4) {
-      return function(map13) {
-        return function(pure6) {
+    return function(apply3) {
+      return function(map14) {
+        return function(pure8) {
           return function(f) {
             return function(array4) {
               function go2(bot, top4) {
                 switch (top4 - bot) {
                   case 0:
-                    return pure6([]);
+                    return pure8([]);
                   case 1:
-                    return map13(array1)(f(array4[bot]));
+                    return map14(array1)(f(array4[bot]));
                   case 2:
-                    return apply4(map13(array22)(f(array4[bot])))(f(array4[bot + 1]));
+                    return apply3(map14(array22)(f(array4[bot])))(f(array4[bot + 1]));
                   case 3:
-                    return apply4(apply4(map13(array3)(f(array4[bot])))(f(array4[bot + 1])))(f(array4[bot + 2]));
+                    return apply3(apply3(map14(array3)(f(array4[bot])))(f(array4[bot + 1])))(f(array4[bot + 2]));
                   default:
                     var pivot = bot + Math.floor((top4 - bot) / 4) * 2;
-                    return apply4(map13(concat2)(go2(bot, pivot)))(go2(pivot, top4));
+                    return apply3(map14(concat2)(go2(bot, pivot)))(go2(pivot, top4));
                 }
               }
               return go2(0, array4.length);
@@ -25600,1157 +25703,6 @@
     };
   }();
 
-  // output/Data.Nullable/foreign.js
-  var nullImpl = null;
-  function nullable(a3, r2, f) {
-    return a3 == null ? r2 : f(a3);
-  }
-
-  // output/Data.Nullable/index.js
-  var toMaybe = function(n) {
-    return nullable(n, Nothing.value, Just.create);
-  };
-
-  // output/Debug/foreign.js
-  var req = typeof module === "undefined" ? void 0 : module.require;
-  var util = function() {
-    try {
-      return req === void 0 ? void 0 : req("util");
-    } catch (e) {
-      return void 0;
-    }
-  }();
-  function _trace(x2, k2) {
-    if (util !== void 0) {
-      console.log(util.inspect(x2, { depth: null, colors: true }));
-    } else {
-      console.log(x2);
-    }
-    return k2({});
-  }
-  var now = function() {
-    var perf;
-    if (typeof performance !== "undefined") {
-      perf = performance;
-    } else if (req) {
-      try {
-        perf = req("perf_hooks").performance;
-      } catch (e) {
-      }
-    }
-    return function() {
-      return (perf || Date).now();
-    };
-  }();
-
-  // output/Data.Function.Uncurried/foreign.js
-  var mkFn2 = function(fn) {
-    return function(a3, b2) {
-      return fn(a3)(b2);
-    };
-  };
-
-  // output/Debug/index.js
-  var discard2 = /* @__PURE__ */ discard(discardUnit);
-  var trace = function() {
-    return function(a3) {
-      return function(k2) {
-        return _trace(a3, k2);
-      };
-    };
-  };
-  var trace1 = /* @__PURE__ */ trace();
-  var traceM = function() {
-    return function(dictMonad) {
-      var discard1 = discard2(dictMonad.Bind1());
-      var pure6 = pure(dictMonad.Applicative0());
-      return function(s3) {
-        return discard1(pure6(unit))(function() {
-          return trace1(s3)(function(v) {
-            return pure6(unit);
-          });
-        });
-      };
-    };
-  };
-
-  // node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js
-  var resizeObservers = [];
-
-  // node_modules/@juggle/resize-observer/lib/algorithms/hasActiveObservations.js
-  var hasActiveObservations = function() {
-    return resizeObservers.some(function(ro) {
-      return ro.activeTargets.length > 0;
-    });
-  };
-
-  // node_modules/@juggle/resize-observer/lib/algorithms/hasSkippedObservations.js
-  var hasSkippedObservations = function() {
-    return resizeObservers.some(function(ro) {
-      return ro.skippedTargets.length > 0;
-    });
-  };
-
-  // node_modules/@juggle/resize-observer/lib/algorithms/deliverResizeLoopError.js
-  var msg = "ResizeObserver loop completed with undelivered notifications.";
-  var deliverResizeLoopError = function() {
-    var event;
-    if (typeof ErrorEvent === "function") {
-      event = new ErrorEvent("error", {
-        message: msg
-      });
-    } else {
-      event = document.createEvent("Event");
-      event.initEvent("error", false, false);
-      event.message = msg;
-    }
-    window.dispatchEvent(event);
-  };
-
-  // node_modules/@juggle/resize-observer/lib/ResizeObserverBoxOptions.js
-  var ResizeObserverBoxOptions;
-  (function(ResizeObserverBoxOptions2) {
-    ResizeObserverBoxOptions2["BORDER_BOX"] = "border-box";
-    ResizeObserverBoxOptions2["CONTENT_BOX"] = "content-box";
-    ResizeObserverBoxOptions2["DEVICE_PIXEL_CONTENT_BOX"] = "device-pixel-content-box";
-  })(ResizeObserverBoxOptions || (ResizeObserverBoxOptions = {}));
-
-  // node_modules/@juggle/resize-observer/lib/utils/freeze.js
-  var freeze2 = function(obj) {
-    return Object.freeze(obj);
-  };
-
-  // node_modules/@juggle/resize-observer/lib/ResizeObserverSize.js
-  var ResizeObserverSize = function() {
-    function ResizeObserverSize2(inlineSize, blockSize) {
-      this.inlineSize = inlineSize;
-      this.blockSize = blockSize;
-      freeze2(this);
-    }
-    return ResizeObserverSize2;
-  }();
-
-  // node_modules/@juggle/resize-observer/lib/DOMRectReadOnly.js
-  var DOMRectReadOnly = function() {
-    function DOMRectReadOnly2(x2, y2, width8, height8) {
-      this.x = x2;
-      this.y = y2;
-      this.width = width8;
-      this.height = height8;
-      this.top = this.y;
-      this.left = this.x;
-      this.bottom = this.top + this.height;
-      this.right = this.left + this.width;
-      return freeze2(this);
-    }
-    DOMRectReadOnly2.prototype.toJSON = function() {
-      var _a = this, x2 = _a.x, y2 = _a.y, top4 = _a.top, right2 = _a.right, bottom5 = _a.bottom, left2 = _a.left, width8 = _a.width, height8 = _a.height;
-      return { x: x2, y: y2, top: top4, right: right2, bottom: bottom5, left: left2, width: width8, height: height8 };
-    };
-    DOMRectReadOnly2.fromRect = function(rectangle) {
-      return new DOMRectReadOnly2(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
-    };
-    return DOMRectReadOnly2;
-  }();
-
-  // node_modules/@juggle/resize-observer/lib/utils/element.js
-  var isSVG = function(target5) {
-    return target5 instanceof SVGElement && "getBBox" in target5;
-  };
-  var isHidden = function(target5) {
-    if (isSVG(target5)) {
-      var _a = target5.getBBox(), width8 = _a.width, height8 = _a.height;
-      return !width8 && !height8;
-    }
-    var _b = target5, offsetWidth2 = _b.offsetWidth, offsetHeight2 = _b.offsetHeight;
-    return !(offsetWidth2 || offsetHeight2 || target5.getClientRects().length);
-  };
-  var isElement = function(obj) {
-    var _a;
-    if (obj instanceof Element) {
-      return true;
-    }
-    var scope2 = (_a = obj === null || obj === void 0 ? void 0 : obj.ownerDocument) === null || _a === void 0 ? void 0 : _a.defaultView;
-    return !!(scope2 && obj instanceof scope2.Element);
-  };
-  var isReplacedElement = function(target5) {
-    switch (target5.tagName) {
-      case "INPUT":
-        if (target5.type !== "image") {
-          break;
-        }
-      case "VIDEO":
-      case "AUDIO":
-      case "EMBED":
-      case "OBJECT":
-      case "CANVAS":
-      case "IFRAME":
-      case "IMG":
-        return true;
-    }
-    return false;
-  };
-
-  // node_modules/@juggle/resize-observer/lib/utils/global.js
-  var global = typeof window !== "undefined" ? window : {};
-
-  // node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js
-  var cache = /* @__PURE__ */ new WeakMap();
-  var scrollRegexp = /auto|scroll/;
-  var verticalRegexp = /^tb|vertical/;
-  var IE = /msie|trident/i.test(global.navigator && global.navigator.userAgent);
-  var parseDimension = function(pixel) {
-    return parseFloat(pixel || "0");
-  };
-  var size2 = function(inlineSize, blockSize, switchSizes) {
-    if (inlineSize === void 0) {
-      inlineSize = 0;
-    }
-    if (blockSize === void 0) {
-      blockSize = 0;
-    }
-    if (switchSizes === void 0) {
-      switchSizes = false;
-    }
-    return new ResizeObserverSize((switchSizes ? blockSize : inlineSize) || 0, (switchSizes ? inlineSize : blockSize) || 0);
-  };
-  var zeroBoxes = freeze2({
-    devicePixelContentBoxSize: size2(),
-    borderBoxSize: size2(),
-    contentBoxSize: size2(),
-    contentRect: new DOMRectReadOnly(0, 0, 0, 0)
-  });
-  var calculateBoxSizes = function(target5, forceRecalculation) {
-    if (forceRecalculation === void 0) {
-      forceRecalculation = false;
-    }
-    if (cache.has(target5) && !forceRecalculation) {
-      return cache.get(target5);
-    }
-    if (isHidden(target5)) {
-      cache.set(target5, zeroBoxes);
-      return zeroBoxes;
-    }
-    var cs = getComputedStyle(target5);
-    var svg = isSVG(target5) && target5.ownerSVGElement && target5.getBBox();
-    var removePadding = !IE && cs.boxSizing === "border-box";
-    var switchSizes = verticalRegexp.test(cs.writingMode || "");
-    var canScrollVertically = !svg && scrollRegexp.test(cs.overflowY || "");
-    var canScrollHorizontally = !svg && scrollRegexp.test(cs.overflowX || "");
-    var paddingTop = svg ? 0 : parseDimension(cs.paddingTop);
-    var paddingRight = svg ? 0 : parseDimension(cs.paddingRight);
-    var paddingBottom = svg ? 0 : parseDimension(cs.paddingBottom);
-    var paddingLeft = svg ? 0 : parseDimension(cs.paddingLeft);
-    var borderTop = svg ? 0 : parseDimension(cs.borderTopWidth);
-    var borderRight = svg ? 0 : parseDimension(cs.borderRightWidth);
-    var borderBottom = svg ? 0 : parseDimension(cs.borderBottomWidth);
-    var borderLeft = svg ? 0 : parseDimension(cs.borderLeftWidth);
-    var horizontalPadding = paddingLeft + paddingRight;
-    var verticalPadding = paddingTop + paddingBottom;
-    var horizontalBorderArea = borderLeft + borderRight;
-    var verticalBorderArea = borderTop + borderBottom;
-    var horizontalScrollbarThickness = !canScrollHorizontally ? 0 : target5.offsetHeight - verticalBorderArea - target5.clientHeight;
-    var verticalScrollbarThickness = !canScrollVertically ? 0 : target5.offsetWidth - horizontalBorderArea - target5.clientWidth;
-    var widthReduction = removePadding ? horizontalPadding + horizontalBorderArea : 0;
-    var heightReduction = removePadding ? verticalPadding + verticalBorderArea : 0;
-    var contentWidth = svg ? svg.width : parseDimension(cs.width) - widthReduction - verticalScrollbarThickness;
-    var contentHeight = svg ? svg.height : parseDimension(cs.height) - heightReduction - horizontalScrollbarThickness;
-    var borderBoxWidth = contentWidth + horizontalPadding + verticalScrollbarThickness + horizontalBorderArea;
-    var borderBoxHeight = contentHeight + verticalPadding + horizontalScrollbarThickness + verticalBorderArea;
-    var boxes = freeze2({
-      devicePixelContentBoxSize: size2(Math.round(contentWidth * devicePixelRatio), Math.round(contentHeight * devicePixelRatio), switchSizes),
-      borderBoxSize: size2(borderBoxWidth, borderBoxHeight, switchSizes),
-      contentBoxSize: size2(contentWidth, contentHeight, switchSizes),
-      contentRect: new DOMRectReadOnly(paddingLeft, paddingTop, contentWidth, contentHeight)
-    });
-    cache.set(target5, boxes);
-    return boxes;
-  };
-  var calculateBoxSize = function(target5, observedBox, forceRecalculation) {
-    var _a = calculateBoxSizes(target5, forceRecalculation), borderBoxSize = _a.borderBoxSize, contentBoxSize = _a.contentBoxSize, devicePixelContentBoxSize = _a.devicePixelContentBoxSize;
-    switch (observedBox) {
-      case ResizeObserverBoxOptions.DEVICE_PIXEL_CONTENT_BOX:
-        return devicePixelContentBoxSize;
-      case ResizeObserverBoxOptions.BORDER_BOX:
-        return borderBoxSize;
-      default:
-        return contentBoxSize;
-    }
-  };
-
-  // node_modules/@juggle/resize-observer/lib/ResizeObserverEntry.js
-  var ResizeObserverEntry = function() {
-    function ResizeObserverEntry2(target5) {
-      var boxes = calculateBoxSizes(target5);
-      this.target = target5;
-      this.contentRect = boxes.contentRect;
-      this.borderBoxSize = freeze2([boxes.borderBoxSize]);
-      this.contentBoxSize = freeze2([boxes.contentBoxSize]);
-      this.devicePixelContentBoxSize = freeze2([boxes.devicePixelContentBoxSize]);
-    }
-    return ResizeObserverEntry2;
-  }();
-
-  // node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js
-  var calculateDepthForNode = function(node) {
-    if (isHidden(node)) {
-      return Infinity;
-    }
-    var depth = 0;
-    var parent2 = node.parentNode;
-    while (parent2) {
-      depth += 1;
-      parent2 = parent2.parentNode;
-    }
-    return depth;
-  };
-
-  // node_modules/@juggle/resize-observer/lib/algorithms/broadcastActiveObservations.js
-  var broadcastActiveObservations = function() {
-    var shallowestDepth = Infinity;
-    var callbacks2 = [];
-    resizeObservers.forEach(function processObserver(ro) {
-      if (ro.activeTargets.length === 0) {
-        return;
-      }
-      var entries = [];
-      ro.activeTargets.forEach(function processTarget(ot) {
-        var entry = new ResizeObserverEntry(ot.target);
-        var targetDepth = calculateDepthForNode(ot.target);
-        entries.push(entry);
-        ot.lastReportedSize = calculateBoxSize(ot.target, ot.observedBox);
-        if (targetDepth < shallowestDepth) {
-          shallowestDepth = targetDepth;
-        }
-      });
-      callbacks2.push(function resizeObserverCallback() {
-        ro.callback.call(ro.observer, entries, ro.observer);
-      });
-      ro.activeTargets.splice(0, ro.activeTargets.length);
-    });
-    for (var _i = 0, callbacks_1 = callbacks2; _i < callbacks_1.length; _i++) {
-      var callback = callbacks_1[_i];
-      callback();
-    }
-    return shallowestDepth;
-  };
-
-  // node_modules/@juggle/resize-observer/lib/algorithms/gatherActiveObservationsAtDepth.js
-  var gatherActiveObservationsAtDepth = function(depth) {
-    resizeObservers.forEach(function processObserver(ro) {
-      ro.activeTargets.splice(0, ro.activeTargets.length);
-      ro.skippedTargets.splice(0, ro.skippedTargets.length);
-      ro.observationTargets.forEach(function processTarget(ot) {
-        if (ot.isActive()) {
-          if (calculateDepthForNode(ot.target) > depth) {
-            ro.activeTargets.push(ot);
-          } else {
-            ro.skippedTargets.push(ot);
-          }
-        }
-      });
-    });
-  };
-
-  // node_modules/@juggle/resize-observer/lib/utils/process.js
-  var process2 = function() {
-    var depth = 0;
-    gatherActiveObservationsAtDepth(depth);
-    while (hasActiveObservations()) {
-      depth = broadcastActiveObservations();
-      gatherActiveObservationsAtDepth(depth);
-    }
-    if (hasSkippedObservations()) {
-      deliverResizeLoopError();
-    }
-    return depth > 0;
-  };
-
-  // node_modules/@juggle/resize-observer/lib/utils/queueMicroTask.js
-  var trigger;
-  var callbacks = [];
-  var notify = function() {
-    return callbacks.splice(0).forEach(function(cb) {
-      return cb();
-    });
-  };
-  var queueMicroTask = function(callback) {
-    if (!trigger) {
-      var toggle_1 = 0;
-      var el_1 = document.createTextNode("");
-      var config = { characterData: true };
-      new MutationObserver(function() {
-        return notify();
-      }).observe(el_1, config);
-      trigger = function() {
-        el_1.textContent = "".concat(toggle_1 ? toggle_1-- : toggle_1++);
-      };
-    }
-    callbacks.push(callback);
-    trigger();
-  };
-
-  // node_modules/@juggle/resize-observer/lib/utils/queueResizeObserver.js
-  var queueResizeObserver = function(cb) {
-    queueMicroTask(function ResizeObserver3() {
-      requestAnimationFrame(cb);
-    });
-  };
-
-  // node_modules/@juggle/resize-observer/lib/utils/scheduler.js
-  var watching = 0;
-  var isWatching = function() {
-    return !!watching;
-  };
-  var CATCH_PERIOD = 250;
-  var observerConfig = { attributes: true, characterData: true, childList: true, subtree: true };
-  var events = [
-    "resize",
-    "load",
-    "transitionend",
-    "animationend",
-    "animationstart",
-    "animationiteration",
-    "keyup",
-    "keydown",
-    "mouseup",
-    "mousedown",
-    "mouseover",
-    "mouseout",
-    "blur",
-    "focus"
-  ];
-  var time = function(timeout2) {
-    if (timeout2 === void 0) {
-      timeout2 = 0;
-    }
-    return Date.now() + timeout2;
-  };
-  var scheduled = false;
-  var Scheduler = function() {
-    function Scheduler2() {
-      var _this = this;
-      this.stopped = true;
-      this.listener = function() {
-        return _this.schedule();
-      };
-    }
-    Scheduler2.prototype.run = function(timeout2) {
-      var _this = this;
-      if (timeout2 === void 0) {
-        timeout2 = CATCH_PERIOD;
-      }
-      if (scheduled) {
-        return;
-      }
-      scheduled = true;
-      var until = time(timeout2);
-      queueResizeObserver(function() {
-        var elementsHaveResized = false;
-        try {
-          elementsHaveResized = process2();
-        } finally {
-          scheduled = false;
-          timeout2 = until - time();
-          if (!isWatching()) {
-            return;
-          }
-          if (elementsHaveResized) {
-            _this.run(1e3);
-          } else if (timeout2 > 0) {
-            _this.run(timeout2);
-          } else {
-            _this.start();
-          }
-        }
-      });
-    };
-    Scheduler2.prototype.schedule = function() {
-      this.stop();
-      this.run();
-    };
-    Scheduler2.prototype.observe = function() {
-      var _this = this;
-      var cb = function() {
-        return _this.observer && _this.observer.observe(document.body, observerConfig);
-      };
-      document.body ? cb() : global.addEventListener("DOMContentLoaded", cb);
-    };
-    Scheduler2.prototype.start = function() {
-      var _this = this;
-      if (this.stopped) {
-        this.stopped = false;
-        this.observer = new MutationObserver(this.listener);
-        this.observe();
-        events.forEach(function(name15) {
-          return global.addEventListener(name15, _this.listener, true);
-        });
-      }
-    };
-    Scheduler2.prototype.stop = function() {
-      var _this = this;
-      if (!this.stopped) {
-        this.observer && this.observer.disconnect();
-        events.forEach(function(name15) {
-          return global.removeEventListener(name15, _this.listener, true);
-        });
-        this.stopped = true;
-      }
-    };
-    return Scheduler2;
-  }();
-  var scheduler = new Scheduler();
-  var updateCount = function(n) {
-    !watching && n > 0 && scheduler.start();
-    watching += n;
-    !watching && scheduler.stop();
-  };
-
-  // node_modules/@juggle/resize-observer/lib/ResizeObservation.js
-  var skipNotifyOnElement = function(target5) {
-    return !isSVG(target5) && !isReplacedElement(target5) && getComputedStyle(target5).display === "inline";
-  };
-  var ResizeObservation = function() {
-    function ResizeObservation2(target5, observedBox) {
-      this.target = target5;
-      this.observedBox = observedBox || ResizeObserverBoxOptions.CONTENT_BOX;
-      this.lastReportedSize = {
-        inlineSize: 0,
-        blockSize: 0
-      };
-    }
-    ResizeObservation2.prototype.isActive = function() {
-      var size5 = calculateBoxSize(this.target, this.observedBox, true);
-      if (skipNotifyOnElement(this.target)) {
-        this.lastReportedSize = size5;
-      }
-      if (this.lastReportedSize.inlineSize !== size5.inlineSize || this.lastReportedSize.blockSize !== size5.blockSize) {
-        return true;
-      }
-      return false;
-    };
-    return ResizeObservation2;
-  }();
-
-  // node_modules/@juggle/resize-observer/lib/ResizeObserverDetail.js
-  var ResizeObserverDetail = function() {
-    function ResizeObserverDetail2(resizeObserver, callback) {
-      this.activeTargets = [];
-      this.skippedTargets = [];
-      this.observationTargets = [];
-      this.observer = resizeObserver;
-      this.callback = callback;
-    }
-    return ResizeObserverDetail2;
-  }();
-
-  // node_modules/@juggle/resize-observer/lib/ResizeObserverController.js
-  var observerMap = /* @__PURE__ */ new WeakMap();
-  var getObservationIndex = function(observationTargets, target5) {
-    for (var i2 = 0; i2 < observationTargets.length; i2 += 1) {
-      if (observationTargets[i2].target === target5) {
-        return i2;
-      }
-    }
-    return -1;
-  };
-  var ResizeObserverController = function() {
-    function ResizeObserverController2() {
-    }
-    ResizeObserverController2.connect = function(resizeObserver, callback) {
-      var detail = new ResizeObserverDetail(resizeObserver, callback);
-      observerMap.set(resizeObserver, detail);
-    };
-    ResizeObserverController2.observe = function(resizeObserver, target5, options2) {
-      var detail = observerMap.get(resizeObserver);
-      var firstObservation = detail.observationTargets.length === 0;
-      if (getObservationIndex(detail.observationTargets, target5) < 0) {
-        firstObservation && resizeObservers.push(detail);
-        detail.observationTargets.push(new ResizeObservation(target5, options2 && options2.box));
-        updateCount(1);
-        scheduler.schedule();
-      }
-    };
-    ResizeObserverController2.unobserve = function(resizeObserver, target5) {
-      var detail = observerMap.get(resizeObserver);
-      var index5 = getObservationIndex(detail.observationTargets, target5);
-      var lastObservation = detail.observationTargets.length === 1;
-      if (index5 >= 0) {
-        lastObservation && resizeObservers.splice(resizeObservers.indexOf(detail), 1);
-        detail.observationTargets.splice(index5, 1);
-        updateCount(-1);
-      }
-    };
-    ResizeObserverController2.disconnect = function(resizeObserver) {
-      var _this = this;
-      var detail = observerMap.get(resizeObserver);
-      detail.observationTargets.slice().forEach(function(ot) {
-        return _this.unobserve(resizeObserver, ot.target);
-      });
-      detail.activeTargets.splice(0, detail.activeTargets.length);
-    };
-    return ResizeObserverController2;
-  }();
-
-  // node_modules/@juggle/resize-observer/lib/ResizeObserver.js
-  var ResizeObserver = function() {
-    function ResizeObserver3(callback) {
-      if (arguments.length === 0) {
-        throw new TypeError("Failed to construct 'ResizeObserver': 1 argument required, but only 0 present.");
-      }
-      if (typeof callback !== "function") {
-        throw new TypeError("Failed to construct 'ResizeObserver': The callback provided as parameter 1 is not a function.");
-      }
-      ResizeObserverController.connect(this, callback);
-    }
-    ResizeObserver3.prototype.observe = function(target5, options2) {
-      if (arguments.length === 0) {
-        throw new TypeError("Failed to execute 'observe' on 'ResizeObserver': 1 argument required, but only 0 present.");
-      }
-      if (!isElement(target5)) {
-        throw new TypeError("Failed to execute 'observe' on 'ResizeObserver': parameter 1 is not of type 'Element");
-      }
-      ResizeObserverController.observe(this, target5, options2);
-    };
-    ResizeObserver3.prototype.unobserve = function(target5) {
-      if (arguments.length === 0) {
-        throw new TypeError("Failed to execute 'unobserve' on 'ResizeObserver': 1 argument required, but only 0 present.");
-      }
-      if (!isElement(target5)) {
-        throw new TypeError("Failed to execute 'unobserve' on 'ResizeObserver': parameter 1 is not of type 'Element");
-      }
-      ResizeObserverController.unobserve(this, target5);
-    };
-    ResizeObserver3.prototype.disconnect = function() {
-      ResizeObserverController.disconnect(this);
-    };
-    ResizeObserver3.toString = function() {
-      return "function ResizeObserver () { [polyfill code] }";
-    };
-    return ResizeObserver3;
-  }();
-
-  // node_modules/@react-hook/passive-layout-effect/dist/module/index.js
-  var import_react = __toESM(require_react());
-  var usePassiveLayoutEffect = import_react.default[typeof document !== "undefined" && document.createElement !== void 0 ? "useLayoutEffect" : "useEffect"];
-  var module_default = usePassiveLayoutEffect;
-
-  // node_modules/@react-hook/latest/dist/module/index.js
-  var React2 = __toESM(require_react());
-  var useLatest = (current) => {
-    const storedValue = React2.useRef(current);
-    React2.useEffect(() => {
-      storedValue.current = current;
-    });
-    return storedValue;
-  };
-  var module_default2 = useLatest;
-
-  // node_modules/@react-hook/resize-observer/dist/module/index.js
-  var ResizeObserver2 = typeof window !== "undefined" && "ResizeObserver" in window ? window.ResizeObserver : ResizeObserver;
-  function _ref() {
-  }
-  function useResizeObserver(target5, callback) {
-    const resizeObserver = getResizeObserver();
-    const storedCallback = module_default2(callback);
-    module_default(() => {
-      let didUnsubscribe = false;
-      const targetEl = target5 && "current" in target5 ? target5.current : target5;
-      if (!targetEl)
-        return _ref;
-      function cb(entry, observer) {
-        if (didUnsubscribe)
-          return;
-        storedCallback.current(entry, observer);
-      }
-      resizeObserver.subscribe(targetEl, cb);
-      return () => {
-        didUnsubscribe = true;
-        resizeObserver.unsubscribe(targetEl, cb);
-      };
-    }, [target5, resizeObserver, storedCallback]);
-    return resizeObserver.observer;
-  }
-  function createResizeObserver() {
-    let ticking = false;
-    let allEntries = [];
-    const callbacks2 = /* @__PURE__ */ new Map();
-    const observer = new ResizeObserver2((entries, obs) => {
-      allEntries = allEntries.concat(entries);
-      function _ref2() {
-        const triggered = /* @__PURE__ */ new Set();
-        for (let i2 = 0; i2 < allEntries.length; i2++) {
-          if (triggered.has(allEntries[i2].target))
-            continue;
-          triggered.add(allEntries[i2].target);
-          const cbs = callbacks2.get(allEntries[i2].target);
-          cbs === null || cbs === void 0 ? void 0 : cbs.forEach((cb) => cb(allEntries[i2], obs));
-        }
-        allEntries = [];
-        ticking = false;
-      }
-      if (!ticking) {
-        window.requestAnimationFrame(_ref2);
-      }
-      ticking = true;
-    });
-    return {
-      observer,
-      subscribe(target5, callback) {
-        var _callbacks$get;
-        observer.observe(target5);
-        const cbs = (_callbacks$get = callbacks2.get(target5)) !== null && _callbacks$get !== void 0 ? _callbacks$get : [];
-        cbs.push(callback);
-        callbacks2.set(target5, cbs);
-      },
-      unsubscribe(target5, callback) {
-        var _callbacks$get2;
-        const cbs = (_callbacks$get2 = callbacks2.get(target5)) !== null && _callbacks$get2 !== void 0 ? _callbacks$get2 : [];
-        if (cbs.length === 1) {
-          observer.unobserve(target5);
-          callbacks2.delete(target5);
-          return;
-        }
-        const cbIndex = cbs.indexOf(callback);
-        if (cbIndex !== -1)
-          cbs.splice(cbIndex, 1);
-        callbacks2.set(target5, cbs);
-      }
-    };
-  }
-  var _resizeObserver;
-  var getResizeObserver = () => !_resizeObserver ? _resizeObserver = createResizeObserver() : _resizeObserver;
-  var module_default3 = useResizeObserver;
-
-  // output/Foreign.Hooks/foreign.js
-  var _useResizeObserver = function(props) {
-    return module_default3(props.ref, function(element2) {
-      return props.callback(element2.contentRect);
-    });
-  };
-
-  // output/Effect.Uncurried/foreign.js
-  var mkEffectFn1 = function mkEffectFn12(fn) {
-    return function(x2) {
-      return fn(x2)();
-    };
-  };
-  var runEffectFn1 = function runEffectFn12(fn) {
-    return function(a3) {
-      return function() {
-        return fn(a3);
-      };
-    };
-  };
-
-  // output/React.Basic.Hooks/foreign.js
-  var import_react2 = __toESM(require_react(), 1);
-  var useEqCache = (eq5, a3) => {
-    const memoRef = import_react2.default.useRef(a3);
-    if (memoRef.current !== a3 && !eq5(memoRef.current, a3)) {
-      memoRef.current = a3;
-    }
-    return memoRef.current;
-  };
-  var memo_ = import_react2.default.memo;
-  var memoEq_ = import_react2.default.memo;
-  function useState_(tuple, initialState) {
-    const [state3, setState] = import_react2.default.useState(
-      typeof initialState === "function" ? () => initialState : initialState
-    );
-    if (!setState.hasOwnProperty("$$reactBasicHooks$$cachedSetState")) {
-      setState.$$reactBasicHooks$$cachedSetState = (update2) => () => setState(update2);
-    }
-    return tuple(state3, setState.$$reactBasicHooks$$cachedSetState);
-  }
-  function useEffect_(eq5, deps, effect) {
-    const memoizedKey = useEqCache(eq5, deps);
-    import_react2.default.useEffect(effect, [memoizedKey]);
-  }
-  function useLayoutEffect_(eq5, deps, effect) {
-    const memoizedKey = useEqCache(eq5, deps);
-    import_react2.default.useLayoutEffect(effect, [memoizedKey]);
-  }
-  function useReducer_(tuple, reducer2, initialState) {
-    const [state3, dispatch2] = import_react2.default.useReducer(reducer2, initialState);
-    if (!dispatch2.hasOwnProperty("$$reactBasicHooks$$cachedDispatch")) {
-      dispatch2.$$reactBasicHooks$$cachedDispatch = (action2) => () => dispatch2(action2);
-    }
-    return tuple(state3, dispatch2.$$reactBasicHooks$$cachedDispatch);
-  }
-  var useRef_ = import_react2.default.useRef;
-  function readRef_(ref) {
-    return ref.current;
-  }
-  var useContext_ = import_react2.default.useContext;
-  var useDebugValue_ = import_react2.default.useDebugValue;
-  var useId_ = import_react2.default.useId;
-  var useDeferredValue_ = import_react2.default.useDeferredValue;
-  var useSyncExternalStore2_ = import_react2.default.useSyncExternalStore;
-  var useSyncExternalStore3_ = import_react2.default.useSyncExternalStore;
-  function unsafeSetDisplayName(displayName2, component2) {
-    component2.displayName = displayName2;
-    component2.toString = () => displayName2;
-    return component2;
-  }
-
-  // output/React.Basic/foreign.js
-  var import_react3 = __toESM(require_react(), 1);
-  var createElement = import_react3.default.createElement;
-  var Fragment = import_react3.default.Fragment;
-  var empty3 = null;
-  function element(component2) {
-    return (props) => Array.isArray(props.children) ? createElement.apply(null, [component2, props].concat(props.children)) : createElement(component2, props);
-  }
-  function fragment(children3) {
-    return createElement.apply(null, [Fragment, null].concat(children3));
-  }
-
-  // output/React.Basic/index.js
-  var semigroupJSX = {
-    append: function(a3) {
-      return function(b2) {
-        return fragment([a3, b2]);
-      };
-    }
-  };
-  var monoidJSX = {
-    mempty: empty3,
-    Semigroup0: function() {
-      return semigroupJSX;
-    }
-  };
-
-  // output/Control.Bind.Indexed/index.js
-  var ibind = function(dict) {
-    return dict.ibind;
-  };
-
-  // output/React.Basic.Hooks.Internal/index.js
-  var map4 = /* @__PURE__ */ map(functorEffect);
-  var apply2 = /* @__PURE__ */ apply(applyEffect);
-  var pure2 = /* @__PURE__ */ pure(applicativeEffect);
-  var Render = function(x2) {
-    return x2;
-  };
-  var unsafeHook = Render;
-  var ixFunctorRender = {
-    imap: function(f) {
-      return function(v) {
-        return map4(f)(v);
-      };
-    }
-  };
-  var ixApplyRender = {
-    iapply: function(v) {
-      return function(v1) {
-        return apply2(v)(v1);
-      };
-    },
-    IxFunctor0: function() {
-      return ixFunctorRender;
-    }
-  };
-  var ixBindRender = {
-    ibind: function(v) {
-      return function(f) {
-        return function __do4() {
-          var a3 = v();
-          var v1 = f(a3);
-          return v1();
-        };
-      };
-    },
-    IxApply0: function() {
-      return ixApplyRender;
-    }
-  };
-  var functorRender = {
-    map: function(f) {
-      return function(v) {
-        return map4(f)(v);
-      };
-    }
-  };
-  var discard3 = function(dictIxBind) {
-    return ibind(dictIxBind);
-  };
-  var bind2 = function(dictIxBind) {
-    return ibind(dictIxBind);
-  };
-  var applyRender = function(dictTypeEquals) {
-    return {
-      apply: function(v) {
-        return function(v1) {
-          return apply2(v)(v1);
-        };
-      },
-      Functor0: function() {
-        return functorRender;
-      }
-    };
-  };
-  var bindRender = function(dictTypeEquals) {
-    var applyRender1 = applyRender(dictTypeEquals);
-    return {
-      bind: function(v) {
-        return function(f) {
-          return function __do4() {
-            var a3 = v();
-            var v1 = f(a3);
-            return v1();
-          };
-        };
-      },
-      Apply0: function() {
-        return applyRender1;
-      }
-    };
-  };
-  var applicativeRender = function(dictTypeEquals) {
-    var applyRender1 = applyRender(dictTypeEquals);
-    return {
-      pure: function(a3) {
-        return pure2(a3);
-      },
-      Apply0: function() {
-        return applyRender1;
-      }
-    };
-  };
-  var monadRender = function(dictTypeEquals) {
-    var applicativeRender1 = applicativeRender(dictTypeEquals);
-    var bindRender1 = bindRender(dictTypeEquals);
-    return {
-      Applicative0: function() {
-        return applicativeRender1;
-      },
-      Bind1: function() {
-        return bindRender1;
-      }
-    };
-  };
-
-  // output/React.Basic.Hooks/index.js
-  var mapFlipped2 = /* @__PURE__ */ mapFlipped(functorRender);
-  var rmap2 = /* @__PURE__ */ rmap(bifunctorTuple);
-  var map5 = /* @__PURE__ */ map(functorEffect);
-  var pure3 = /* @__PURE__ */ pure(applicativeEffect);
-  var Reducer = function(x2) {
-    return x2;
-  };
-  var useState = function(initialState) {
-    return unsafeHook(function() {
-      return useState_(mkFn2(Tuple.create), initialState);
-    });
-  };
-  var useState$prime = function(initialState) {
-    return mapFlipped2(useState(initialState))(rmap2(function(v) {
-      return function($36) {
-        return v($$const($36));
-      };
-    }));
-  };
-  var useRef2 = function(initialValue) {
-    return unsafeHook(function() {
-      return useRef_(initialValue);
-    });
-  };
-  var useReducer = function(initialState) {
-    return function(v) {
-      return unsafeHook(function() {
-        return useReducer_(mkFn2(Tuple.create), v, initialState);
-      });
-    };
-  };
-  var useLayoutEffectOnce = function(effect) {
-    return unsafeHook(function() {
-      return useLayoutEffect_(function(v, v1) {
-        return true;
-      }, unit, effect);
-    });
-  };
-  var useEffectOnce = function(effect) {
-    return unsafeHook(function() {
-      return useEffect_(function(v, v1) {
-        return true;
-      }, unit, effect);
-    });
-  };
-  var unsafeReactFunctionComponent = unsafeCoerce2;
-  var unsafeDiscardRenderEffects = unsafeCoerce2;
-  var unsafeReactComponent = function() {
-    return function() {
-      return function(name15) {
-        return function(renderFn) {
-          var c4 = unsafeReactFunctionComponent(function(props) {
-            return unsafeDiscardRenderEffects(renderFn(props))();
-          });
-          return function() {
-            return unsafeSetDisplayName(name15, c4);
-          };
-        };
-      };
-    };
-  };
-  var unsafeReactComponent1 = /* @__PURE__ */ unsafeReactComponent()();
-  var readRef = /* @__PURE__ */ runEffectFn1(readRef_);
-  var readRefMaybe = function(a3) {
-    return map5(toMaybe)(readRef(a3));
-  };
-  var reactComponent = function() {
-    return function() {
-      return function() {
-        return unsafeReactComponent1;
-      };
-    };
-  };
-  var reactComponent1 = /* @__PURE__ */ reactComponent()()();
-  var mkReducer = function($37) {
-    return pure3(Reducer(mkFn2($37)));
-  };
-  var component = function(name15) {
-    return function(renderFn) {
-      return function __do4() {
-        var c4 = reactComponent1(name15)(function($38) {
-          return renderFn(function(v) {
-            return v.nested;
-          }($38));
-        })();
-        var $39 = element(c4);
-        return function($40) {
-          return $39(function(v) {
-            return {
-              nested: v
-            };
-          }($40));
-        };
-      };
-    };
-  };
-
-  // output/Type.Equality/index.js
-  var refl = {
-    proof: function(a3) {
-      return a3;
-    },
-    Coercible0: function() {
-      return void 0;
-    }
-  };
-
-  // output/Web.DOM.Element/foreign.js
-  var getProp = function(name15) {
-    return function(doctype) {
-      return doctype[name15];
-    };
-  };
-  var _namespaceURI = getProp("namespaceURI");
-  var _prefix = getProp("prefix");
-  var localName = getProp("localName");
-  var tagName = getProp("tagName");
-  function getBoundingClientRect(el) {
-    return function() {
-      var rect = el.getBoundingClientRect();
-      return {
-        top: rect.top,
-        right: rect.right,
-        bottom: rect.bottom,
-        left: rect.left,
-        width: rect.width,
-        height: rect.height,
-        x: rect.x,
-        y: rect.y
-      };
-    };
-  }
-
-  // output/Web.DOM.ParentNode/foreign.js
-  var getEffProp = function(name15) {
-    return function(node) {
-      return function() {
-        return node[name15];
-      };
-    };
-  };
-  var children = getEffProp("children");
-  var _firstElementChild = getEffProp("firstElementChild");
-  var _lastElementChild = getEffProp("lastElementChild");
-  var childElementCount = getEffProp("childElementCount");
-
-  // output/Web.Internal.FFI/foreign.js
-  function _unsafeReadProtoTagged(nothing, just, name15, value12) {
-    if (typeof window !== "undefined") {
-      var ty = window[name15];
-      if (ty != null && value12 instanceof ty) {
-        return just(value12);
-      }
-    }
-    var obj = value12;
-    while (obj != null) {
-      var proto = Object.getPrototypeOf(obj);
-      var constructorName = proto.constructor.name;
-      if (constructorName === name15) {
-        return just(value12);
-      } else if (constructorName === "Object") {
-        return nothing;
-      }
-      obj = proto;
-    }
-    return nothing;
-  }
-
-  // output/Web.Internal.FFI/index.js
-  var unsafeReadProtoTagged = function(name15) {
-    return function(value12) {
-      return _unsafeReadProtoTagged(Nothing.value, Just.create, name15, value12);
-    };
-  };
-
-  // output/Web.DOM.Element/index.js
-  var fromNode = /* @__PURE__ */ unsafeReadProtoTagged("Element");
-
-  // output/Foreign.Hooks/index.js
-  var bind3 = /* @__PURE__ */ bind2(ixBindRender);
-  var discard4 = /* @__PURE__ */ discard3(ixBindRender);
-  var for_2 = /* @__PURE__ */ for_(applicativeEffect)(foldableMaybe);
-  var bind22 = /* @__PURE__ */ bind(bindMaybe);
-  var mempty2 = /* @__PURE__ */ mempty(/* @__PURE__ */ monoidEffect(monoidUnit));
-  var pure1 = /* @__PURE__ */ pure(/* @__PURE__ */ applicativeRender(refl));
-  var useResizeObserver2 = function(ref) {
-    return function(callback) {
-      return unsafeHook(function() {
-        return _useResizeObserver({
-          ref,
-          callback: mkEffectFn1(callback)
-        });
-      });
-    };
-  };
-  var useContentBox = function(ref) {
-    return bind3(useState$prime(Nothing.value))(function(v) {
-      return discard4(useLayoutEffectOnce(function __do4() {
-        var maybeElement = readRefMaybe(ref)();
-        for_2(bind22(maybeElement)(fromNode))(function(element2) {
-          return function __do5() {
-            var rect = getBoundingClientRect(element2)();
-            return v.value1(new Just({
-              width: rect.width,
-              height: rect.height
-            }))();
-          };
-        })();
-        return mempty2;
-      }))(function() {
-        return discard4(useResizeObserver2(ref)(function(box1) {
-          return v.value1(new Just(box1));
-        }))(function() {
-          return pure1(v.value0);
-        });
-      });
-    });
-  };
-
   // output/Format.Int/foreign.js
   var intFormat = new Intl.NumberFormat("en-US", {
     maximumFractionDigits: 0,
@@ -26790,7 +25742,7 @@
     sticky: false,
     unicode: false
   };
-  var global2 = {
+  var global = {
     global: true,
     ignoreCase: false,
     multiline: false,
@@ -26854,8 +25806,8 @@
   };
 
   // output/Format.Int/index.js
-  var thousandGroups = /* @__PURE__ */ unsafeRegex("\\B(?=(\\d{3})+$)")(global2);
-  var nonNumbers = /* @__PURE__ */ unsafeRegex("[^0-9]")(global2);
+  var thousandGroups = /* @__PURE__ */ unsafeRegex("\\B(?=(\\d{3})+$)")(global);
+  var nonNumbers = /* @__PURE__ */ unsafeRegex("[^0-9]")(global);
   var leadingZeros = /* @__PURE__ */ unsafeRegex("^0*")(noFlags);
   var formatString = /* @__PURE__ */ function() {
     var $2 = replace(thousandGroups)(",");
@@ -26865,7 +25817,7 @@
       return $2($3($4($5)));
     };
   }();
-  var commas = /* @__PURE__ */ unsafeRegex(",")(global2);
+  var commas = /* @__PURE__ */ unsafeRegex(",")(global);
   var unformat = /* @__PURE__ */ function() {
     var $6 = map(functorMaybe)(floor2);
     var $7 = replace(commas)("");
@@ -26986,7 +25938,7 @@
   function length4(array3) {
     return array3.length | 0;
   }
-  function empty4(length8) {
+  function empty3(length8) {
     return !(length8 > 0);
   }
   function arrayify(values3) {
@@ -27002,7 +25954,7 @@
     const j = values3.length - 1;
     const index5 = new Array(j + 1).fill(0);
     const product2 = [];
-    if (j < 0 || lengths.some(empty4))
+    if (j < 0 || lengths.some(empty3))
       return product2;
     while (true) {
       product2.push(index5.map((j2, i3) => values3[i3][j2]));
@@ -27170,7 +26122,7 @@
   function rollup(values3, reduce, ...keys3) {
     return nest(values3, identity7, reduce, keys3);
   }
-  function nest(values3, map13, reduce, keys3) {
+  function nest(values3, map14, reduce, keys3) {
     return function regroup(values4, i2) {
       if (i2 >= keys3.length)
         return reduce(values4);
@@ -27188,7 +26140,7 @@
       for (const [key, values5] of groups2) {
         groups2.set(key, regroup(values5, i2));
       }
-      return map13(groups2);
+      return map14(groups2);
     }(values3, 0);
   }
 
@@ -27246,7 +26198,7 @@
   // node_modules/d3-array/src/array.js
   var array = Array.prototype;
   var slice3 = array.slice;
-  var map6 = array.map;
+  var map4 = array.map;
 
   // node_modules/d3-array/src/constant.js
   function constant(x2) {
@@ -27997,11 +26949,11 @@
   }
 
   // node_modules/d3-selection/src/selectorAll.js
-  function empty5() {
+  function empty4() {
     return [];
   }
   function selectorAll_default(selector) {
-    return selector == null ? empty5 : function() {
+    return selector == null ? empty4 : function() {
       return this.querySelectorAll(selector);
     };
   }
@@ -28056,7 +27008,7 @@
 
   // node_modules/d3-selection/src/selection/selectChildren.js
   var filter4 = Array.prototype.filter;
-  function children2() {
+  function children() {
     return Array.from(this.children);
   }
   function childrenFilter(match) {
@@ -28065,7 +27017,7 @@
     };
   }
   function selectChildren_default(match) {
-    return this.selectAll(match == null ? children2 : childrenFilter(typeof match === "function" ? match : childMatcher(match)));
+    return this.selectAll(match == null ? children : childrenFilter(typeof match === "function" ? match : childMatcher(match)));
   }
 
   // node_modules/d3-selection/src/selection/filter.js
@@ -28172,12 +27124,12 @@
   function data_default(value12, key) {
     if (!arguments.length)
       return Array.from(this, datum);
-    var bind5 = key ? bindKey : bindIndex, parents = this._parents, groups2 = this._groups;
+    var bind7 = key ? bindKey : bindIndex, parents = this._parents, groups2 = this._groups;
     if (typeof value12 !== "function")
       value12 = constant_default(value12);
     for (var m = groups2.length, update2 = new Array(m), enter = new Array(m), exit = new Array(m), j = 0; j < m; ++j) {
       var parent2 = parents[j], group3 = groups2[j], groupLength = group3.length, data = arraylike(value12.call(parent2, parent2 && parent2.__data__, j, parents)), dataLength = data.length, enterGroup = enter[j] = new Array(dataLength), updateGroup = update2[j] = new Array(dataLength), exitGroup = exit[j] = new Array(groupLength);
-      bind5(parent2, group3, enterGroup, updateGroup, exitGroup, data, key);
+      bind7(parent2, group3, enterGroup, updateGroup, exitGroup, data, key);
       for (var i0 = 0, i1 = 0, previous, next; i0 < dataLength; ++i0) {
         if (previous = enterGroup[i0]) {
           if (i0 >= i1)
@@ -28432,7 +27384,7 @@
   function classArray(string2) {
     return string2.trim().split(/^|\s+/);
   }
-  function classList2(node) {
+  function classList(node) {
     return node.classList || new ClassList(node);
   }
   function ClassList(node) {
@@ -28459,12 +27411,12 @@
     }
   };
   function classedAdd(node, names) {
-    var list = classList2(node), i2 = -1, n = names.length;
+    var list = classList(node), i2 = -1, n = names.length;
     while (++i2 < n)
       list.add(names[i2]);
   }
   function classedRemove(node, names) {
-    var list = classList2(node), i2 = -1, n = names.length;
+    var list = classList(node), i2 = -1, n = names.length;
     while (++i2 < n)
       list.remove(names[i2]);
   }
@@ -28486,7 +27438,7 @@
   function classed_default(name15, value12) {
     var names = classArray(name15 + "");
     if (arguments.length < 2) {
-      var list = classList2(this.node()), i2 = -1, n = names.length;
+      var list = classList(this.node()), i2 = -1, n = names.length;
       while (++i2 < n)
         if (!list.contains(names[i2]))
           return false;
@@ -29701,7 +28653,7 @@
   var setFrame = typeof window === "object" && window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : function(f) {
     setTimeout(f, 17);
   };
-  function now2() {
+  function now() {
     return clockNow || (setFrame(clearNow), clockNow = clock.now() + clockSkew);
   }
   function clearNow() {
@@ -29712,10 +28664,10 @@
   }
   Timer.prototype = timer.prototype = {
     constructor: Timer,
-    restart: function(callback, delay, time4) {
+    restart: function(callback, delay2, time4) {
       if (typeof callback !== "function")
         throw new TypeError("callback is not a function");
-      time4 = (time4 == null ? now2() : +time4) + (delay == null ? 0 : +delay);
+      time4 = (time4 == null ? now() : +time4) + (delay2 == null ? 0 : +delay2);
       if (!this._next && taskTail !== this) {
         if (taskTail)
           taskTail._next = this;
@@ -29735,13 +28687,13 @@
       }
     }
   };
-  function timer(callback, delay, time4) {
+  function timer(callback, delay2, time4) {
     var t = new Timer();
-    t.restart(callback, delay, time4);
+    t.restart(callback, delay2, time4);
     return t;
   }
   function timerFlush() {
-    now2();
+    now();
     ++frame;
     var t = taskHead, e;
     while (t) {
@@ -29763,9 +28715,9 @@
     }
   }
   function poke2() {
-    var now4 = clock.now(), delay = now4 - clockLast;
-    if (delay > pokeDelay)
-      clockSkew -= delay, clockLast = now4;
+    var now3 = clock.now(), delay2 = now3 - clockLast;
+    if (delay2 > pokeDelay)
+      clockSkew -= delay2, clockLast = now3;
   }
   function nap() {
     var t03, t13 = taskHead, t22, time4 = Infinity;
@@ -29787,8 +28739,8 @@
       return;
     if (timeout)
       timeout = clearTimeout(timeout);
-    var delay = time4 - clockNow;
-    if (delay > 24) {
+    var delay2 = time4 - clockNow;
+    if (delay2 > 24) {
       if (time4 < Infinity)
         timeout = setTimeout(wake, time4 - clock.now() - clockSkew);
       if (interval)
@@ -29801,13 +28753,13 @@
   }
 
   // node_modules/d3-timer/src/timeout.js
-  function timeout_default(callback, delay, time4) {
+  function timeout_default(callback, delay2, time4) {
     var t = new Timer();
-    delay = delay == null ? 0 : +delay;
+    delay2 = delay2 == null ? 0 : +delay2;
     t.restart((elapsed) => {
       t.stop();
-      callback(elapsed + delay);
-    }, delay, time4);
+      callback(elapsed + delay2);
+    }, delay2, time4);
     return t;
   }
 
@@ -30457,7 +29409,7 @@
   }
 
   // node_modules/d3-transition/src/transition/index.js
-  var id2 = 0;
+  var id = 0;
   function Transition(groups2, parents, name15, id3) {
     this._groups = groups2;
     this._parents = parents;
@@ -30468,7 +29420,7 @@
     return selection_default().transition(name15);
   }
   function newId() {
-    return ++id2;
+    return ++id;
   }
   var selection_prototype = selection_default.prototype;
   Transition.prototype = transition.prototype = {
@@ -30530,7 +29482,7 @@
     if (name15 instanceof Transition) {
       id3 = name15._id, name15 = name15._name;
     } else {
-      id3 = newId(), (timing = defaultTiming).time = now2(), name15 = name15 == null ? null : name15 + "";
+      id3 = newId(), (timing = defaultTiming).time = now(), name15 = name15 == null ? null : name15 + "";
     }
     for (var groups2 = this._groups, m = groups2.length, j = 0; j < m; ++j) {
       for (var group3 = groups2[j], n = group3.length, node, i2 = 0; i2 < n; ++i2) {
@@ -30814,10 +29766,10 @@
   }
 
   // node_modules/d3-format/src/locale.js
-  var map7 = Array.prototype.map;
+  var map5 = Array.prototype.map;
   var prefixes = ["y", "z", "a", "f", "p", "n", "\xB5", "m", "", "k", "M", "G", "T", "P", "E", "Z", "Y"];
   function locale_default(locale3) {
-    var group3 = locale3.grouping === void 0 || locale3.thousands === void 0 ? identity_default2 : formatGroup_default(map7.call(locale3.grouping, Number), locale3.thousands + ""), currencyPrefix = locale3.currency === void 0 ? "" : locale3.currency[0] + "", currencySuffix = locale3.currency === void 0 ? "" : locale3.currency[1] + "", decimal = locale3.decimal === void 0 ? "." : locale3.decimal + "", numerals = locale3.numerals === void 0 ? identity_default2 : formatNumerals_default(map7.call(locale3.numerals, String)), percent = locale3.percent === void 0 ? "%" : locale3.percent + "", minus = locale3.minus === void 0 ? "\u2212" : locale3.minus + "", nan2 = locale3.nan === void 0 ? "NaN" : locale3.nan + "";
+    var group3 = locale3.grouping === void 0 || locale3.thousands === void 0 ? identity_default2 : formatGroup_default(map5.call(locale3.grouping, Number), locale3.thousands + ""), currencyPrefix = locale3.currency === void 0 ? "" : locale3.currency[0] + "", currencySuffix = locale3.currency === void 0 ? "" : locale3.currency[1] + "", decimal = locale3.decimal === void 0 ? "." : locale3.decimal + "", numerals = locale3.numerals === void 0 ? identity_default2 : formatNumerals_default(map5.call(locale3.numerals, String)), percent = locale3.percent === void 0 ? "%" : locale3.percent + "", minus = locale3.minus === void 0 ? "\u2212" : locale3.minus + "", nan2 = locale3.nan === void 0 ? "NaN" : locale3.nan + "";
     function newFormat(specifier) {
       specifier = formatSpecifier(specifier);
       var fill = specifier.fill, align = specifier.align, sign3 = specifier.sign, symbol2 = specifier.symbol, zero4 = specifier.zero, width8 = specifier.width, comma = specifier.comma, precision = specifier.precision, trim2 = specifier.trim, type2 = specifier.type;
@@ -32519,7 +31471,7 @@
     };
     return scale;
   }
-  function time2() {
+  function time() {
     return initRange.apply(calendar(timeTicks, timeTickInterval, year_default, month_default, sunday, day_default, hour_default, minute_default, second_default, timeFormat).domain([new Date(2e3, 0, 1), new Date(2e3, 0, 2)]), arguments);
   }
 
@@ -34420,7 +33372,7 @@
   var objectToString = Object.prototype.toString;
   function valueof(data, value12, type2) {
     const valueType = typeof value12;
-    return valueType === "string" ? map8(data, field(value12), type2) : valueType === "function" ? map8(data, value12, type2) : valueType === "number" || value12 instanceof Date || valueType === "boolean" ? map8(data, constant2(value12), type2) : value12 && typeof value12.transform === "function" ? arrayify2(value12.transform(data), type2) : arrayify2(value12, type2);
+    return valueType === "string" ? map6(data, field(value12), type2) : valueType === "function" ? map6(data, value12, type2) : valueType === "number" || value12 instanceof Date || valueType === "boolean" ? map6(data, constant2(value12), type2) : value12 && typeof value12.transform === "function" ? arrayify2(value12.transform(data), type2) : arrayify2(value12, type2);
   }
   var field = (name15) => (d) => d[name15];
   var indexOf = (d, i2) => i2;
@@ -34460,7 +33412,7 @@
   function arrayify2(data, type2) {
     return data == null ? data : type2 === void 0 ? data instanceof Array || data instanceof TypedArray ? data : Array.from(data) : data instanceof type2 ? data : type2.from(data);
   }
-  function map8(values3, f, type2 = Array) {
+  function map6(values3, f, type2 = Array) {
     return values3 instanceof type2 ? values3.map(f) : type2.from(values3, f);
   }
   function slice5(values3, type2 = Array) {
@@ -34509,7 +33461,7 @@
     return range4(data).filter((i2) => test2(data[i2], i2, data));
   }
   function take2(values3, index5) {
-    return map8(index5, (i2) => values3[i2]);
+    return map6(index5, (i2) => values3[i2]);
   }
   function keyof2(value12) {
     return value12 !== null && typeof value12 === "object" ? value12.valueOf() : value12;
@@ -34550,7 +33502,7 @@
       transform(data) {
         const X1 = x1.transform(data);
         const X2 = x2.transform(data);
-        return isTemporal(X1) || isTemporal(X2) ? map8(X1, (_, i2) => new Date((+X1[i2] + +X2[i2]) / 2)) : map8(X1, (_, i2) => (+X1[i2] + +X2[i2]) / 2, Float64Array);
+        return isTemporal(X1) || isTemporal(X2) ? map6(X1, (_, i2) => new Date((+X1[i2] + +X2[i2]) / 2)) : map6(X1, (_, i2) => (+X1[i2] + +X2[i2]) / 2, Float64Array);
       },
       label: x1.label
     };
@@ -35592,7 +34544,7 @@
     return ScaleQ(key, scale, channels, options2);
   }
   function ScaleTime(key, channels, options2) {
-    return ScaleT(key, time2(), channels, options2);
+    return ScaleT(key, time(), channels, options2);
   }
   function ScaleUtc(key, channels, options2) {
     return ScaleT(key, utcTime(), channels, options2);
@@ -35673,7 +34625,7 @@
     let hint;
     if (registry.get(key) === symbol) {
       hint = inferSymbolHint(channels);
-      range5 = range5 === void 0 ? inferSymbolRange(hint) : map8(range5, maybeSymbol);
+      range5 = range5 === void 0 ? inferSymbolRange(hint) : map6(range5, maybeSymbol);
     } else if (registry.get(key) === color2) {
       if (range5 === void 0 && (type2 === "ordinal" || type2 === ordinalImplicit)) {
         range5 = maybeBooleanRange(domain, scheme28);
@@ -35825,8 +34777,8 @@
       const { insetTop, insetBottom } = scale;
       const { height: height8, marginTop = 0, marginBottom = 0 } = dimensions;
       const top4 = marginTop + insetTop;
-      const bottom5 = height8 - marginBottom - insetBottom;
-      scale.range = [Math.max(top4, bottom5), top4];
+      const bottom6 = height8 - marginBottom - insetBottom;
+      scale.range = [Math.max(top4, bottom6), top4];
       if (!isOrdinalScale(scale))
         scale.range = piecewiseRange(scale);
       else
@@ -36038,13 +34990,13 @@
     };
   }
   function coerceSymbols(values3) {
-    return map8(values3, maybeSymbol);
+    return map6(values3, maybeSymbol);
   }
   function coerceDates(values3) {
-    return map8(values3, coerceDate);
+    return map6(values3, coerceDate);
   }
   function coerceNumbers(values3) {
-    return isTypedArray(values3) ? values3 : map8(values3, coerceNumber, Float64Array);
+    return isTypedArray(values3) ? values3 : map6(values3, coerceNumber, Float64Array);
   }
   function coerceNumber(x2) {
     return x2 == null ? NaN : +x2;
@@ -36528,8 +35480,8 @@
       const groups2 = sort(rollup(I, (V) => V.length, (i2) => X2[i2]), second2);
       const top4 = groups2.slice(-n).reverse();
       if (top4.length < groups2.length) {
-        const bottom5 = groups2.slice(0, 1 - n);
-        top4[n - 1] = [`\u2026 ${bottom5.length.toLocaleString("en-US")} more`, sum2(bottom5, second2)];
+        const bottom6 = groups2.slice(0, 1 - n);
+        top4[n - 1] = [`\u2026 ${bottom6.length.toLocaleString("en-US")} more`, sum2(bottom6, second2)];
       }
       return top4.map(([key, value12]) => `${key} (${value12.toLocaleString("en-US")})`).join("\n");
     }
@@ -36612,7 +35564,7 @@
   function valueObject(channels, scales) {
     return Object.fromEntries(Object.entries(channels).map(([name15, { scale: scaleName, value: value12 }]) => {
       const scale = scales[scaleName];
-      return [name15, scale === void 0 ? value12 : map8(value12, scale)];
+      return [name15, scale === void 0 ? value12 : map6(value12, scale)];
     }));
   }
   function channelDomain(channels, facetChannels, data, options2) {
@@ -36662,7 +35614,7 @@
   function difference3(channels, k1, k2) {
     const X1 = values2(channels, k1);
     const X2 = values2(channels, k2);
-    return map8(X2, (x2, i2) => Math.abs(x2 - X1[i2]), Float64Array);
+    return map6(X2, (x2, i2) => Math.abs(x2 - X1[i2]), Float64Array);
   }
   function values2(channels, name15, alias) {
     let channel = channels[name15];
@@ -36742,7 +35694,7 @@
       const thresholdFormat = tickFormat2 === void 0 ? (d) => d : typeof tickFormat2 === "string" ? format2(tickFormat2) : tickFormat2;
       x2 = applyRange(linear2().domain([-1, range5.length - 1]), [marginLeft, width8 - marginRight]);
       svg.append("g").selectAll().data(range5).enter().append("rect").attr("x", (d, i2) => x2(i2 - 1)).attr("y", marginTop).attr("width", (d, i2) => x2(i2) - x2(i2 - 1)).attr("height", height8 - marginTop - marginBottom).attr("fill", (d) => d);
-      ticks2 = map8(thresholds, (_, i2) => i2);
+      ticks2 = map6(thresholds, (_, i2) => i2);
       tickFormat2 = (i2) => thresholdFormat(thresholds[i2], i2);
     } else {
       x2 = applyRange(band().domain(domain), [marginLeft, width8 - marginRight]);
@@ -37152,9 +36104,9 @@
     }
   };
   function markify(mark2) {
-    return typeof mark2?.render === "function" ? mark2 : new Render2(mark2);
+    return typeof mark2?.render === "function" ? mark2 : new Render(mark2);
   }
-  var Render2 = class extends Mark {
+  var Render = class extends Mark {
     constructor(render) {
       super();
       if (render == null)
@@ -37173,7 +36125,7 @@
       if (scale != null) {
         const { percent, interval: interval2, transform: transform2 = percent ? (x2) => x2 * 100 : maybeInterval(interval2)?.floor } = options2[scale] || {};
         if (transform2 != null)
-          channel.value = map8(channel.value, transform2);
+          channel.value = map6(channel.value, transform2);
       }
     }
     return channels;
@@ -37254,17 +36206,17 @@
   };
   var FacetMap2 = class extends FacetMap {
     has([key1, key2]) {
-      const map13 = super.get(key1);
-      return map13 ? map13.has(key2) : false;
+      const map14 = super.get(key1);
+      return map14 ? map14.has(key2) : false;
     }
     get([key1, key2]) {
-      const map13 = super.get(key1);
-      return map13 && map13.get(key2);
+      const map14 = super.get(key1);
+      return map14 && map14.get(key2);
     }
     set([key1, key2], value12) {
-      const map13 = super.get(key1);
-      if (map13)
-        map13.set(key2, value12);
+      const map14 = super.get(key1);
+      if (map14)
+        map14.set(key2, value12);
       else
         super.set(key1, new InternMap([[key2, value12]]));
       return this;
@@ -37933,17 +36885,17 @@
   }
 
   // node_modules/@observablehq/plot/dist/transforms/map.js
-  function mapY(map13, options2 = {}) {
-    return mapAlias(Object.fromEntries(["y", "y1", "y2"].filter((key) => options2[key] != null).map((key) => [key, map13])), options2);
+  function mapY(map14, options2 = {}) {
+    return mapAlias(Object.fromEntries(["y", "y1", "y2"].filter((key) => options2[key] != null).map((key) => [key, map14])), options2);
   }
-  function map9(outputs = {}, options2 = {}) {
+  function map7(outputs = {}, options2 = {}) {
     const z = maybeZ(options2);
-    const channels = Object.entries(outputs).map(([key, map13]) => {
+    const channels = Object.entries(outputs).map(([key, map14]) => {
       const input3 = maybeInput(key, options2);
       if (input3 == null)
         throw new Error(`missing channel: ${key}`);
       const [output2, setOutput] = column(input3);
-      return { key, input: input3, output: output2, setOutput, map: maybeMap(map13) };
+      return { key, input: input3, output: output2, setOutput, map: maybeMap(map14) };
     });
     return {
       ...basic(options2, (data, facets) => {
@@ -37952,7 +36904,7 @@
         const MX = channels.map(({ setOutput }) => setOutput(new Array(data.length)));
         for (const facet of facets) {
           for (const I of Z ? group(facet, (i2) => Z[i2]).values() : [facet]) {
-            channels.forEach(({ map: map13 }, i2) => map13.map(I, X2[i2], MX[i2]));
+            channels.forEach(({ map: map14 }, i2) => map14.map(I, X2[i2], MX[i2]));
           }
         }
         return { data, facets };
@@ -37960,13 +36912,13 @@
       ...Object.fromEntries(channels.map(({ key, output: output2 }) => [key, output2]))
     };
   }
-  var mapAlias = map9;
-  function maybeMap(map13) {
-    if (map13 && typeof map13.map === "function")
-      return map13;
-    if (typeof map13 === "function")
-      return mapFunction(map13);
-    switch (`${map13}`.toLowerCase()) {
+  var mapAlias = map7;
+  function maybeMap(map14) {
+    if (map14 && typeof map14.map === "function")
+      return map14;
+    if (typeof map14 === "function")
+      return mapFunction(map14);
+    switch (`${map14}`.toLowerCase()) {
       case "cumsum":
         return mapCumsum;
       case "rank":
@@ -37974,7 +36926,7 @@
       case "quantile":
         return mapFunction(rankQuantile);
     }
-    throw new Error(`invalid map: ${map13}`);
+    throw new Error(`invalid map: ${map14}`);
   }
   function rankQuantile(V) {
     const n = count(V) - 1;
@@ -38334,7 +37286,7 @@
   }
 
   // output/LargeChart/foreign.js
-  var import_react4 = __toESM(require_react(), 1);
+  var import_react = __toESM(require_react(), 1);
   var __assign = function() {
     __assign = Object.assign || function(t) {
       for (var s3, i2 = 1, n = arguments.length; i2 < n; i2++) {
@@ -38348,10 +37300,11 @@
     return __assign.apply(this, arguments);
   };
   function _largeChart(props) {
-    var ref = import_react4.default.useRef();
-    import_react4.default.useEffect(function() {
+    var ref = import_react.default.useRef();
+    import_react.default.useEffect(function() {
       var chart = plot({
         width: props.width,
+        height: props.height,
         style: {
           background: "transparent"
         },
@@ -38394,7 +37347,7 @@
         return chart.remove();
       };
     }, [props]);
-    return import_react4.default.createElement("div", { ref });
+    return import_react.default.createElement("div", { ref });
   }
 
   // output/Data.Time.Component/index.js
@@ -38790,6 +37743,36 @@
     return throwException(error($4));
   };
 
+  // output/Control.Monad.Error.Class/index.js
+  var throwError = function(dict) {
+    return dict.throwError;
+  };
+  var monadThrowEffect = {
+    throwError: throwException,
+    Monad0: function() {
+      return monadEffect;
+    }
+  };
+  var catchError = function(dict) {
+    return dict.catchError;
+  };
+  var $$try = function(dictMonadError) {
+    var catchError1 = catchError(dictMonadError);
+    var Monad0 = dictMonadError.MonadThrow0().Monad0();
+    var map14 = map(Monad0.Bind1().Apply0().Functor0());
+    var pure8 = pure(Monad0.Applicative0());
+    return function(a3) {
+      return catchError1(map14(Right.create)(a3))(function($52) {
+        return pure8(Left.create($52));
+      });
+    };
+  };
+
+  // output/Effect.Class/index.js
+  var liftEffect = function(dict) {
+    return dict.liftEffect;
+  };
+
   // output/Data.JSDate/index.js
   var fromEnum3 = /* @__PURE__ */ fromEnum(boundedEnumYear);
   var fromEnum1 = /* @__PURE__ */ fromEnum(boundedEnumMonth);
@@ -38810,6 +37793,14 @@
     });
   };
 
+  // output/React.Basic/foreign.js
+  var import_react2 = __toESM(require_react(), 1);
+  var createElement = import_react2.default.createElement;
+  var Fragment = import_react2.default.Fragment;
+  function element(component2) {
+    return (props) => Array.isArray(props.children) ? createElement.apply(null, [component2, props].concat(props.children)) : createElement(component2, props);
+  }
+
   // output/LargeChart/index.js
   var bottom4 = /* @__PURE__ */ bottom(boundedTime);
   var make = /* @__PURE__ */ pure(applicativeEffect)(/* @__PURE__ */ function() {
@@ -38819,6 +37810,7 @@
         return {
           data: props.data,
           width: props.width,
+          height: props.height,
           min: fromDateTime(new DateTime(props.min, bottom4)),
           max: fromDateTime(new DateTime(props.max, bottom4))
         };
@@ -38835,7 +37827,7 @@
   };
 
   // output/React.Basic.DOM.Internal/foreign.js
-  var import_react5 = __toESM(require_react(), 1);
+  var import_react3 = __toESM(require_react(), 1);
   function unsafeCreateDOMComponent_(createElement2) {
     return (el) => {
       const flattenDataProp = (props, ref) => {
@@ -38856,7 +37848,7 @@
         return Object.assign({ ref }, props, data, aria);
       };
       return () => {
-        const c4 = import_react5.default.forwardRef(
+        const c4 = import_react3.default.forwardRef(
           (props, ref) => createElement2(el)(flattenDataProp(props, ref))
         );
         c4.displayName = el;
@@ -38905,6 +37897,20 @@
       children: children3
     });
   };
+  var _main$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("main"));
+  var main$prime = function() {
+    return _main$prime;
+  };
+  var main$prime1 = /* @__PURE__ */ main$prime();
+  var main = function() {
+    return element(main$prime1);
+  };
+  var main1 = /* @__PURE__ */ main();
+  var main_ = function(children3) {
+    return main1({
+      children: children3
+    });
+  };
   var _input$prime = /* @__PURE__ */ unsafePerformEffect(/* @__PURE__ */ unsafeCreateDOMComponent("input"));
   var input$prime = function() {
     return _input$prime;
@@ -38925,6 +37931,38 @@
   // output/React.Basic.DOM/index.js
   var text = unsafeCoerce2;
 
+  // output/Data.Nullable/foreign.js
+  var nullImpl = null;
+  function nullable(a3, r2, f) {
+    return a3 == null ? r2 : f(a3);
+  }
+
+  // output/Data.Nullable/index.js
+  var toMaybe = function(n) {
+    return nullable(n, Nothing.value, Just.create);
+  };
+
+  // output/Effect.Uncurried/foreign.js
+  var mkEffectFn1 = function mkEffectFn12(fn) {
+    return function(x2) {
+      return fn(x2)();
+    };
+  };
+  var runEffectFn1 = function runEffectFn12(fn) {
+    return function(a3) {
+      return function() {
+        return fn(a3);
+      };
+    };
+  };
+
+  // output/Data.Function.Uncurried/foreign.js
+  var mkFn2 = function(fn) {
+    return function(a3, b2) {
+      return fn(a3)(b2);
+    };
+  };
+
   // output/React.Basic.Events/index.js
   var EventFn = function(x2) {
     return x2;
@@ -38941,6 +37979,2136 @@
   // output/React.Basic.DOM.Events/index.js
   var targetValue = /* @__PURE__ */ unsafeEventFn(function(e) {
     return toMaybe(e.target.value);
+  });
+
+  // output/React.Basic.Hooks/foreign.js
+  var import_react4 = __toESM(require_react(), 1);
+  var useEqCache = (eq5, a3) => {
+    const memoRef = import_react4.default.useRef(a3);
+    if (memoRef.current !== a3 && !eq5(memoRef.current, a3)) {
+      memoRef.current = a3;
+    }
+    return memoRef.current;
+  };
+  var memo_ = import_react4.default.memo;
+  var memoEq_ = import_react4.default.memo;
+  function useState_(tuple, initialState) {
+    const [state3, setState] = import_react4.default.useState(
+      typeof initialState === "function" ? () => initialState : initialState
+    );
+    if (!setState.hasOwnProperty("$$reactBasicHooks$$cachedSetState")) {
+      setState.$$reactBasicHooks$$cachedSetState = (update2) => () => setState(update2);
+    }
+    return tuple(state3, setState.$$reactBasicHooks$$cachedSetState);
+  }
+  function useEffect_(eq5, deps, effect) {
+    const memoizedKey = useEqCache(eq5, deps);
+    import_react4.default.useEffect(effect, [memoizedKey]);
+  }
+  function useLayoutEffect_(eq5, deps, effect) {
+    const memoizedKey = useEqCache(eq5, deps);
+    import_react4.default.useLayoutEffect(effect, [memoizedKey]);
+  }
+  function useReducer_(tuple, reducer2, initialState) {
+    const [state3, dispatch2] = import_react4.default.useReducer(reducer2, initialState);
+    if (!dispatch2.hasOwnProperty("$$reactBasicHooks$$cachedDispatch")) {
+      dispatch2.$$reactBasicHooks$$cachedDispatch = (action2) => () => dispatch2(action2);
+    }
+    return tuple(state3, dispatch2.$$reactBasicHooks$$cachedDispatch);
+  }
+  var useRef_ = import_react4.default.useRef;
+  function readRef_(ref) {
+    return ref.current;
+  }
+  var useContext_ = import_react4.default.useContext;
+  var useDebugValue_ = import_react4.default.useDebugValue;
+  var useId_ = import_react4.default.useId;
+  var useDeferredValue_ = import_react4.default.useDeferredValue;
+  var useSyncExternalStore2_ = import_react4.default.useSyncExternalStore;
+  var useSyncExternalStore3_ = import_react4.default.useSyncExternalStore;
+  function unsafeSetDisplayName(displayName2, component2) {
+    component2.displayName = displayName2;
+    component2.toString = () => displayName2;
+    return component2;
+  }
+
+  // output/Control.Bind.Indexed/index.js
+  var ibind = function(dict) {
+    return dict.ibind;
+  };
+
+  // output/React.Basic.Hooks.Internal/index.js
+  var map9 = /* @__PURE__ */ map(functorEffect);
+  var apply2 = /* @__PURE__ */ apply(applyEffect);
+  var pure2 = /* @__PURE__ */ pure(applicativeEffect);
+  var Render2 = function(x2) {
+    return x2;
+  };
+  var unsafeRenderEffect = Render2;
+  var unsafeHook = Render2;
+  var ixFunctorRender = {
+    imap: function(f) {
+      return function(v) {
+        return map9(f)(v);
+      };
+    }
+  };
+  var ixApplyRender = {
+    iapply: function(v) {
+      return function(v1) {
+        return apply2(v)(v1);
+      };
+    },
+    IxFunctor0: function() {
+      return ixFunctorRender;
+    }
+  };
+  var ixBindRender = {
+    ibind: function(v) {
+      return function(f) {
+        return function __do4() {
+          var a3 = v();
+          var v1 = f(a3);
+          return v1();
+        };
+      };
+    },
+    IxApply0: function() {
+      return ixApplyRender;
+    }
+  };
+  var functorRender = {
+    map: function(f) {
+      return function(v) {
+        return map9(f)(v);
+      };
+    }
+  };
+  var discard2 = function(dictIxBind) {
+    return ibind(dictIxBind);
+  };
+  var coerceHook = function() {
+    return function(v) {
+      return v;
+    };
+  };
+  var bind2 = function(dictIxBind) {
+    return ibind(dictIxBind);
+  };
+  var applyRender = function(dictTypeEquals) {
+    return {
+      apply: function(v) {
+        return function(v1) {
+          return apply2(v)(v1);
+        };
+      },
+      Functor0: function() {
+        return functorRender;
+      }
+    };
+  };
+  var applicativeRender = function(dictTypeEquals) {
+    var applyRender1 = applyRender(dictTypeEquals);
+    return {
+      pure: function(a3) {
+        return pure2(a3);
+      },
+      Apply0: function() {
+        return applyRender1;
+      }
+    };
+  };
+
+  // output/React.Basic.Hooks/index.js
+  var mapFlipped2 = /* @__PURE__ */ mapFlipped(functorRender);
+  var rmap2 = /* @__PURE__ */ rmap(bifunctorTuple);
+  var map10 = /* @__PURE__ */ map(functorEffect);
+  var pure3 = /* @__PURE__ */ pure(applicativeEffect);
+  var Reducer = function(x2) {
+    return x2;
+  };
+  var useState = function(initialState) {
+    return unsafeHook(function() {
+      return useState_(mkFn2(Tuple.create), initialState);
+    });
+  };
+  var useState$prime = function(initialState) {
+    return mapFlipped2(useState(initialState))(rmap2(function(v) {
+      return function($36) {
+        return v($$const($36));
+      };
+    }));
+  };
+  var useRef = function(initialValue) {
+    return unsafeHook(function() {
+      return useRef_(initialValue);
+    });
+  };
+  var useReducer = function(initialState) {
+    return function(v) {
+      return unsafeHook(function() {
+        return useReducer_(mkFn2(Tuple.create), v, initialState);
+      });
+    };
+  };
+  var useLayoutEffectOnce = function(effect) {
+    return unsafeHook(function() {
+      return useLayoutEffect_(function(v, v1) {
+        return true;
+      }, unit, effect);
+    });
+  };
+  var useEffectOnce = function(effect) {
+    return unsafeHook(function() {
+      return useEffect_(function(v, v1) {
+        return true;
+      }, unit, effect);
+    });
+  };
+  var useEffect = function(dictEq) {
+    var eq5 = eq(dictEq);
+    return function(deps) {
+      return function(effect) {
+        return unsafeHook(function() {
+          return useEffect_(mkFn2(eq5), deps, effect);
+        });
+      };
+    };
+  };
+  var unsafeReactFunctionComponent = unsafeCoerce2;
+  var unsafeDiscardRenderEffects = unsafeCoerce2;
+  var unsafeReactComponent = function() {
+    return function() {
+      return function(name15) {
+        return function(renderFn) {
+          var c4 = unsafeReactFunctionComponent(function(props) {
+            return unsafeDiscardRenderEffects(renderFn(props))();
+          });
+          return function() {
+            return unsafeSetDisplayName(name15, c4);
+          };
+        };
+      };
+    };
+  };
+  var unsafeReactComponent1 = /* @__PURE__ */ unsafeReactComponent()();
+  var readRef = /* @__PURE__ */ runEffectFn1(readRef_);
+  var readRefMaybe = function(a3) {
+    return map10(toMaybe)(readRef(a3));
+  };
+  var reactComponent = function() {
+    return function() {
+      return function() {
+        return unsafeReactComponent1;
+      };
+    };
+  };
+  var reactComponent1 = /* @__PURE__ */ reactComponent()()();
+  var mkReducer = function($37) {
+    return pure3(Reducer(mkFn2($37)));
+  };
+  var component = function(name15) {
+    return function(renderFn) {
+      return function __do4() {
+        var c4 = reactComponent1(name15)(function($38) {
+          return renderFn(function(v) {
+            return v.nested;
+          }($38));
+        })();
+        var $39 = element(c4);
+        return function($40) {
+          return $39(function(v) {
+            return {
+              nested: v
+            };
+          }($40));
+        };
+      };
+    };
+  };
+
+  // node_modules/@juggle/resize-observer/lib/utils/resizeObservers.js
+  var resizeObservers = [];
+
+  // node_modules/@juggle/resize-observer/lib/algorithms/hasActiveObservations.js
+  var hasActiveObservations = function() {
+    return resizeObservers.some(function(ro) {
+      return ro.activeTargets.length > 0;
+    });
+  };
+
+  // node_modules/@juggle/resize-observer/lib/algorithms/hasSkippedObservations.js
+  var hasSkippedObservations = function() {
+    return resizeObservers.some(function(ro) {
+      return ro.skippedTargets.length > 0;
+    });
+  };
+
+  // node_modules/@juggle/resize-observer/lib/algorithms/deliverResizeLoopError.js
+  var msg = "ResizeObserver loop completed with undelivered notifications.";
+  var deliverResizeLoopError = function() {
+    var event;
+    if (typeof ErrorEvent === "function") {
+      event = new ErrorEvent("error", {
+        message: msg
+      });
+    } else {
+      event = document.createEvent("Event");
+      event.initEvent("error", false, false);
+      event.message = msg;
+    }
+    window.dispatchEvent(event);
+  };
+
+  // node_modules/@juggle/resize-observer/lib/ResizeObserverBoxOptions.js
+  var ResizeObserverBoxOptions;
+  (function(ResizeObserverBoxOptions2) {
+    ResizeObserverBoxOptions2["BORDER_BOX"] = "border-box";
+    ResizeObserverBoxOptions2["CONTENT_BOX"] = "content-box";
+    ResizeObserverBoxOptions2["DEVICE_PIXEL_CONTENT_BOX"] = "device-pixel-content-box";
+  })(ResizeObserverBoxOptions || (ResizeObserverBoxOptions = {}));
+
+  // node_modules/@juggle/resize-observer/lib/utils/freeze.js
+  var freeze2 = function(obj) {
+    return Object.freeze(obj);
+  };
+
+  // node_modules/@juggle/resize-observer/lib/ResizeObserverSize.js
+  var ResizeObserverSize = function() {
+    function ResizeObserverSize2(inlineSize, blockSize) {
+      this.inlineSize = inlineSize;
+      this.blockSize = blockSize;
+      freeze2(this);
+    }
+    return ResizeObserverSize2;
+  }();
+
+  // node_modules/@juggle/resize-observer/lib/DOMRectReadOnly.js
+  var DOMRectReadOnly = function() {
+    function DOMRectReadOnly2(x2, y2, width8, height8) {
+      this.x = x2;
+      this.y = y2;
+      this.width = width8;
+      this.height = height8;
+      this.top = this.y;
+      this.left = this.x;
+      this.bottom = this.top + this.height;
+      this.right = this.left + this.width;
+      return freeze2(this);
+    }
+    DOMRectReadOnly2.prototype.toJSON = function() {
+      var _a = this, x2 = _a.x, y2 = _a.y, top4 = _a.top, right2 = _a.right, bottom6 = _a.bottom, left2 = _a.left, width8 = _a.width, height8 = _a.height;
+      return { x: x2, y: y2, top: top4, right: right2, bottom: bottom6, left: left2, width: width8, height: height8 };
+    };
+    DOMRectReadOnly2.fromRect = function(rectangle) {
+      return new DOMRectReadOnly2(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+    };
+    return DOMRectReadOnly2;
+  }();
+
+  // node_modules/@juggle/resize-observer/lib/utils/element.js
+  var isSVG = function(target5) {
+    return target5 instanceof SVGElement && "getBBox" in target5;
+  };
+  var isHidden = function(target5) {
+    if (isSVG(target5)) {
+      var _a = target5.getBBox(), width8 = _a.width, height8 = _a.height;
+      return !width8 && !height8;
+    }
+    var _b = target5, offsetWidth2 = _b.offsetWidth, offsetHeight2 = _b.offsetHeight;
+    return !(offsetWidth2 || offsetHeight2 || target5.getClientRects().length);
+  };
+  var isElement = function(obj) {
+    var _a;
+    if (obj instanceof Element) {
+      return true;
+    }
+    var scope2 = (_a = obj === null || obj === void 0 ? void 0 : obj.ownerDocument) === null || _a === void 0 ? void 0 : _a.defaultView;
+    return !!(scope2 && obj instanceof scope2.Element);
+  };
+  var isReplacedElement = function(target5) {
+    switch (target5.tagName) {
+      case "INPUT":
+        if (target5.type !== "image") {
+          break;
+        }
+      case "VIDEO":
+      case "AUDIO":
+      case "EMBED":
+      case "OBJECT":
+      case "CANVAS":
+      case "IFRAME":
+      case "IMG":
+        return true;
+    }
+    return false;
+  };
+
+  // node_modules/@juggle/resize-observer/lib/utils/global.js
+  var global2 = typeof window !== "undefined" ? window : {};
+
+  // node_modules/@juggle/resize-observer/lib/algorithms/calculateBoxSize.js
+  var cache = /* @__PURE__ */ new WeakMap();
+  var scrollRegexp = /auto|scroll/;
+  var verticalRegexp = /^tb|vertical/;
+  var IE = /msie|trident/i.test(global2.navigator && global2.navigator.userAgent);
+  var parseDimension = function(pixel) {
+    return parseFloat(pixel || "0");
+  };
+  var size2 = function(inlineSize, blockSize, switchSizes) {
+    if (inlineSize === void 0) {
+      inlineSize = 0;
+    }
+    if (blockSize === void 0) {
+      blockSize = 0;
+    }
+    if (switchSizes === void 0) {
+      switchSizes = false;
+    }
+    return new ResizeObserverSize((switchSizes ? blockSize : inlineSize) || 0, (switchSizes ? inlineSize : blockSize) || 0);
+  };
+  var zeroBoxes = freeze2({
+    devicePixelContentBoxSize: size2(),
+    borderBoxSize: size2(),
+    contentBoxSize: size2(),
+    contentRect: new DOMRectReadOnly(0, 0, 0, 0)
+  });
+  var calculateBoxSizes = function(target5, forceRecalculation) {
+    if (forceRecalculation === void 0) {
+      forceRecalculation = false;
+    }
+    if (cache.has(target5) && !forceRecalculation) {
+      return cache.get(target5);
+    }
+    if (isHidden(target5)) {
+      cache.set(target5, zeroBoxes);
+      return zeroBoxes;
+    }
+    var cs = getComputedStyle(target5);
+    var svg = isSVG(target5) && target5.ownerSVGElement && target5.getBBox();
+    var removePadding = !IE && cs.boxSizing === "border-box";
+    var switchSizes = verticalRegexp.test(cs.writingMode || "");
+    var canScrollVertically = !svg && scrollRegexp.test(cs.overflowY || "");
+    var canScrollHorizontally = !svg && scrollRegexp.test(cs.overflowX || "");
+    var paddingTop = svg ? 0 : parseDimension(cs.paddingTop);
+    var paddingRight = svg ? 0 : parseDimension(cs.paddingRight);
+    var paddingBottom = svg ? 0 : parseDimension(cs.paddingBottom);
+    var paddingLeft = svg ? 0 : parseDimension(cs.paddingLeft);
+    var borderTop = svg ? 0 : parseDimension(cs.borderTopWidth);
+    var borderRight = svg ? 0 : parseDimension(cs.borderRightWidth);
+    var borderBottom = svg ? 0 : parseDimension(cs.borderBottomWidth);
+    var borderLeft = svg ? 0 : parseDimension(cs.borderLeftWidth);
+    var horizontalPadding = paddingLeft + paddingRight;
+    var verticalPadding = paddingTop + paddingBottom;
+    var horizontalBorderArea = borderLeft + borderRight;
+    var verticalBorderArea = borderTop + borderBottom;
+    var horizontalScrollbarThickness = !canScrollHorizontally ? 0 : target5.offsetHeight - verticalBorderArea - target5.clientHeight;
+    var verticalScrollbarThickness = !canScrollVertically ? 0 : target5.offsetWidth - horizontalBorderArea - target5.clientWidth;
+    var widthReduction = removePadding ? horizontalPadding + horizontalBorderArea : 0;
+    var heightReduction = removePadding ? verticalPadding + verticalBorderArea : 0;
+    var contentWidth = svg ? svg.width : parseDimension(cs.width) - widthReduction - verticalScrollbarThickness;
+    var contentHeight = svg ? svg.height : parseDimension(cs.height) - heightReduction - horizontalScrollbarThickness;
+    var borderBoxWidth = contentWidth + horizontalPadding + verticalScrollbarThickness + horizontalBorderArea;
+    var borderBoxHeight = contentHeight + verticalPadding + horizontalScrollbarThickness + verticalBorderArea;
+    var boxes = freeze2({
+      devicePixelContentBoxSize: size2(Math.round(contentWidth * devicePixelRatio), Math.round(contentHeight * devicePixelRatio), switchSizes),
+      borderBoxSize: size2(borderBoxWidth, borderBoxHeight, switchSizes),
+      contentBoxSize: size2(contentWidth, contentHeight, switchSizes),
+      contentRect: new DOMRectReadOnly(paddingLeft, paddingTop, contentWidth, contentHeight)
+    });
+    cache.set(target5, boxes);
+    return boxes;
+  };
+  var calculateBoxSize = function(target5, observedBox, forceRecalculation) {
+    var _a = calculateBoxSizes(target5, forceRecalculation), borderBoxSize = _a.borderBoxSize, contentBoxSize = _a.contentBoxSize, devicePixelContentBoxSize = _a.devicePixelContentBoxSize;
+    switch (observedBox) {
+      case ResizeObserverBoxOptions.DEVICE_PIXEL_CONTENT_BOX:
+        return devicePixelContentBoxSize;
+      case ResizeObserverBoxOptions.BORDER_BOX:
+        return borderBoxSize;
+      default:
+        return contentBoxSize;
+    }
+  };
+
+  // node_modules/@juggle/resize-observer/lib/ResizeObserverEntry.js
+  var ResizeObserverEntry = function() {
+    function ResizeObserverEntry2(target5) {
+      var boxes = calculateBoxSizes(target5);
+      this.target = target5;
+      this.contentRect = boxes.contentRect;
+      this.borderBoxSize = freeze2([boxes.borderBoxSize]);
+      this.contentBoxSize = freeze2([boxes.contentBoxSize]);
+      this.devicePixelContentBoxSize = freeze2([boxes.devicePixelContentBoxSize]);
+    }
+    return ResizeObserverEntry2;
+  }();
+
+  // node_modules/@juggle/resize-observer/lib/algorithms/calculateDepthForNode.js
+  var calculateDepthForNode = function(node) {
+    if (isHidden(node)) {
+      return Infinity;
+    }
+    var depth = 0;
+    var parent2 = node.parentNode;
+    while (parent2) {
+      depth += 1;
+      parent2 = parent2.parentNode;
+    }
+    return depth;
+  };
+
+  // node_modules/@juggle/resize-observer/lib/algorithms/broadcastActiveObservations.js
+  var broadcastActiveObservations = function() {
+    var shallowestDepth = Infinity;
+    var callbacks2 = [];
+    resizeObservers.forEach(function processObserver(ro) {
+      if (ro.activeTargets.length === 0) {
+        return;
+      }
+      var entries = [];
+      ro.activeTargets.forEach(function processTarget(ot) {
+        var entry = new ResizeObserverEntry(ot.target);
+        var targetDepth = calculateDepthForNode(ot.target);
+        entries.push(entry);
+        ot.lastReportedSize = calculateBoxSize(ot.target, ot.observedBox);
+        if (targetDepth < shallowestDepth) {
+          shallowestDepth = targetDepth;
+        }
+      });
+      callbacks2.push(function resizeObserverCallback() {
+        ro.callback.call(ro.observer, entries, ro.observer);
+      });
+      ro.activeTargets.splice(0, ro.activeTargets.length);
+    });
+    for (var _i = 0, callbacks_1 = callbacks2; _i < callbacks_1.length; _i++) {
+      var callback = callbacks_1[_i];
+      callback();
+    }
+    return shallowestDepth;
+  };
+
+  // node_modules/@juggle/resize-observer/lib/algorithms/gatherActiveObservationsAtDepth.js
+  var gatherActiveObservationsAtDepth = function(depth) {
+    resizeObservers.forEach(function processObserver(ro) {
+      ro.activeTargets.splice(0, ro.activeTargets.length);
+      ro.skippedTargets.splice(0, ro.skippedTargets.length);
+      ro.observationTargets.forEach(function processTarget(ot) {
+        if (ot.isActive()) {
+          if (calculateDepthForNode(ot.target) > depth) {
+            ro.activeTargets.push(ot);
+          } else {
+            ro.skippedTargets.push(ot);
+          }
+        }
+      });
+    });
+  };
+
+  // node_modules/@juggle/resize-observer/lib/utils/process.js
+  var process2 = function() {
+    var depth = 0;
+    gatherActiveObservationsAtDepth(depth);
+    while (hasActiveObservations()) {
+      depth = broadcastActiveObservations();
+      gatherActiveObservationsAtDepth(depth);
+    }
+    if (hasSkippedObservations()) {
+      deliverResizeLoopError();
+    }
+    return depth > 0;
+  };
+
+  // node_modules/@juggle/resize-observer/lib/utils/queueMicroTask.js
+  var trigger;
+  var callbacks = [];
+  var notify = function() {
+    return callbacks.splice(0).forEach(function(cb) {
+      return cb();
+    });
+  };
+  var queueMicroTask = function(callback) {
+    if (!trigger) {
+      var toggle_1 = 0;
+      var el_1 = document.createTextNode("");
+      var config = { characterData: true };
+      new MutationObserver(function() {
+        return notify();
+      }).observe(el_1, config);
+      trigger = function() {
+        el_1.textContent = "".concat(toggle_1 ? toggle_1-- : toggle_1++);
+      };
+    }
+    callbacks.push(callback);
+    trigger();
+  };
+
+  // node_modules/@juggle/resize-observer/lib/utils/queueResizeObserver.js
+  var queueResizeObserver = function(cb) {
+    queueMicroTask(function ResizeObserver3() {
+      requestAnimationFrame(cb);
+    });
+  };
+
+  // node_modules/@juggle/resize-observer/lib/utils/scheduler.js
+  var watching = 0;
+  var isWatching = function() {
+    return !!watching;
+  };
+  var CATCH_PERIOD = 250;
+  var observerConfig = { attributes: true, characterData: true, childList: true, subtree: true };
+  var events = [
+    "resize",
+    "load",
+    "transitionend",
+    "animationend",
+    "animationstart",
+    "animationiteration",
+    "keyup",
+    "keydown",
+    "mouseup",
+    "mousedown",
+    "mouseover",
+    "mouseout",
+    "blur",
+    "focus"
+  ];
+  var time3 = function(timeout2) {
+    if (timeout2 === void 0) {
+      timeout2 = 0;
+    }
+    return Date.now() + timeout2;
+  };
+  var scheduled = false;
+  var Scheduler = function() {
+    function Scheduler2() {
+      var _this = this;
+      this.stopped = true;
+      this.listener = function() {
+        return _this.schedule();
+      };
+    }
+    Scheduler2.prototype.run = function(timeout2) {
+      var _this = this;
+      if (timeout2 === void 0) {
+        timeout2 = CATCH_PERIOD;
+      }
+      if (scheduled) {
+        return;
+      }
+      scheduled = true;
+      var until = time3(timeout2);
+      queueResizeObserver(function() {
+        var elementsHaveResized = false;
+        try {
+          elementsHaveResized = process2();
+        } finally {
+          scheduled = false;
+          timeout2 = until - time3();
+          if (!isWatching()) {
+            return;
+          }
+          if (elementsHaveResized) {
+            _this.run(1e3);
+          } else if (timeout2 > 0) {
+            _this.run(timeout2);
+          } else {
+            _this.start();
+          }
+        }
+      });
+    };
+    Scheduler2.prototype.schedule = function() {
+      this.stop();
+      this.run();
+    };
+    Scheduler2.prototype.observe = function() {
+      var _this = this;
+      var cb = function() {
+        return _this.observer && _this.observer.observe(document.body, observerConfig);
+      };
+      document.body ? cb() : global2.addEventListener("DOMContentLoaded", cb);
+    };
+    Scheduler2.prototype.start = function() {
+      var _this = this;
+      if (this.stopped) {
+        this.stopped = false;
+        this.observer = new MutationObserver(this.listener);
+        this.observe();
+        events.forEach(function(name15) {
+          return global2.addEventListener(name15, _this.listener, true);
+        });
+      }
+    };
+    Scheduler2.prototype.stop = function() {
+      var _this = this;
+      if (!this.stopped) {
+        this.observer && this.observer.disconnect();
+        events.forEach(function(name15) {
+          return global2.removeEventListener(name15, _this.listener, true);
+        });
+        this.stopped = true;
+      }
+    };
+    return Scheduler2;
+  }();
+  var scheduler = new Scheduler();
+  var updateCount = function(n) {
+    !watching && n > 0 && scheduler.start();
+    watching += n;
+    !watching && scheduler.stop();
+  };
+
+  // node_modules/@juggle/resize-observer/lib/ResizeObservation.js
+  var skipNotifyOnElement = function(target5) {
+    return !isSVG(target5) && !isReplacedElement(target5) && getComputedStyle(target5).display === "inline";
+  };
+  var ResizeObservation = function() {
+    function ResizeObservation2(target5, observedBox) {
+      this.target = target5;
+      this.observedBox = observedBox || ResizeObserverBoxOptions.CONTENT_BOX;
+      this.lastReportedSize = {
+        inlineSize: 0,
+        blockSize: 0
+      };
+    }
+    ResizeObservation2.prototype.isActive = function() {
+      var size5 = calculateBoxSize(this.target, this.observedBox, true);
+      if (skipNotifyOnElement(this.target)) {
+        this.lastReportedSize = size5;
+      }
+      if (this.lastReportedSize.inlineSize !== size5.inlineSize || this.lastReportedSize.blockSize !== size5.blockSize) {
+        return true;
+      }
+      return false;
+    };
+    return ResizeObservation2;
+  }();
+
+  // node_modules/@juggle/resize-observer/lib/ResizeObserverDetail.js
+  var ResizeObserverDetail = function() {
+    function ResizeObserverDetail2(resizeObserver, callback) {
+      this.activeTargets = [];
+      this.skippedTargets = [];
+      this.observationTargets = [];
+      this.observer = resizeObserver;
+      this.callback = callback;
+    }
+    return ResizeObserverDetail2;
+  }();
+
+  // node_modules/@juggle/resize-observer/lib/ResizeObserverController.js
+  var observerMap = /* @__PURE__ */ new WeakMap();
+  var getObservationIndex = function(observationTargets, target5) {
+    for (var i2 = 0; i2 < observationTargets.length; i2 += 1) {
+      if (observationTargets[i2].target === target5) {
+        return i2;
+      }
+    }
+    return -1;
+  };
+  var ResizeObserverController = function() {
+    function ResizeObserverController2() {
+    }
+    ResizeObserverController2.connect = function(resizeObserver, callback) {
+      var detail = new ResizeObserverDetail(resizeObserver, callback);
+      observerMap.set(resizeObserver, detail);
+    };
+    ResizeObserverController2.observe = function(resizeObserver, target5, options2) {
+      var detail = observerMap.get(resizeObserver);
+      var firstObservation = detail.observationTargets.length === 0;
+      if (getObservationIndex(detail.observationTargets, target5) < 0) {
+        firstObservation && resizeObservers.push(detail);
+        detail.observationTargets.push(new ResizeObservation(target5, options2 && options2.box));
+        updateCount(1);
+        scheduler.schedule();
+      }
+    };
+    ResizeObserverController2.unobserve = function(resizeObserver, target5) {
+      var detail = observerMap.get(resizeObserver);
+      var index5 = getObservationIndex(detail.observationTargets, target5);
+      var lastObservation = detail.observationTargets.length === 1;
+      if (index5 >= 0) {
+        lastObservation && resizeObservers.splice(resizeObservers.indexOf(detail), 1);
+        detail.observationTargets.splice(index5, 1);
+        updateCount(-1);
+      }
+    };
+    ResizeObserverController2.disconnect = function(resizeObserver) {
+      var _this = this;
+      var detail = observerMap.get(resizeObserver);
+      detail.observationTargets.slice().forEach(function(ot) {
+        return _this.unobserve(resizeObserver, ot.target);
+      });
+      detail.activeTargets.splice(0, detail.activeTargets.length);
+    };
+    return ResizeObserverController2;
+  }();
+
+  // node_modules/@juggle/resize-observer/lib/ResizeObserver.js
+  var ResizeObserver = function() {
+    function ResizeObserver3(callback) {
+      if (arguments.length === 0) {
+        throw new TypeError("Failed to construct 'ResizeObserver': 1 argument required, but only 0 present.");
+      }
+      if (typeof callback !== "function") {
+        throw new TypeError("Failed to construct 'ResizeObserver': The callback provided as parameter 1 is not a function.");
+      }
+      ResizeObserverController.connect(this, callback);
+    }
+    ResizeObserver3.prototype.observe = function(target5, options2) {
+      if (arguments.length === 0) {
+        throw new TypeError("Failed to execute 'observe' on 'ResizeObserver': 1 argument required, but only 0 present.");
+      }
+      if (!isElement(target5)) {
+        throw new TypeError("Failed to execute 'observe' on 'ResizeObserver': parameter 1 is not of type 'Element");
+      }
+      ResizeObserverController.observe(this, target5, options2);
+    };
+    ResizeObserver3.prototype.unobserve = function(target5) {
+      if (arguments.length === 0) {
+        throw new TypeError("Failed to execute 'unobserve' on 'ResizeObserver': 1 argument required, but only 0 present.");
+      }
+      if (!isElement(target5)) {
+        throw new TypeError("Failed to execute 'unobserve' on 'ResizeObserver': parameter 1 is not of type 'Element");
+      }
+      ResizeObserverController.unobserve(this, target5);
+    };
+    ResizeObserver3.prototype.disconnect = function() {
+      ResizeObserverController.disconnect(this);
+    };
+    ResizeObserver3.toString = function() {
+      return "function ResizeObserver () { [polyfill code] }";
+    };
+    return ResizeObserver3;
+  }();
+
+  // node_modules/@react-hook/passive-layout-effect/dist/module/index.js
+  var import_react5 = __toESM(require_react());
+  var usePassiveLayoutEffect = import_react5.default[typeof document !== "undefined" && document.createElement !== void 0 ? "useLayoutEffect" : "useEffect"];
+  var module_default = usePassiveLayoutEffect;
+
+  // node_modules/@react-hook/latest/dist/module/index.js
+  var React6 = __toESM(require_react());
+  var useLatest = (current) => {
+    const storedValue = React6.useRef(current);
+    React6.useEffect(() => {
+      storedValue.current = current;
+    });
+    return storedValue;
+  };
+  var module_default2 = useLatest;
+
+  // node_modules/@react-hook/resize-observer/dist/module/index.js
+  var ResizeObserver2 = typeof window !== "undefined" && "ResizeObserver" in window ? window.ResizeObserver : ResizeObserver;
+  function _ref() {
+  }
+  function useResizeObserver(target5, callback) {
+    const resizeObserver = getResizeObserver();
+    const storedCallback = module_default2(callback);
+    module_default(() => {
+      let didUnsubscribe = false;
+      const targetEl = target5 && "current" in target5 ? target5.current : target5;
+      if (!targetEl)
+        return _ref;
+      function cb(entry, observer) {
+        if (didUnsubscribe)
+          return;
+        storedCallback.current(entry, observer);
+      }
+      resizeObserver.subscribe(targetEl, cb);
+      return () => {
+        didUnsubscribe = true;
+        resizeObserver.unsubscribe(targetEl, cb);
+      };
+    }, [target5, resizeObserver, storedCallback]);
+    return resizeObserver.observer;
+  }
+  function createResizeObserver() {
+    let ticking = false;
+    let allEntries = [];
+    const callbacks2 = /* @__PURE__ */ new Map();
+    const observer = new ResizeObserver2((entries, obs) => {
+      allEntries = allEntries.concat(entries);
+      function _ref2() {
+        const triggered = /* @__PURE__ */ new Set();
+        for (let i2 = 0; i2 < allEntries.length; i2++) {
+          if (triggered.has(allEntries[i2].target))
+            continue;
+          triggered.add(allEntries[i2].target);
+          const cbs = callbacks2.get(allEntries[i2].target);
+          cbs === null || cbs === void 0 ? void 0 : cbs.forEach((cb) => cb(allEntries[i2], obs));
+        }
+        allEntries = [];
+        ticking = false;
+      }
+      if (!ticking) {
+        window.requestAnimationFrame(_ref2);
+      }
+      ticking = true;
+    });
+    return {
+      observer,
+      subscribe(target5, callback) {
+        var _callbacks$get;
+        observer.observe(target5);
+        const cbs = (_callbacks$get = callbacks2.get(target5)) !== null && _callbacks$get !== void 0 ? _callbacks$get : [];
+        cbs.push(callback);
+        callbacks2.set(target5, cbs);
+      },
+      unsubscribe(target5, callback) {
+        var _callbacks$get2;
+        const cbs = (_callbacks$get2 = callbacks2.get(target5)) !== null && _callbacks$get2 !== void 0 ? _callbacks$get2 : [];
+        if (cbs.length === 1) {
+          observer.unobserve(target5);
+          callbacks2.delete(target5);
+          return;
+        }
+        const cbIndex = cbs.indexOf(callback);
+        if (cbIndex !== -1)
+          cbs.splice(cbIndex, 1);
+        callbacks2.set(target5, cbs);
+      }
+    };
+  }
+  var _resizeObserver;
+  var getResizeObserver = () => !_resizeObserver ? _resizeObserver = createResizeObserver() : _resizeObserver;
+  var module_default3 = useResizeObserver;
+
+  // output/Foreign.Hooks/foreign.js
+  var _useResizeObserver = function(props) {
+    return module_default3(props.ref, function(element2) {
+      return props.callback(element2.contentRect);
+    });
+  };
+
+  // output/Effect.Aff/foreign.js
+  var Aff = function() {
+    var EMPTY = {};
+    var PURE = "Pure";
+    var THROW = "Throw";
+    var CATCH = "Catch";
+    var SYNC = "Sync";
+    var ASYNC = "Async";
+    var BIND = "Bind";
+    var BRACKET = "Bracket";
+    var FORK = "Fork";
+    var SEQ = "Sequential";
+    var MAP = "Map";
+    var APPLY = "Apply";
+    var ALT = "Alt";
+    var CONS = "Cons";
+    var RESUME = "Resume";
+    var RELEASE = "Release";
+    var FINALIZER = "Finalizer";
+    var FINALIZED = "Finalized";
+    var FORKED = "Forked";
+    var FIBER = "Fiber";
+    var THUNK = "Thunk";
+    function Aff2(tag, _1, _2, _3) {
+      this.tag = tag;
+      this._1 = _1;
+      this._2 = _2;
+      this._3 = _3;
+    }
+    function AffCtr(tag) {
+      var fn = function(_1, _2, _3) {
+        return new Aff2(tag, _1, _2, _3);
+      };
+      fn.tag = tag;
+      return fn;
+    }
+    function nonCanceler(error2) {
+      return new Aff2(PURE, void 0);
+    }
+    function runEff(eff) {
+      try {
+        eff();
+      } catch (error2) {
+        setTimeout(function() {
+          throw error2;
+        }, 0);
+      }
+    }
+    function runSync(left2, right2, eff) {
+      try {
+        return right2(eff());
+      } catch (error2) {
+        return left2(error2);
+      }
+    }
+    function runAsync(left2, eff, k2) {
+      try {
+        return eff(k2)();
+      } catch (error2) {
+        k2(left2(error2))();
+        return nonCanceler;
+      }
+    }
+    var Scheduler2 = function() {
+      var limit = 1024;
+      var size5 = 0;
+      var ix = 0;
+      var queue = new Array(limit);
+      var draining = false;
+      function drain() {
+        var thunk;
+        draining = true;
+        while (size5 !== 0) {
+          size5--;
+          thunk = queue[ix];
+          queue[ix] = void 0;
+          ix = (ix + 1) % limit;
+          thunk();
+        }
+        draining = false;
+      }
+      return {
+        isDraining: function() {
+          return draining;
+        },
+        enqueue: function(cb) {
+          var i2, tmp;
+          if (size5 === limit) {
+            tmp = draining;
+            drain();
+            draining = tmp;
+          }
+          queue[(ix + size5) % limit] = cb;
+          size5++;
+          if (!draining) {
+            drain();
+          }
+        }
+      };
+    }();
+    function Supervisor(util) {
+      var fibers = {};
+      var fiberId = 0;
+      var count2 = 0;
+      return {
+        register: function(fiber) {
+          var fid = fiberId++;
+          fiber.onComplete({
+            rethrow: true,
+            handler: function(result) {
+              return function() {
+                count2--;
+                delete fibers[fid];
+              };
+            }
+          })();
+          fibers[fid] = fiber;
+          count2++;
+        },
+        isEmpty: function() {
+          return count2 === 0;
+        },
+        killAll: function(killError, cb) {
+          return function() {
+            if (count2 === 0) {
+              return cb();
+            }
+            var killCount = 0;
+            var kills = {};
+            function kill(fid) {
+              kills[fid] = fibers[fid].kill(killError, function(result) {
+                return function() {
+                  delete kills[fid];
+                  killCount--;
+                  if (util.isLeft(result) && util.fromLeft(result)) {
+                    setTimeout(function() {
+                      throw util.fromLeft(result);
+                    }, 0);
+                  }
+                  if (killCount === 0) {
+                    cb();
+                  }
+                };
+              })();
+            }
+            for (var k2 in fibers) {
+              if (fibers.hasOwnProperty(k2)) {
+                killCount++;
+                kill(k2);
+              }
+            }
+            fibers = {};
+            fiberId = 0;
+            count2 = 0;
+            return function(error2) {
+              return new Aff2(SYNC, function() {
+                for (var k3 in kills) {
+                  if (kills.hasOwnProperty(k3)) {
+                    kills[k3]();
+                  }
+                }
+              });
+            };
+          };
+        }
+      };
+    }
+    var SUSPENDED = 0;
+    var CONTINUE = 1;
+    var STEP_BIND = 2;
+    var STEP_RESULT = 3;
+    var PENDING = 4;
+    var RETURN = 5;
+    var COMPLETED = 6;
+    function Fiber(util, supervisor, aff) {
+      var runTick = 0;
+      var status = SUSPENDED;
+      var step3 = aff;
+      var fail = null;
+      var interrupt = null;
+      var bhead = null;
+      var btail = null;
+      var attempts = null;
+      var bracketCount = 0;
+      var joinId = 0;
+      var joins = null;
+      var rethrow = true;
+      function run3(localRunTick) {
+        var tmp, result, attempt;
+        while (true) {
+          tmp = null;
+          result = null;
+          attempt = null;
+          switch (status) {
+            case STEP_BIND:
+              status = CONTINUE;
+              try {
+                step3 = bhead(step3);
+                if (btail === null) {
+                  bhead = null;
+                } else {
+                  bhead = btail._1;
+                  btail = btail._2;
+                }
+              } catch (e) {
+                status = RETURN;
+                fail = util.left(e);
+                step3 = null;
+              }
+              break;
+            case STEP_RESULT:
+              if (util.isLeft(step3)) {
+                status = RETURN;
+                fail = step3;
+                step3 = null;
+              } else if (bhead === null) {
+                status = RETURN;
+              } else {
+                status = STEP_BIND;
+                step3 = util.fromRight(step3);
+              }
+              break;
+            case CONTINUE:
+              switch (step3.tag) {
+                case BIND:
+                  if (bhead) {
+                    btail = new Aff2(CONS, bhead, btail);
+                  }
+                  bhead = step3._2;
+                  status = CONTINUE;
+                  step3 = step3._1;
+                  break;
+                case PURE:
+                  if (bhead === null) {
+                    status = RETURN;
+                    step3 = util.right(step3._1);
+                  } else {
+                    status = STEP_BIND;
+                    step3 = step3._1;
+                  }
+                  break;
+                case SYNC:
+                  status = STEP_RESULT;
+                  step3 = runSync(util.left, util.right, step3._1);
+                  break;
+                case ASYNC:
+                  status = PENDING;
+                  step3 = runAsync(util.left, step3._1, function(result2) {
+                    return function() {
+                      if (runTick !== localRunTick) {
+                        return;
+                      }
+                      runTick++;
+                      Scheduler2.enqueue(function() {
+                        if (runTick !== localRunTick + 1) {
+                          return;
+                        }
+                        status = STEP_RESULT;
+                        step3 = result2;
+                        run3(runTick);
+                      });
+                    };
+                  });
+                  return;
+                case THROW:
+                  status = RETURN;
+                  fail = util.left(step3._1);
+                  step3 = null;
+                  break;
+                case CATCH:
+                  if (bhead === null) {
+                    attempts = new Aff2(CONS, step3, attempts, interrupt);
+                  } else {
+                    attempts = new Aff2(CONS, step3, new Aff2(CONS, new Aff2(RESUME, bhead, btail), attempts, interrupt), interrupt);
+                  }
+                  bhead = null;
+                  btail = null;
+                  status = CONTINUE;
+                  step3 = step3._1;
+                  break;
+                case BRACKET:
+                  bracketCount++;
+                  if (bhead === null) {
+                    attempts = new Aff2(CONS, step3, attempts, interrupt);
+                  } else {
+                    attempts = new Aff2(CONS, step3, new Aff2(CONS, new Aff2(RESUME, bhead, btail), attempts, interrupt), interrupt);
+                  }
+                  bhead = null;
+                  btail = null;
+                  status = CONTINUE;
+                  step3 = step3._1;
+                  break;
+                case FORK:
+                  status = STEP_RESULT;
+                  tmp = Fiber(util, supervisor, step3._2);
+                  if (supervisor) {
+                    supervisor.register(tmp);
+                  }
+                  if (step3._1) {
+                    tmp.run();
+                  }
+                  step3 = util.right(tmp);
+                  break;
+                case SEQ:
+                  status = CONTINUE;
+                  step3 = sequential2(util, supervisor, step3._1);
+                  break;
+              }
+              break;
+            case RETURN:
+              bhead = null;
+              btail = null;
+              if (attempts === null) {
+                status = COMPLETED;
+                step3 = interrupt || fail || step3;
+              } else {
+                tmp = attempts._3;
+                attempt = attempts._1;
+                attempts = attempts._2;
+                switch (attempt.tag) {
+                  case CATCH:
+                    if (interrupt && interrupt !== tmp && bracketCount === 0) {
+                      status = RETURN;
+                    } else if (fail) {
+                      status = CONTINUE;
+                      step3 = attempt._2(util.fromLeft(fail));
+                      fail = null;
+                    }
+                    break;
+                  case RESUME:
+                    if (interrupt && interrupt !== tmp && bracketCount === 0 || fail) {
+                      status = RETURN;
+                    } else {
+                      bhead = attempt._1;
+                      btail = attempt._2;
+                      status = STEP_BIND;
+                      step3 = util.fromRight(step3);
+                    }
+                    break;
+                  case BRACKET:
+                    bracketCount--;
+                    if (fail === null) {
+                      result = util.fromRight(step3);
+                      attempts = new Aff2(CONS, new Aff2(RELEASE, attempt._2, result), attempts, tmp);
+                      if (interrupt === tmp || bracketCount > 0) {
+                        status = CONTINUE;
+                        step3 = attempt._3(result);
+                      }
+                    }
+                    break;
+                  case RELEASE:
+                    attempts = new Aff2(CONS, new Aff2(FINALIZED, step3, fail), attempts, interrupt);
+                    status = CONTINUE;
+                    if (interrupt && interrupt !== tmp && bracketCount === 0) {
+                      step3 = attempt._1.killed(util.fromLeft(interrupt))(attempt._2);
+                    } else if (fail) {
+                      step3 = attempt._1.failed(util.fromLeft(fail))(attempt._2);
+                    } else {
+                      step3 = attempt._1.completed(util.fromRight(step3))(attempt._2);
+                    }
+                    fail = null;
+                    bracketCount++;
+                    break;
+                  case FINALIZER:
+                    bracketCount++;
+                    attempts = new Aff2(CONS, new Aff2(FINALIZED, step3, fail), attempts, interrupt);
+                    status = CONTINUE;
+                    step3 = attempt._1;
+                    break;
+                  case FINALIZED:
+                    bracketCount--;
+                    status = RETURN;
+                    step3 = attempt._1;
+                    fail = attempt._2;
+                    break;
+                }
+              }
+              break;
+            case COMPLETED:
+              for (var k2 in joins) {
+                if (joins.hasOwnProperty(k2)) {
+                  rethrow = rethrow && joins[k2].rethrow;
+                  runEff(joins[k2].handler(step3));
+                }
+              }
+              joins = null;
+              if (interrupt && fail) {
+                setTimeout(function() {
+                  throw util.fromLeft(fail);
+                }, 0);
+              } else if (util.isLeft(step3) && rethrow) {
+                setTimeout(function() {
+                  if (rethrow) {
+                    throw util.fromLeft(step3);
+                  }
+                }, 0);
+              }
+              return;
+            case SUSPENDED:
+              status = CONTINUE;
+              break;
+            case PENDING:
+              return;
+          }
+        }
+      }
+      function onComplete(join3) {
+        return function() {
+          if (status === COMPLETED) {
+            rethrow = rethrow && join3.rethrow;
+            join3.handler(step3)();
+            return function() {
+            };
+          }
+          var jid = joinId++;
+          joins = joins || {};
+          joins[jid] = join3;
+          return function() {
+            if (joins !== null) {
+              delete joins[jid];
+            }
+          };
+        };
+      }
+      function kill(error2, cb) {
+        return function() {
+          if (status === COMPLETED) {
+            cb(util.right(void 0))();
+            return function() {
+            };
+          }
+          var canceler = onComplete({
+            rethrow: false,
+            handler: function() {
+              return cb(util.right(void 0));
+            }
+          })();
+          switch (status) {
+            case SUSPENDED:
+              interrupt = util.left(error2);
+              status = COMPLETED;
+              step3 = interrupt;
+              run3(runTick);
+              break;
+            case PENDING:
+              if (interrupt === null) {
+                interrupt = util.left(error2);
+              }
+              if (bracketCount === 0) {
+                if (status === PENDING) {
+                  attempts = new Aff2(CONS, new Aff2(FINALIZER, step3(error2)), attempts, interrupt);
+                }
+                status = RETURN;
+                step3 = null;
+                fail = null;
+                run3(++runTick);
+              }
+              break;
+            default:
+              if (interrupt === null) {
+                interrupt = util.left(error2);
+              }
+              if (bracketCount === 0) {
+                status = RETURN;
+                step3 = null;
+                fail = null;
+              }
+          }
+          return canceler;
+        };
+      }
+      function join2(cb) {
+        return function() {
+          var canceler = onComplete({
+            rethrow: false,
+            handler: cb
+          })();
+          if (status === SUSPENDED) {
+            run3(runTick);
+          }
+          return canceler;
+        };
+      }
+      return {
+        kill,
+        join: join2,
+        onComplete,
+        isSuspended: function() {
+          return status === SUSPENDED;
+        },
+        run: function() {
+          if (status === SUSPENDED) {
+            if (!Scheduler2.isDraining()) {
+              Scheduler2.enqueue(function() {
+                run3(runTick);
+              });
+            } else {
+              run3(runTick);
+            }
+          }
+        }
+      };
+    }
+    function runPar(util, supervisor, par, cb) {
+      var fiberId = 0;
+      var fibers = {};
+      var killId = 0;
+      var kills = {};
+      var early = new Error("[ParAff] Early exit");
+      var interrupt = null;
+      var root2 = EMPTY;
+      function kill(error2, par2, cb2) {
+        var step3 = par2;
+        var head3 = null;
+        var tail = null;
+        var count2 = 0;
+        var kills2 = {};
+        var tmp, kid;
+        loop:
+          while (true) {
+            tmp = null;
+            switch (step3.tag) {
+              case FORKED:
+                if (step3._3 === EMPTY) {
+                  tmp = fibers[step3._1];
+                  kills2[count2++] = tmp.kill(error2, function(result) {
+                    return function() {
+                      count2--;
+                      if (count2 === 0) {
+                        cb2(result)();
+                      }
+                    };
+                  });
+                }
+                if (head3 === null) {
+                  break loop;
+                }
+                step3 = head3._2;
+                if (tail === null) {
+                  head3 = null;
+                } else {
+                  head3 = tail._1;
+                  tail = tail._2;
+                }
+                break;
+              case MAP:
+                step3 = step3._2;
+                break;
+              case APPLY:
+              case ALT:
+                if (head3) {
+                  tail = new Aff2(CONS, head3, tail);
+                }
+                head3 = step3;
+                step3 = step3._1;
+                break;
+            }
+          }
+        if (count2 === 0) {
+          cb2(util.right(void 0))();
+        } else {
+          kid = 0;
+          tmp = count2;
+          for (; kid < tmp; kid++) {
+            kills2[kid] = kills2[kid]();
+          }
+        }
+        return kills2;
+      }
+      function join2(result, head3, tail) {
+        var fail, step3, lhs, rhs, tmp, kid;
+        if (util.isLeft(result)) {
+          fail = result;
+          step3 = null;
+        } else {
+          step3 = result;
+          fail = null;
+        }
+        loop:
+          while (true) {
+            lhs = null;
+            rhs = null;
+            tmp = null;
+            kid = null;
+            if (interrupt !== null) {
+              return;
+            }
+            if (head3 === null) {
+              cb(fail || step3)();
+              return;
+            }
+            if (head3._3 !== EMPTY) {
+              return;
+            }
+            switch (head3.tag) {
+              case MAP:
+                if (fail === null) {
+                  head3._3 = util.right(head3._1(util.fromRight(step3)));
+                  step3 = head3._3;
+                } else {
+                  head3._3 = fail;
+                }
+                break;
+              case APPLY:
+                lhs = head3._1._3;
+                rhs = head3._2._3;
+                if (fail) {
+                  head3._3 = fail;
+                  tmp = true;
+                  kid = killId++;
+                  kills[kid] = kill(early, fail === lhs ? head3._2 : head3._1, function() {
+                    return function() {
+                      delete kills[kid];
+                      if (tmp) {
+                        tmp = false;
+                      } else if (tail === null) {
+                        join2(fail, null, null);
+                      } else {
+                        join2(fail, tail._1, tail._2);
+                      }
+                    };
+                  });
+                  if (tmp) {
+                    tmp = false;
+                    return;
+                  }
+                } else if (lhs === EMPTY || rhs === EMPTY) {
+                  return;
+                } else {
+                  step3 = util.right(util.fromRight(lhs)(util.fromRight(rhs)));
+                  head3._3 = step3;
+                }
+                break;
+              case ALT:
+                lhs = head3._1._3;
+                rhs = head3._2._3;
+                if (lhs === EMPTY && util.isLeft(rhs) || rhs === EMPTY && util.isLeft(lhs)) {
+                  return;
+                }
+                if (lhs !== EMPTY && util.isLeft(lhs) && rhs !== EMPTY && util.isLeft(rhs)) {
+                  fail = step3 === lhs ? rhs : lhs;
+                  step3 = null;
+                  head3._3 = fail;
+                } else {
+                  head3._3 = step3;
+                  tmp = true;
+                  kid = killId++;
+                  kills[kid] = kill(early, step3 === lhs ? head3._2 : head3._1, function() {
+                    return function() {
+                      delete kills[kid];
+                      if (tmp) {
+                        tmp = false;
+                      } else if (tail === null) {
+                        join2(step3, null, null);
+                      } else {
+                        join2(step3, tail._1, tail._2);
+                      }
+                    };
+                  });
+                  if (tmp) {
+                    tmp = false;
+                    return;
+                  }
+                }
+                break;
+            }
+            if (tail === null) {
+              head3 = null;
+            } else {
+              head3 = tail._1;
+              tail = tail._2;
+            }
+          }
+      }
+      function resolve(fiber) {
+        return function(result) {
+          return function() {
+            delete fibers[fiber._1];
+            fiber._3 = result;
+            join2(result, fiber._2._1, fiber._2._2);
+          };
+        };
+      }
+      function run3() {
+        var status = CONTINUE;
+        var step3 = par;
+        var head3 = null;
+        var tail = null;
+        var tmp, fid;
+        loop:
+          while (true) {
+            tmp = null;
+            fid = null;
+            switch (status) {
+              case CONTINUE:
+                switch (step3.tag) {
+                  case MAP:
+                    if (head3) {
+                      tail = new Aff2(CONS, head3, tail);
+                    }
+                    head3 = new Aff2(MAP, step3._1, EMPTY, EMPTY);
+                    step3 = step3._2;
+                    break;
+                  case APPLY:
+                    if (head3) {
+                      tail = new Aff2(CONS, head3, tail);
+                    }
+                    head3 = new Aff2(APPLY, EMPTY, step3._2, EMPTY);
+                    step3 = step3._1;
+                    break;
+                  case ALT:
+                    if (head3) {
+                      tail = new Aff2(CONS, head3, tail);
+                    }
+                    head3 = new Aff2(ALT, EMPTY, step3._2, EMPTY);
+                    step3 = step3._1;
+                    break;
+                  default:
+                    fid = fiberId++;
+                    status = RETURN;
+                    tmp = step3;
+                    step3 = new Aff2(FORKED, fid, new Aff2(CONS, head3, tail), EMPTY);
+                    tmp = Fiber(util, supervisor, tmp);
+                    tmp.onComplete({
+                      rethrow: false,
+                      handler: resolve(step3)
+                    })();
+                    fibers[fid] = tmp;
+                    if (supervisor) {
+                      supervisor.register(tmp);
+                    }
+                }
+                break;
+              case RETURN:
+                if (head3 === null) {
+                  break loop;
+                }
+                if (head3._1 === EMPTY) {
+                  head3._1 = step3;
+                  status = CONTINUE;
+                  step3 = head3._2;
+                  head3._2 = EMPTY;
+                } else {
+                  head3._2 = step3;
+                  step3 = head3;
+                  if (tail === null) {
+                    head3 = null;
+                  } else {
+                    head3 = tail._1;
+                    tail = tail._2;
+                  }
+                }
+            }
+          }
+        root2 = step3;
+        for (fid = 0; fid < fiberId; fid++) {
+          fibers[fid].run();
+        }
+      }
+      function cancel(error2, cb2) {
+        interrupt = util.left(error2);
+        var innerKills;
+        for (var kid in kills) {
+          if (kills.hasOwnProperty(kid)) {
+            innerKills = kills[kid];
+            for (kid in innerKills) {
+              if (innerKills.hasOwnProperty(kid)) {
+                innerKills[kid]();
+              }
+            }
+          }
+        }
+        kills = null;
+        var newKills = kill(error2, root2, cb2);
+        return function(killError) {
+          return new Aff2(ASYNC, function(killCb) {
+            return function() {
+              for (var kid2 in newKills) {
+                if (newKills.hasOwnProperty(kid2)) {
+                  newKills[kid2]();
+                }
+              }
+              return nonCanceler;
+            };
+          });
+        };
+      }
+      run3();
+      return function(killError) {
+        return new Aff2(ASYNC, function(killCb) {
+          return function() {
+            return cancel(killError, killCb);
+          };
+        });
+      };
+    }
+    function sequential2(util, supervisor, par) {
+      return new Aff2(ASYNC, function(cb) {
+        return function() {
+          return runPar(util, supervisor, par, cb);
+        };
+      });
+    }
+    Aff2.EMPTY = EMPTY;
+    Aff2.Pure = AffCtr(PURE);
+    Aff2.Throw = AffCtr(THROW);
+    Aff2.Catch = AffCtr(CATCH);
+    Aff2.Sync = AffCtr(SYNC);
+    Aff2.Async = AffCtr(ASYNC);
+    Aff2.Bind = AffCtr(BIND);
+    Aff2.Bracket = AffCtr(BRACKET);
+    Aff2.Fork = AffCtr(FORK);
+    Aff2.Seq = AffCtr(SEQ);
+    Aff2.ParMap = AffCtr(MAP);
+    Aff2.ParApply = AffCtr(APPLY);
+    Aff2.ParAlt = AffCtr(ALT);
+    Aff2.Fiber = Fiber;
+    Aff2.Supervisor = Supervisor;
+    Aff2.Scheduler = Scheduler2;
+    Aff2.nonCanceler = nonCanceler;
+    return Aff2;
+  }();
+  var _pure = Aff.Pure;
+  var _throwError = Aff.Throw;
+  function _catchError(aff) {
+    return function(k2) {
+      return Aff.Catch(aff, k2);
+    };
+  }
+  function _map(f) {
+    return function(aff) {
+      if (aff.tag === Aff.Pure.tag) {
+        return Aff.Pure(f(aff._1));
+      } else {
+        return Aff.Bind(aff, function(value12) {
+          return Aff.Pure(f(value12));
+        });
+      }
+    };
+  }
+  function _bind(aff) {
+    return function(k2) {
+      return Aff.Bind(aff, k2);
+    };
+  }
+  var _liftEffect = Aff.Sync;
+  var makeAff = Aff.Async;
+  function _makeFiber(util, aff) {
+    return function() {
+      return Aff.Fiber(util, null, aff);
+    };
+  }
+  var _delay = function() {
+    function setDelay(n, k2) {
+      if (n === 0 && typeof setImmediate !== "undefined") {
+        return setImmediate(k2);
+      } else {
+        return setTimeout(k2, n);
+      }
+    }
+    function clearDelay(n, t) {
+      if (n === 0 && typeof clearImmediate !== "undefined") {
+        return clearImmediate(t);
+      } else {
+        return clearTimeout(t);
+      }
+    }
+    return function(right2, ms) {
+      return Aff.Async(function(cb) {
+        return function() {
+          var timer2 = setDelay(ms, cb(right2()));
+          return function() {
+            return Aff.Sync(function() {
+              return right2(clearDelay(ms, timer2));
+            });
+          };
+        };
+      });
+    };
+  }();
+  var _sequential = Aff.Seq;
+
+  // output/Type.Equality/index.js
+  var refl = {
+    proof: function(a3) {
+      return a3;
+    },
+    Coercible0: function() {
+      return void 0;
+    }
+  };
+
+  // output/Effect.Aff/index.js
+  var $runtime_lazy4 = function(name15, moduleName, init3) {
+    var state3 = 0;
+    var val;
+    return function(lineNumber) {
+      if (state3 === 2)
+        return val;
+      if (state3 === 1)
+        throw new ReferenceError(name15 + " was needed before it finished initializing (module " + moduleName + ", line " + lineNumber + ")", moduleName, lineNumber);
+      state3 = 1;
+      val = init3();
+      state3 = 2;
+      return val;
+    };
+  };
+  var pure4 = /* @__PURE__ */ pure(applicativeEffect);
+  var $$void2 = /* @__PURE__ */ $$void(functorEffect);
+  var map11 = /* @__PURE__ */ map(functorEffect);
+  var Canceler = function(x2) {
+    return x2;
+  };
+  var functorAff = {
+    map: _map
+  };
+  var ffiUtil = /* @__PURE__ */ function() {
+    var unsafeFromRight = function(v) {
+      if (v instanceof Right) {
+        return v.value0;
+      }
+      ;
+      if (v instanceof Left) {
+        return unsafeCrashWith("unsafeFromRight: Left");
+      }
+      ;
+      throw new Error("Failed pattern match at Effect.Aff (line 412, column 21 - line 414, column 54): " + [v.constructor.name]);
+    };
+    var unsafeFromLeft = function(v) {
+      if (v instanceof Left) {
+        return v.value0;
+      }
+      ;
+      if (v instanceof Right) {
+        return unsafeCrashWith("unsafeFromLeft: Right");
+      }
+      ;
+      throw new Error("Failed pattern match at Effect.Aff (line 407, column 20 - line 409, column 55): " + [v.constructor.name]);
+    };
+    var isLeft = function(v) {
+      if (v instanceof Left) {
+        return true;
+      }
+      ;
+      if (v instanceof Right) {
+        return false;
+      }
+      ;
+      throw new Error("Failed pattern match at Effect.Aff (line 402, column 12 - line 404, column 21): " + [v.constructor.name]);
+    };
+    return {
+      isLeft,
+      fromLeft: unsafeFromLeft,
+      fromRight: unsafeFromRight,
+      left: Left.create,
+      right: Right.create
+    };
+  }();
+  var makeFiber = function(aff) {
+    return _makeFiber(ffiUtil, aff);
+  };
+  var launchAff = function(aff) {
+    return function __do4() {
+      var fiber = makeFiber(aff)();
+      fiber.run();
+      return fiber;
+    };
+  };
+  var launchAff_ = function($74) {
+    return $$void2(launchAff($74));
+  };
+  var delay = function(v) {
+    return _delay(Right.create, v);
+  };
+  var monadAff = {
+    Applicative0: function() {
+      return applicativeAff;
+    },
+    Bind1: function() {
+      return bindAff;
+    }
+  };
+  var bindAff = {
+    bind: _bind,
+    Apply0: function() {
+      return $lazy_applyAff(0);
+    }
+  };
+  var applicativeAff = {
+    pure: _pure,
+    Apply0: function() {
+      return $lazy_applyAff(0);
+    }
+  };
+  var $lazy_applyAff = /* @__PURE__ */ $runtime_lazy4("applyAff", "Effect.Aff", function() {
+    return {
+      apply: ap(monadAff),
+      Functor0: function() {
+        return functorAff;
+      }
+    };
+  });
+  var bind1 = /* @__PURE__ */ bind(bindAff);
+  var monadEffectAff = {
+    liftEffect: _liftEffect,
+    Monad0: function() {
+      return monadAff;
+    }
+  };
+  var liftEffect2 = /* @__PURE__ */ liftEffect(monadEffectAff);
+  var effectCanceler = function($75) {
+    return Canceler($$const(liftEffect2($75)));
+  };
+  var killFiber = function(e) {
+    return function(v) {
+      return bind1(liftEffect2(v.isSuspended))(function(suspended) {
+        if (suspended) {
+          return liftEffect2($$void2(v.kill(e, $$const(pure4(unit)))));
+        }
+        ;
+        return makeAff(function(k2) {
+          return map11(effectCanceler)(v.kill(e, k2));
+        });
+      });
+    };
+  };
+  var monadThrowAff = {
+    throwError: _throwError,
+    Monad0: function() {
+      return monadAff;
+    }
+  };
+  var monadErrorAff = {
+    catchError: _catchError,
+    MonadThrow0: function() {
+      return monadThrowAff;
+    }
+  };
+
+  // output/React.Basic.Hooks.Aff/index.js
+  var coerceHook2 = /* @__PURE__ */ coerceHook();
+  var bind3 = /* @__PURE__ */ bind2(ixBindRender);
+  var discard3 = /* @__PURE__ */ discard2(ixBindRender);
+  var bind12 = /* @__PURE__ */ bind(bindAff);
+  var liftEffect3 = /* @__PURE__ */ liftEffect(monadEffectAff);
+  var $$try2 = /* @__PURE__ */ $$try(monadErrorAff);
+  var pure1 = /* @__PURE__ */ pure(applicativeEffect);
+  var throwError2 = /* @__PURE__ */ throwError(monadThrowEffect);
+  var useAff = function(dictEq) {
+    var useEffect1 = useEffect(dictEq);
+    return function(deps) {
+      return function(aff) {
+        return coerceHook2(bind3(useState(Nothing.value))(function(v) {
+          return discard3(useEffect1(deps)(function __do4() {
+            v.value1($$const(Nothing.value))();
+            var fiber = launchAff(bind12($$try2(aff))(function(r2) {
+              return liftEffect3(v.value1(function(v1) {
+                return new Just(r2);
+              }));
+            }))();
+            return launchAff_(killFiber(error("Stale request cancelled"))(fiber));
+          }))(function() {
+            return unsafeRenderEffect(function() {
+              if (v.value0 instanceof Just && v.value0.value0 instanceof Left) {
+                return throwError2(v.value0.value0.value0);
+              }
+              ;
+              if (v.value0 instanceof Just && v.value0.value0 instanceof Right) {
+                return pure1(new Just(v.value0.value0.value0));
+              }
+              ;
+              if (v.value0 instanceof Nothing) {
+                return pure1(Nothing.value);
+              }
+              ;
+              throw new Error("Failed pattern match at React.Basic.Hooks.Aff (line 53, column 24 - line 56, column 30): " + [v.value0.constructor.name]);
+            }());
+          });
+        }));
+      };
+    };
+  };
+
+  // output/Web.DOM.Element/foreign.js
+  var getProp = function(name15) {
+    return function(doctype) {
+      return doctype[name15];
+    };
+  };
+  var _namespaceURI = getProp("namespaceURI");
+  var _prefix = getProp("prefix");
+  var localName = getProp("localName");
+  var tagName = getProp("tagName");
+  function getBoundingClientRect(el) {
+    return function() {
+      var rect = el.getBoundingClientRect();
+      return {
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        left: rect.left,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      };
+    };
+  }
+
+  // output/Web.DOM.ParentNode/foreign.js
+  var getEffProp = function(name15) {
+    return function(node) {
+      return function() {
+        return node[name15];
+      };
+    };
+  };
+  var children2 = getEffProp("children");
+  var _firstElementChild = getEffProp("firstElementChild");
+  var _lastElementChild = getEffProp("lastElementChild");
+  var childElementCount = getEffProp("childElementCount");
+
+  // output/Web.Internal.FFI/foreign.js
+  function _unsafeReadProtoTagged(nothing, just, name15, value12) {
+    if (typeof window !== "undefined") {
+      var ty = window[name15];
+      if (ty != null && value12 instanceof ty) {
+        return just(value12);
+      }
+    }
+    var obj = value12;
+    while (obj != null) {
+      var proto = Object.getPrototypeOf(obj);
+      var constructorName = proto.constructor.name;
+      if (constructorName === name15) {
+        return just(value12);
+      } else if (constructorName === "Object") {
+        return nothing;
+      }
+      obj = proto;
+    }
+    return nothing;
+  }
+
+  // output/Web.Internal.FFI/index.js
+  var unsafeReadProtoTagged = function(name15) {
+    return function(value12) {
+      return _unsafeReadProtoTagged(Nothing.value, Just.create, name15, value12);
+    };
+  };
+
+  // output/Web.DOM.Element/index.js
+  var fromNode = /* @__PURE__ */ unsafeReadProtoTagged("Element");
+
+  // output/Foreign.Hooks/index.js
+  var bind4 = /* @__PURE__ */ bind2(ixBindRender);
+  var discard4 = /* @__PURE__ */ discard2(ixBindRender);
+  var discard1 = /* @__PURE__ */ discard(discardUnit);
+  var for_2 = /* @__PURE__ */ for_(applicativeEffect)(foldableMaybe);
+  var bind22 = /* @__PURE__ */ bind(bindMaybe);
+  var mempty2 = /* @__PURE__ */ mempty(/* @__PURE__ */ monoidEffect(monoidUnit));
+  var useAff2 = /* @__PURE__ */ useAff(/* @__PURE__ */ eqMaybe(/* @__PURE__ */ eqRec()(/* @__PURE__ */ eqRowCons(/* @__PURE__ */ eqRowCons(eqRowNil)()({
+    reflectSymbol: function() {
+      return "width";
+    }
+  })(eqNumber))()({
+    reflectSymbol: function() {
+      return "height";
+    }
+  })(eqNumber))));
+  var discard32 = /* @__PURE__ */ discard1(bindAff);
+  var liftEffect4 = /* @__PURE__ */ liftEffect(monadEffectAff);
+  var pure12 = /* @__PURE__ */ pure(/* @__PURE__ */ applicativeRender(refl));
+  var useResizeObserver2 = function(ref) {
+    return function(callback) {
+      return unsafeHook(function() {
+        return _useResizeObserver({
+          ref,
+          callback: mkEffectFn1(callback)
+        });
+      });
+    };
+  };
+  var useContentBox = function(ref) {
+    return bind4(useState$prime(Nothing.value))(function(v) {
+      return bind4(useState$prime(Nothing.value))(function(v1) {
+        return discard4(useLayoutEffectOnce(function __do4() {
+          var maybeElement = readRefMaybe(ref)();
+          for_2(bind22(maybeElement)(fromNode))(function(element2) {
+            return function __do5() {
+              var rect = getBoundingClientRect(element2)();
+              return v.value1(new Just({
+                width: rect.width,
+                height: rect.height
+              }))();
+            };
+          })();
+          return mempty2;
+        }))(function() {
+          return discard4(useResizeObserver2(ref)(function(box$prime) {
+            return v.value1(new Just(box$prime));
+          }))(function() {
+            return discard4(useAff2(v.value0)(discard32(delay(200))(function() {
+              return liftEffect4(v1.value1(v.value0));
+            })))(function() {
+              return pure12(v1.value0);
+            });
+          });
+        });
+      });
+    });
+  };
+
+  // output/ResizeSection/index.js
+  var bind5 = /* @__PURE__ */ bind2(ixBindRender);
+  var pure5 = /* @__PURE__ */ pure(/* @__PURE__ */ applicativeRender(refl));
+  var section2 = /* @__PURE__ */ section();
+  var foldMap3 = /* @__PURE__ */ foldMap(foldableMaybe)(monoidArray);
+  var make2 = /* @__PURE__ */ component("ResizeSection")(function(handleResize) {
+    return bind5(useRef(nullImpl))(function(ref) {
+      return bind5(useContentBox(ref))(function(maybeBounds) {
+        return pure5(section2({
+          ref,
+          children: foldMap3(handleResize)(maybeBounds)
+        }));
+      });
+    });
   });
 
   // output/Slider/foreign.js
@@ -40900,7 +42068,7 @@
     var _b = $f7dceffc5ad7768b$export$4e328f61c538687f(), focusProps = _b.focusProps, isFocusVisible = _b.isFocusVisible;
     return import_react15.default.createElement(
       "div",
-      __assign2({}, thumbProps, { className: "thumb ".concat(isFocusVisible ? "focus" : "", " ").concat(isDragging ? "dragging" : "") }),
+      __assign2({}, thumbProps, { className: "thumb ".concat(isFocusVisible ? "focus" : "", " ").concat(isDragging ? "dragging" : "", " ").concat(props.selected ? "selected" : "") }),
       import_react15.default.createElement(
         $5c3e21d68f1c4674$export$439d29a4e110a164,
         null,
@@ -40908,7 +42076,7 @@
       )
     );
   }
-  function rangeSlider_(props) {
+  function _rangeSlider(props) {
     var onChange = function(_a2) {
       var minThumb = _a2[0], maxThumb = _a2[1];
       return props.onChange({ minThumb, maxThumb });
@@ -40940,21 +42108,22 @@
       import_react15.default.createElement(
         "div",
         __assign2({}, trackProps, { ref: trackRef, className: "track ".concat(state3.isDisabled ? "disabled" : "") }),
-        import_react15.default.createElement(Thumb, { index: 0, state: state3, trackRef }),
-        import_react15.default.createElement(Thumb, { index: 1, state: state3, trackRef })
+        import_react15.default.createElement(Thumb, { index: 0, state: state3, trackRef, selected: props.earlierLastSet }),
+        import_react15.default.createElement(Thumb, { index: 1, state: state3, trackRef, selected: !props.earlierLastSet })
       )
     );
   }
 
   // output/Slider/index.js
-  var pure4 = /* @__PURE__ */ pure(/* @__PURE__ */ applicativeRender(refl));
-  var make2 = /* @__PURE__ */ component("RangeSlider")(function(props) {
-    return pure4(element(rangeSlider_)({
+  var pure6 = /* @__PURE__ */ pure(/* @__PURE__ */ applicativeRender(refl));
+  var make3 = /* @__PURE__ */ component("RangeSlider")(function(props) {
+    return pure6(element(_rangeSlider)({
       step: 1,
       minValue: props.minValue,
       maxValue: props.maxValue,
       value: props.value,
-      onChange: mkEffectFn1(props.onChange)
+      onChange: mkEffectFn1(props.onChange),
+      earlierLastSet: props.earlierLastSet
     }));
   });
 
@@ -47620,36 +48789,33 @@
   }
 
   // output/TimelineChart/index.js
-  var make3 = /* @__PURE__ */ pure(applicativeEffect)(/* @__PURE__ */ element(_timelineChart));
+  var make4 = /* @__PURE__ */ pure(applicativeEffect)(/* @__PURE__ */ element(_timelineChart));
 
   // output/App/index.js
   var show2 = /* @__PURE__ */ show(showInt);
-  var map11 = /* @__PURE__ */ map(functorMaybe);
+  var map12 = /* @__PURE__ */ map(functorMaybe);
   var show1 = /* @__PURE__ */ show(showMonth);
   var fromEnum7 = /* @__PURE__ */ fromEnum(boundedEnumYear);
   var fromFoldable4 = /* @__PURE__ */ fromFoldable(foldableSet);
-  var bind1 = /* @__PURE__ */ bind2(ixBindRender);
-  var discard5 = /* @__PURE__ */ discard3(ixBindRender);
-  var traceM2 = /* @__PURE__ */ traceM()(/* @__PURE__ */ monadRender(refl));
+  var bind13 = /* @__PURE__ */ bind2(ixBindRender);
+  var discard5 = /* @__PURE__ */ discard2(ixBindRender);
   var bind23 = /* @__PURE__ */ bind(bindMaybe);
   var ordTuple2 = /* @__PURE__ */ ordTuple(ordYear)(ordMonth);
   var lookup2 = /* @__PURE__ */ lookup(ordTuple2);
-  var pure5 = /* @__PURE__ */ pure(applicativeMaybe);
+  var pure7 = /* @__PURE__ */ pure(applicativeMaybe);
   var for_3 = /* @__PURE__ */ for_(applicativeEffect)(foldableMaybe);
   var mempty3 = /* @__PURE__ */ mempty(/* @__PURE__ */ monoidEffect(monoidUnit));
   var pure22 = /* @__PURE__ */ pure(/* @__PURE__ */ applicativeRender(refl));
-  var div1 = /* @__PURE__ */ div2();
-  var section2 = /* @__PURE__ */ section();
-  var foldMap3 = /* @__PURE__ */ foldMap(foldableMaybe)(monoidJSX);
   var mapFlipped3 = /* @__PURE__ */ mapFlipped(functorArray);
-  var apply3 = /* @__PURE__ */ apply(applyMaybe);
-  var toEnum3 = /* @__PURE__ */ toEnum(boundedEnumDay);
+  var bottom5 = /* @__PURE__ */ bottom(boundedDay);
   var eq4 = /* @__PURE__ */ eq(/* @__PURE__ */ eqTuple(eqYear)(eqMonth));
+  var section3 = /* @__PURE__ */ section();
+  var div1 = /* @__PURE__ */ div2();
   var guard3 = /* @__PURE__ */ guard(monoidString);
   var input2 = /* @__PURE__ */ input();
   var traverse_2 = /* @__PURE__ */ traverse_(applicativeEffect)(foldableMaybe);
   var bind32 = /* @__PURE__ */ bind(bindEither);
-  var toEnum1 = /* @__PURE__ */ toEnum(boundedEnumYear);
+  var toEnum3 = /* @__PURE__ */ toEnum(boundedEnumYear);
   var pure32 = /* @__PURE__ */ pure(applicativeEither);
   var fromFoldable1 = /* @__PURE__ */ fromFoldable2(ordTuple2)(foldableArray);
   var BadYear = /* @__PURE__ */ function() {
@@ -47732,8 +48898,8 @@
         };
         return {
           earlier: formatString(v.value0),
-          later: fromMaybe(state3.later)(map11(function($99) {
-            return format(scalar($99));
+          later: fromMaybe(state3.later)(map12(function($84) {
+            return format(scalar($84));
           })(unformat(v.value0))),
           earlierLastSet: true,
           thumbs: state3.thumbs
@@ -47745,8 +48911,8 @@
           return floor2(state3.thumbs.minThumb.value / state3.thumbs.maxThumb.value * toNumber(n));
         };
         return {
-          earlier: fromMaybe(state3.earlier)(map11(function($100) {
-            return format(scalar($100));
+          earlier: fromMaybe(state3.earlier)(map12(function($85) {
+            return format(scalar($85));
           })(unformat(v.value0))),
           later: formatString(v.value0),
           earlierLastSet: false,
@@ -47771,18 +48937,18 @@
               return state3.earlier;
             }
             ;
-            return fromMaybe(state3.earlier)(map11(function($101) {
-              return format(scalar($101));
+            return fromMaybe(state3.earlier)(map12(function($86) {
+              return format(scalar($86));
             })(unformat(state3.later)));
           }(),
           later: function() {
-            var $78 = !state3.earlierLastSet;
-            if ($78) {
+            var $67 = !state3.earlierLastSet;
+            if ($67) {
               return state3.later;
             }
             ;
-            return fromMaybe(state3.later)(map11(function($102) {
-              return format(scalar($102));
+            return fromMaybe(state3.later)(map12(function($87) {
+              return format(scalar($87));
             })(unformat(state3.earlier)));
           }(),
           earlierLastSet: state3.earlierLastSet,
@@ -47798,8 +48964,9 @@
   };
   var mkAppContents = function __do() {
     var largeChart = make();
-    var timelineChart = make3();
-    var rangeSlider = make2();
+    var timelineChart = make4();
+    var rangeSlider = make3();
+    var resizeSection = make2();
     var reducer2 = mkReducer2();
     return component("AppContents")(function(props) {
       var keys3 = fromFoldable4(keys2(props.allData));
@@ -47810,7 +48977,7 @@
         thumbs: props.thumbs,
         earlierLastSet: true
       };
-      return bind1(useReducer(initialState)(reducer2))(function(v) {
+      return bind13(useReducer(initialState)(reducer2))(function(v) {
         var scalar = function(n) {
           if (v.value0.earlierLastSet) {
             return toNumber(fromMaybe(0)(unformat(v.value0.earlier))) / v.value0.thumbs.minThumb.value * n;
@@ -47818,166 +48985,142 @@
           ;
           return toNumber(fromMaybe(0)(unformat(v.value0.later))) / v.value0.thumbs.maxThumb.value * n;
         };
-        return bind1(useRef2(nullImpl))(function(ref) {
-          return bind1(useContentBox(ref))(function(maybeBox) {
-            var maybeWidth = map11(function(v1) {
-              return v1.width;
-            })(maybeBox);
-            return discard5(traceM2(maybeBox))(function() {
-              return discard5(useEffectOnce(function() {
-                var maybeThumbs = bind23(bind23(index(keys3)(800))(function(key) {
+        return discard5(useEffectOnce(function() {
+          var maybeThumbs = bind23(bind23(index(keys3)(800))(function(key) {
+            return bind23(lookup2(key)(props.allData))(function(value12) {
+              return pure7({
+                key,
+                value: value12
+              });
+            });
+          }))(function(min$prime) {
+            return bind23(bind23(index(keys3)(1200))(function(key) {
+              return bind23(lookup2(key)(props.allData))(function(value12) {
+                return pure7({
+                  key,
+                  value: value12
+                });
+              });
+            }))(function(max$prime) {
+              return pure7({
+                minThumb: min$prime,
+                maxThumb: max$prime
+              });
+            });
+          });
+          return function __do4() {
+            for_3(maybeThumbs)(function($88) {
+              return v.value1(SetThumbs.create($88));
+            })();
+            v.value1(new Earlier("100"))();
+            return mempty3;
+          };
+        }()))(function() {
+          return pure22(main_([resizeSection(function(contentBox) {
+            return [largeChart({
+              data: mapFlipped3(allData)(function(datum2) {
+                return {
+                  value: scalar(datum2.value),
+                  month: datum2.month,
+                  year: datum2.year
+                };
+              }),
+              width: contentBox.width,
+              height: contentBox.height,
+              min: uncurry(canonicalDate)(v.value0.thumbs.minThumb.key)(bottom5),
+              max: uncurry(canonicalDate)(v.value0.thumbs.maxThumb.key)(bottom5)
+            })];
+          }), resizeSection(function(contentBox) {
+            return [function() {
+              var data$prime2 = zipWith(function(a3) {
+                return function(b2) {
+                  return {
+                    value: (b2.value - a3.value) / a3.value,
+                    month: b2.month,
+                    year: b2.year
+                  };
+                };
+              })(allData)(drop(1)(allData));
+              return timelineChart({
+                data: data$prime2,
+                width: contentBox.width
+              });
+            }(), rangeSlider({
+              minValue: 0,
+              maxValue: maxKeyIndex,
+              value: function() {
+                var minThumb = fromMaybe(0)(findIndex(function(v1) {
+                  return eq4(v1)(v.value0.thumbs.minThumb.key);
+                })(keys3));
+                var maxThumb = fromMaybe(maxKeyIndex)(findIndex(function(v1) {
+                  return eq4(v1)(v.value0.thumbs.maxThumb.key);
+                })(keys3));
+                return {
+                  minThumb,
+                  maxThumb
+                };
+              }(),
+              earlierLastSet: v.value0.earlierLastSet,
+              onChange: function(v1) {
+                var maybeThumbs = bind23(bind23(index(keys3)(v1.minThumb))(function(key) {
                   return bind23(lookup2(key)(props.allData))(function(value12) {
-                    return pure5({
+                    return pure7({
                       key,
                       value: value12
                     });
                   });
                 }))(function(min$prime) {
-                  return bind23(bind23(index(keys3)(1200))(function(key) {
+                  return bind23(bind23(index(keys3)(v1.maxThumb))(function(key) {
                     return bind23(lookup2(key)(props.allData))(function(value12) {
-                      return pure5({
+                      return pure7({
                         key,
                         value: value12
                       });
                     });
                   }))(function(max$prime) {
-                    return pure5({
+                    return pure7({
                       minThumb: min$prime,
                       maxThumb: max$prime
                     });
                   });
                 });
-                return function __do4() {
-                  for_3(maybeThumbs)(function($103) {
-                    return v.value1(SetThumbs.create($103));
-                  })();
-                  v.value1(new Earlier("100"))();
-                  return mempty3;
-                };
-              }()))(function() {
-                return pure22(div1({
-                  ref,
-                  children: [section2({
-                    className: "chart",
-                    children: [foldMap3(function(v1) {
-                      return largeChart({
-                        data: mapFlipped3(allData)(function(datum2) {
-                          return {
-                            value: scalar(datum2.value),
-                            month: datum2.month,
-                            year: datum2.year
-                          };
-                        }),
-                        width: v1.width,
-                        min: v1.min,
-                        max: v1.max
-                      });
-                    })(apply3(apply3(map11(function(v1) {
-                      return function(v2) {
-                        return function(v3) {
-                          return {
-                            width: v1,
-                            min: v2,
-                            max: v3
-                          };
-                        };
-                      };
-                    })(maybeWidth))(map11(uncurry(canonicalDate)(v.value0.thumbs.minThumb.key))(toEnum3(1))))(map11(uncurry(canonicalDate)(v.value0.thumbs.maxThumb.key))(toEnum3(1))))]
-                  }), section2({
-                    className: "slider-section",
-                    children: [foldMap3(function(width8) {
-                      var data$prime2 = zipWith(function(a3) {
-                        return function(b2) {
-                          return {
-                            value: (b2.value - a3.value) / a3.value,
-                            month: b2.month,
-                            year: b2.year
-                          };
-                        };
-                      })(allData)(drop(1)(allData));
-                      return timelineChart({
-                        data: data$prime2,
-                        width: width8
-                      });
-                    })(maybeWidth), rangeSlider({
-                      minValue: 0,
-                      maxValue: maxKeyIndex,
-                      value: function() {
-                        var minThumb = fromMaybe(0)(findIndex(function(v1) {
-                          return eq4(v1)(v.value0.thumbs.minThumb.key);
-                        })(keys3));
-                        var maxThumb = fromMaybe(maxKeyIndex)(findIndex(function(v1) {
-                          return eq4(v1)(v.value0.thumbs.maxThumb.key);
-                        })(keys3));
-                        return {
-                          minThumb,
-                          maxThumb
-                        };
-                      }(),
-                      onChange: function(v1) {
-                        var maybeThumbs = bind23(bind23(index(keys3)(v1.minThumb))(function(key) {
-                          return bind23(lookup2(key)(props.allData))(function(value12) {
-                            return pure5({
-                              key,
-                              value: value12
-                            });
-                          });
-                        }))(function(min$prime) {
-                          return bind23(bind23(index(keys3)(v1.maxThumb))(function(key) {
-                            return bind23(lookup2(key)(props.allData))(function(value12) {
-                              return pure5({
-                                key,
-                                value: value12
-                              });
-                            });
-                          }))(function(max$prime) {
-                            return pure5({
-                              minThumb: min$prime,
-                              maxThumb: max$prime
-                            });
-                          });
-                        });
-                        return for_3(maybeThumbs)(function($104) {
-                          return v.value1(SetThumbs.create($104));
-                        });
-                      }
-                    })]
-                  }), section2({
-                    className: "inputs",
-                    children: [div1({
-                      className: "dollar-input-group" + guard3(v.value0.earlierLastSet)(" selected"),
-                      children: [text("$"), input2({
-                        value: v.value0.earlier,
-                        onChange: handler(targetValue)(traverse_2(function(value12) {
-                          return v.value1(new Earlier(value12));
-                        })),
-                        type: "text",
-                        className: "dollar",
-                        inputMode: "numeric"
-                      })]
-                    }), output_([text(displayYearMonth(v.value0.thumbs.minThumb.key))]), div1({
-                      className: "dollar-input-group" + guard3(!v.value0.earlierLastSet)(" selected"),
-                      children: [text("$"), input2({
-                        value: v.value0.later,
-                        onChange: handler(targetValue)(traverse_2(function(value12) {
-                          return v.value1(new Later(value12));
-                        })),
-                        type: "text",
-                        className: "dollar",
-                        inputMode: "numeric"
-                      })]
-                    }), output_([text(displayYearMonth(v.value0.thumbs.maxThumb.key))])]
-                  })]
-                }));
-              });
-            });
-          });
+                return for_3(maybeThumbs)(function($89) {
+                  return v.value1(SetThumbs.create($89));
+                });
+              }
+            })];
+          }), section3({
+            className: "inputs",
+            children: [div1({
+              className: "dollar-input-group" + guard3(v.value0.earlierLastSet)(" selected"),
+              children: [text("$"), input2({
+                value: v.value0.earlier,
+                onChange: handler(targetValue)(traverse_2(function(value12) {
+                  return v.value1(new Earlier(value12));
+                })),
+                type: "text",
+                className: "dollar",
+                inputMode: "numeric"
+              })]
+            }), output_([text(displayYearMonth(v.value0.thumbs.minThumb.key))]), div1({
+              className: "dollar-input-group" + guard3(!v.value0.earlierLastSet)(" selected"),
+              children: [text("$"), input2({
+                value: v.value0.later,
+                onChange: handler(targetValue)(traverse_2(function(value12) {
+                  return v.value1(new Later(value12));
+                })),
+                type: "text",
+                className: "dollar",
+                inputMode: "numeric"
+              })]
+            }), output_([text(displayYearMonth(v.value0.thumbs.maxThumb.key))])]
+          })]));
         });
       });
     })();
   };
   var appData = /* @__PURE__ */ bind32(/* @__PURE__ */ $$for(applicativeEither)(traversableArray)(allData)(function(datum2) {
-    return bind32(note(new BadYear(datum2.year))(toEnum1(datum2.year)))(function(v) {
+    return bind32(note(new BadYear(datum2.year))(toEnum3(datum2.year)))(function(v) {
       return bind32(note(new BadMonth(datum2.month))(function() {
         if (datum2.month === "January") {
           return new Just(January.value);
@@ -48036,7 +49179,7 @@
     var dataMap = fromFoldable1(dataArray);
     return bind32(note(EmptyMap.value)(bind23(findMin(dataMap))(function(minThumb) {
       return bind23(findMax(dataMap))(function(maxThumb) {
-        return pure5({
+        return pure7({
           minThumb,
           maxThumb
         });
@@ -48080,9 +49223,9 @@
   }
 
   // output/Web.DOM.NonElementParentNode/index.js
-  var map12 = /* @__PURE__ */ map(functorEffect);
+  var map13 = /* @__PURE__ */ map(functorEffect);
   var getElementById = function(eid) {
-    var $2 = map12(toMaybe);
+    var $2 = map13(toMaybe);
     var $3 = _getElementById(eid);
     return function($4) {
       return $2($3($4));
@@ -48105,9 +49248,9 @@
   }
 
   // output/Main/index.js
-  var bind4 = /* @__PURE__ */ bind(bindEffect);
+  var bind6 = /* @__PURE__ */ bind(bindEffect);
   var main2 = function __do3() {
-    var maybeRoot = bind4(bind4(windowImpl)(document2))(function() {
+    var maybeRoot = bind6(bind6(windowImpl)(document2))(function() {
       var $4 = getElementById("root");
       return function($5) {
         return $4(toNonElementParentNode($5));
