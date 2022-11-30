@@ -27,7 +27,7 @@ function Thumb(props) {
       {...thumbProps}
       className={`thumb ${isFocusVisible ? "focus" : ""} ${
         isDragging ? "dragging" : ""
-      }`}
+      } ${props.selected ? "selected" : ""}`}
     >
       <VisuallyHidden>
         <input ref={inputRef} {...mergeProps(inputProps, focusProps)} />
@@ -45,11 +45,12 @@ type Props = {
   minValue: number;
   step: number;
   value: Thumbs;
+  earlierLastSet: boolean;
   onChange: (value: Thumbs) => void;
   displayThumb;
 };
 
-export function rangeSlider_(props: Props) {
+export function _rangeSlider(props: Props) {
   let onChange = ([minThumb, maxThumb]: number[]) =>
     props.onChange({ minThumb, maxThumb });
   let value = [props.value.minThumb, props.value.maxThumb];
@@ -90,8 +91,18 @@ export function rangeSlider_(props: Props) {
         ref={trackRef}
         className={`track ${state.isDisabled ? "disabled" : ""}`}
       >
-        <Thumb index={0} state={state} trackRef={trackRef} />
-        <Thumb index={1} state={state} trackRef={trackRef} />
+        <Thumb
+          index={0}
+          state={state}
+          trackRef={trackRef}
+          selected={props.earlierLastSet}
+        />
+        <Thumb
+          index={1}
+          state={state}
+          trackRef={trackRef}
+          selected={!props.earlierLastSet}
+        />
       </div>
     </div>
   );

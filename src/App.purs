@@ -23,7 +23,6 @@ import Data.Tuple as Tuple
 import Data.Tuple.Nested (type (/\))
 import Debug as Debug
 import Effect (Effect)
-import Foreign.Hooks as Foreign.Hooks
 import Format.Int as Format
 import LargeChart as LargeChart
 import React.Basic.DOM as DOM
@@ -31,6 +30,7 @@ import React.Basic.DOM.Events as DOM.Events
 import React.Basic.Events as Events
 import React.Basic.Hooks (Component, Reducer, (/\))
 import React.Basic.Hooks as Hooks
+import ResizeSection as ResizeSection
 import Slider as Slider
 import Temp.Data as Temp.Data
 import TimelineChart as TimelineChart
@@ -151,6 +151,7 @@ mkAppContents = do
   largeChart <- LargeChart.make
   timelineChart <- TimelineChart.make
   rangeSlider <- Slider.make
+  resizeSection <- ResizeSection.make
   reducer <- mkReducer
   Hooks.component "AppContents" \props -> Hooks.do
     let
@@ -173,14 +174,6 @@ mkAppContents = do
         else
           (Int.toNumber (Format.unformat state.later # Maybe.fromMaybe 0) / state.thumbs.maxThumb.value) * n
 
-    ref <- Hooks.useRef Nullable.null
-
-    maybeBox <- Foreign.Hooks.useContentBox ref
-
-    let maybeWidth = _.width <$> maybeBox
-
-    Debug.traceM maybeBox
-
     Hooks.useEffectOnce do
       let
         -- Random thumbs to get things started
@@ -201,96 +194,87 @@ mkAppContents = do
       pure mempty
 
     pure do
-      DOM.div
-        { ref
-        , children:
-            [ DOM.section
-                { className: "chart"
-                , children:
-                    [ { width: _, min: _, max: _ }
-                        <$> maybeWidth
-                        <*> (Tuple.uncurry Date.canonicalDate state.thumbs.minThumb.key <$> Enum.toEnum 1)
-                        <*> (Tuple.uncurry Date.canonicalDate state.thumbs.maxThumb.key <$> Enum.toEnum 1)
-                        # Foldable.foldMap \{ width, min, max } -> do
-                            largeChart
-                              { data:
-                                  Temp.Data.allData <#> \datum -> datum { value = scalar datum.value }
-                              , width
-                              , min
-                              , max
-                              }
-                    ]
-                }
-            , DOM.section
-                { className: "slider-section"
-                , children:
-                    [ maybeWidth # Foldable.foldMap \width -> do
-                        let data' = Array.zipWith (\a b -> b { value = (b.value - a.value) / a.value }) Temp.Data.allData (Array.drop 1 Temp.Data.allData)
-                        timelineChart { data: data', width }
-                    , rangeSlider
-                        { minValue: minKeyIndex
-                        , maxValue: maxKeyIndex
-                        , value: do
-                            let
-                              minThumb = Array.findIndex (_ == state.thumbs.minThumb.key) keys # Maybe.fromMaybe minKeyIndex
-                              maxThumb = Array.findIndex (_ == state.thumbs.maxThumb.key) keys # Maybe.fromMaybe maxKeyIndex
-                            { minThumb, maxThumb }
-                        , onChange: \{ minThumb, maxThumb } -> do
-                            let
-                              maybeThumbs = do
-                                min' <- do
-                                  key <- keys !! minThumb
-                                  value <- Map.lookup key props.allData
-                                  pure { key, value }
-                                max' <- do
-                                  key <- keys !! maxThumb
-                                  value <- Map.lookup key props.allData
-                                  pure { key, value }
-                                pure { minThumb: min', maxThumb: max' }
-                            Foldable.for_ maybeThumbs (dispatch <<< SetThumbs)
-                        }
-                    ]
-                }
-            , DOM.section
-                { className: "inputs"
-                , children:
-                    [ DOM.div
-                        { className: "dollar-input-group" <> Monoid.guard state.earlierLastSet " selected"
-                        , children:
-                            [ DOM.text "$"
-                            , DOM.input
-                                { value: state.earlier
-                                , onChange: Events.handler DOM.Events.targetValue do
-                                    Traversable.traverse_ \value ->
-                                      dispatch (Earlier value)
-                                , type: "text"
-                                , className: "dollar"
-                                , inputMode: "numeric"
-                                }
-                            ]
-                        }
-                    , DOM.output_
-                        [ DOM.text (displayYearMonth state.thumbs.minThumb.key)
-                        ]
-                    , DOM.div
-                        { className: "dollar-input-group" <> Monoid.guard (not state.earlierLastSet) " selected"
-                        , children:
-                            [ DOM.text "$"
-                            , DOM.input
-                                { value: state.later
-                                , onChange: Events.handler DOM.Events.targetValue do
-                                    Traversable.traverse_ \value ->
-                                      dispatch (Later value)
-                                , type: "text"
-                                , className: "dollar"
-                                , inputMode: "numeric"
-                                }
-                            ]
-                        }
-                    , DOM.output_
-                        [ DOM.text (displayYearMonth state.thumbs.maxThumb.key)
-                        ]
-                    ]
+      DOM.main_
+        [ resizeSection \contentBox ->
+            [ largeChart
+                { data:
+                    Temp.Data.allData <#> \datum -> datum { value = scalar datum.value }
+                , width: contentBox.width
+                , height: contentBox.height
+                , min: Tuple.uncurry Date.canonicalDate state.thumbs.minThumb.key bottom
+                , max: Tuple.uncurry Date.canonicalDate state.thumbs.maxThumb.key bottom
                 }
             ]
-        }
+
+        , resizeSection \contentBox ->
+            [ do
+                let data' = Array.zipWith (\a b -> b { value = (b.value - a.value) / a.value }) Temp.Data.allData (Array.drop 1 Temp.Data.allData)
+                timelineChart { data: data', width: contentBox.width }
+            , rangeSlider
+                { minValue: minKeyIndex
+                , maxValue: maxKeyIndex
+                , value: do
+                    let
+                      minThumb = Array.findIndex (_ == state.thumbs.minThumb.key) keys # Maybe.fromMaybe minKeyIndex
+                      maxThumb = Array.findIndex (_ == state.thumbs.maxThumb.key) keys # Maybe.fromMaybe maxKeyIndex
+                    { minThumb, maxThumb }
+                , earlierLastSet: state.earlierLastSet
+                , onChange: \{ minThumb, maxThumb } -> do
+                    let
+                      maybeThumbs = do
+                        min' <- do
+                          key <- keys !! minThumb
+                          value <- Map.lookup key props.allData
+                          pure { key, value }
+                        max' <- do
+                          key <- keys !! maxThumb
+                          value <- Map.lookup key props.allData
+                          pure { key, value }
+                        pure { minThumb: min', maxThumb: max' }
+                    Foldable.for_ maybeThumbs (dispatch <<< SetThumbs)
+                }
+            ]
+
+        , DOM.section
+            { className: "inputs"
+            , children:
+                [ DOM.div
+                    { className: "dollar-input-group" <> Monoid.guard state.earlierLastSet " selected"
+                    , children:
+                        [ DOM.text "$"
+                        , DOM.input
+                            { value: state.earlier
+                            , onChange: Events.handler DOM.Events.targetValue do
+                                Traversable.traverse_ \value ->
+                                  dispatch (Earlier value)
+                            , type: "text"
+                            , className: "dollar"
+                            , inputMode: "numeric"
+                            }
+                        ]
+                    }
+                , DOM.output_
+                    [ DOM.text (displayYearMonth state.thumbs.minThumb.key)
+                    ]
+                , DOM.div
+                    { className: "dollar-input-group" <> Monoid.guard (not state.earlierLastSet) " selected"
+                    , children:
+                        [ DOM.text "$"
+                        , DOM.input
+                            { value: state.later
+                            , onChange: Events.handler DOM.Events.targetValue do
+                                Traversable.traverse_ \value ->
+                                  dispatch (Later value)
+                            , type: "text"
+                            , className: "dollar"
+                            , inputMode: "numeric"
+                            }
+                        ]
+                    }
+                , DOM.output_
+                    [ DOM.text (displayYearMonth state.thumbs.maxThumb.key)
+                    ]
+                ]
+            }
+        ]
+

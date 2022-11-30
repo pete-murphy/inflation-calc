@@ -21,15 +21,17 @@ type Props_ =
   , step :: Int
   , value :: Thumbs
   , onChange :: EffectFn1 Thumbs Unit
+  , earlierLastSet :: Boolean
   }
 
-foreign import rangeSlider_ :: ReactComponent Props_
+foreign import _rangeSlider :: ReactComponent Props_
 
 type Props =
   { minValue :: Int
   , maxValue :: Int
   , value :: Thumbs
   , onChange :: Thumbs -> Effect Unit
+  , earlierLastSet :: Boolean
   }
 
 make :: Component Props
@@ -37,11 +39,12 @@ make =
   Hooks.component "RangeSlider" \props -> Hooks.do
     pure
       ( Hooks.element
-          rangeSlider_
+          _rangeSlider
           { step: 1
           , minValue: props.minValue
           , maxValue: props.maxValue
           , value: props.value
           , onChange: Uncurried.mkEffectFn1 props.onChange
+          , earlierLastSet: props.earlierLastSet
           }
       )

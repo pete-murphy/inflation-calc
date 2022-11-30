@@ -10,6 +10,7 @@ type Datum = {
 
 type Props = {
   readonly data: ReadonlyArray<Datum>;
+  readonly height: number;
   readonly width: number;
   readonly min: Date;
   readonly max: Date;
@@ -21,6 +22,7 @@ export function _largeChart(props: Props) {
   React.useEffect(() => {
     const chart = Plot.plot({
       width: props.width,
+      height: props.height,
       style: {
         background: "transparent",
       },

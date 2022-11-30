@@ -14,6 +14,7 @@ make
   :: Component
        { data :: Array { year :: Int, month :: String, value :: Number }
        , width :: Number
+       , height :: Number
        , min :: Date
        , max :: Date
        }
@@ -34,6 +35,7 @@ foreign import _largeChart
              , value :: Number
              }
        , width :: Number
+       , height :: Number
        , min :: JSDate
        , max :: JSDate
        }
