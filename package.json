@@ -7,7 +7,7 @@
     "build": "tsc && spago build",
     "bundle:BROKEN": "npm run build && purs-backend-es bundle-app --no-build --to=\"./bundle/Main/index.js\"",
     "bundle": "npm run build && spago bundle-app --to=\"./bundle/Main/index.js\"",
-    "bundle:temp": "npm run bundle && cp \"./bundle-temp/*\" \"./bundle\"",
+    "bundle:temp": "npm run bundle && cp \"./bundle-temp/\"* \"./bundle\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "spago install",
     "start": "parcel html/index.html"
