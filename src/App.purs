@@ -21,6 +21,7 @@ import Data.Traversable as Traversable
 import Data.Tuple (Tuple(..))
 import Data.Tuple as Tuple
 import Data.Tuple.Nested (type (/\))
+import Debug as Debug
 import Effect (Effect)
 import Foreign.Hooks as Foreign.Hooks
 import Format.Int as Format
@@ -174,7 +175,11 @@ mkAppContents = do
 
     ref <- Hooks.useRef Nullable.null
 
-    maybeWidth <- Foreign.Hooks.useWidth ref
+    maybeBox <- Foreign.Hooks.useContentBox ref
+
+    let maybeWidth = _.width <$> maybeBox
+
+    Debug.traceM maybeBox
 
     Hooks.useEffectOnce do
       let
