@@ -1850,10 +1850,10 @@
               return null;
             }
             var first2 = heap[0];
-            var last2 = heap.pop();
-            if (last2 !== first2) {
-              heap[0] = last2;
-              siftDown(heap, last2, 0);
+            var last3 = heap.pop();
+            if (last3 !== first2) {
+              heap[0] = last3;
+              siftDown(heap, last3, 0);
             }
             return first2;
           }
@@ -24069,6 +24069,9 @@
   var index = /* @__PURE__ */ function() {
     return indexImpl(Just.create)(Nothing.value);
   }();
+  var last = function(xs) {
+    return index(xs)(length(xs) - 1 | 0);
+  };
   var fromFoldable = function(dictFoldable) {
     return fromFoldableImpl(foldr(dictFoldable));
   };
@@ -33577,8 +33580,8 @@
     if (values3 == null)
       return;
     const first2 = values3[0];
-    const last2 = values3[values3.length - 1];
-    return descending(first2, last2);
+    const last3 = values3[values3.length - 1];
+    return descending(first2, last3);
   }
   function inherit2(options2 = {}, ...rest) {
     let o = options2;
@@ -48994,7 +48997,7 @@
               });
             });
           }))(function(min$prime) {
-            return bind23(bind23(index(keys3)(1200))(function(key) {
+            return bind23(bind23(last(keys3))(function(key) {
               return bind23(lookup2(key)(props.allData))(function(value12) {
                 return pure7({
                   key,
