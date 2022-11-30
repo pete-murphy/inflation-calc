@@ -12,7 +12,8 @@ to generate this file without the comments in this block.
 -}
 { name = "react-starter"
 , dependencies =
-  [ "arrays"
+  [ "aff"
+  , "arrays"
   , "checked-exceptions"
   , "codec-argonaut"
   , "console"
