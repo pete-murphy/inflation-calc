@@ -27,6 +27,7 @@ body {
   block-size: 100%;
   inline-size: 100%;
   max-inline-size: 40rem;
+  overflow-y: auto;
 }
 
 main {
@@ -35,7 +36,7 @@ main {
   inline-size: 100%;
   block-size: 100%;
   gap: 1rem;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 main > * {
@@ -44,6 +45,7 @@ main > * {
 main section {
   display: grid;
   align-items: center;
+  overflow-y: auto;
 }
 
 main section:nth-of-type(2) > * {
